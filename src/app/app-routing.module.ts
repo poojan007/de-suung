@@ -61,6 +61,11 @@ const routes: Routes = [
     path: 'createevent',
     loadChildren: () => import('./create-event/create-event.module').then( m => m.CreateEventPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'logout',
+    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 
