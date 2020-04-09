@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end"></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="orange-background">
+  <ion-fab horizontal="end" vertical="top" slot="fixed" edge class="app-button-top">
+    <ion-fab-button class="app-button">
+      <ion-icon name="apps" class="app-button-icon"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list class="app-button-margin">
+      <ion-fab-button color="light" [routerLink]="['/dashboard']">
+        <ion-icon name="home"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" [routerLink]="['/changepin']">
+        <ion-icon name="cog"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" style="color: black;">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="form-header">Upcoming Events</div>
+  <div *ngIf="dataList?.length != 0">
+    <ion-list *ngFor="let data of dataList">
+      <ion-item>
+        <ion-icon name="notifications" style="color: #ff5507;"></ion-icon>&nbsp;&nbsp;
+        <ion-label>
+          <h3 class="ion-text-wrap"><strong>{{data.title}}</strong></h3>
+          <h5 class="ion-text-wrap">{{data.event_type}}</h5>
+          <!-- <p class="description ion-text-wrap">{{data.description}}</p> -->
+        </ion-label>
+        <ion-button slot="end" (click)="openModal(data.eventId)">
+          <ion-icon name="eye"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="dataList?.length == 0">
+    <div style="margin-top: 25%;font-size: 20px;text-align: center;color: #ff5507;">
+      <img src="../../assets/no-information.png">
+      No events available
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,80 @@
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="back()">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+        My Profile
+      </ion-button>
+    </ion-buttons>
+    <ion-title>&nbsp;</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" src="../../assets/checkmark-filled.svg"></ion-icon>
+       </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" slot="fixed">
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        <img src="http://202.144.139.70/photos/{{photoUrl}}" alt="">
+      </div>
+    </div>
+    <div class="card-body">
+        <div class="user-meta ion-text-center">
+          <h3 class="playername">{{name}}</h3>
+        </div>
+        <ion-list>
+          <ion-item class="custom-font">
+            <ion-label class="country">
+              Desuup ID:
+            </ion-label>
+            <ion-label slot="end">
+              {{desuupId}}
+            </ion-label>
+          </ion-item>
+          <ion-item class="custom-font">
+            <ion-label class="country">
+              CID Number: 
+            </ion-label>
+            <ion-label slot="end">
+              {{cidNo}}
+            </ion-label>
+          </ion-item>
+          <ion-item class="custom-font">
+            <ion-label class="country">
+              DOB: 
+            </ion-label>
+            <ion-label slot="end">
+              {{dob}}
+            </ion-label>
+          </ion-item>
+          <ion-item class="custom-font">
+            <ion-label class="country">
+              Gender: 
+            </ion-label>
+            <ion-label slot="end">
+              {{gender}}
+            </ion-label>
+          </ion-item>
+          <ion-item class="custom-font">
+            <ion-label class="country">
+              Location: 
+            </ion-label>
+            <ion-label slot="end">
+              {{location}}
+            </ion-label>
+          </ion-item>
+          <ion-item class="custom-font">
+            <ion-label class="country">
+              Email: 
+            </ion-label>
+            <ion-label slot="end">
+              {{email}}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+    </div>
+  </div>
+</ion-content>

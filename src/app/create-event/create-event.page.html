@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="orange-background">
+  <ion-fab horizontal="end" vertical="top" slot="fixed" edge class="app-button-top">
+    <ion-fab-button class="app-button">
+      <ion-icon name="apps" class="app-button-icon"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list class="app-button-margin">
+      <ion-fab-button color="light" [routerLink]="['/dashboard']">
+        <ion-icon name="home"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" [routerLink]="['/changepin']">
+        <ion-icon name="cog"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <div class="form-header">Create an event</div>
+
+  <div id="container">
+    <form #form="ngForm" (ngSubmit)="createEvent()" class="form-margin">
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div padding>
+              <ion-item>
+                <ion-label position="floating">Event Title</ion-label>
+                <ion-input class="icon-size-13" name="eventTitle" type="text" [(ngModel)]="eventTitle" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Event Category</ion-label>
+                <ion-select class="icon-size-13" name="eventCategory" [(ngModel)]="eventCategory" required>
+                  <option value=''>Select Event Category</option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Event Type</ion-label>
+                <ion-select class="icon-size-13" name="eventType" [(ngModel)]="eventType" required>
+                  <option value=''>Select Event Type</option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Event Details</ion-label>
+                <ion-input class="icon-size-13" name="eventDetail" type="number" [(ngModel)]="eventDetail" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Location</ion-label>
+                <ion-select class="icon-size-13" name="dzongkhag" [(ngModel)]="dzongkhag" required>
+                  <option value=''>Select Dzongkhag</option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Gewog</ion-label>
+                <ion-select class="icon-size-13" name="gewog" [(ngModel)]="gewog" required>
+                  <option value=''>Select Gewog</option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Start Date</ion-label>
+                <ion-input class="icon-size-13" name="startDate" [(ngModel)]="startDate" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">End Date</ion-label>
+                <ion-input class="icon-size-13" name="endDate" [(ngModel)]="endDate" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Start Time</ion-label>
+                <ion-input class="icon-size-13" name="startTime" [(ngModel)]="startTime" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">End Time</ion-label>
+                <ion-input class="icon-size-13" name="endTime" [(ngModel)]="endTime" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Invite Desuups From</ion-label>
+                <ion-select class="icon-size-13" name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" required>
+                  <option value=''>Invite Desuups From</option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Invite Desuups Batch</ion-label>
+                <ion-select class="icon-size-13" name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" required>
+                  <option value=''>Invite Desuups Batch</option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Coordinator</ion-label>
+                <ion-select class="icon-size-13" name="coordinator" [(ngModel)]="coordinator" required>
+                  <option value=''>Select Coordinator</option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Expected Working Days</ion-label>
+                <ion-input type="number" class="icon-size-13" name="expectedWorkingDay" [(ngModel)]="expectedWorkingDay" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Total Desuups Required</ion-label>
+                <ion-input type="number" class="icon-size-13" name="totalDesuupsRequired" [(ngModel)]="totalDesuupsRequired" required></ion-input>
+              </ion-item>
+            </div>
+            <div padding>
+              <ion-button size="large" class="login-button" type="submit" [disabled]="form.invalid" expand="block">
+                <ion-icon name="add-circle"></ion-icon>  Create Event
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+
+</ion-content>

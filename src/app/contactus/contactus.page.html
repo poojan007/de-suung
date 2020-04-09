@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end"></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="orange-background">
+  <ion-fab horizontal="end" vertical="top" slot="fixed" edge class="app-button-top">
+    <ion-fab-button class="app-button">
+      <ion-icon name="apps" class="app-button-icon"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list class="app-button-margin">
+      <ion-fab-button color="light" [routerLink]="['/dashboard']">
+        <ion-icon name="home"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" [routerLink]="['/changepin']">
+        <ion-icon name="cog"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <div class="form-header">Contact Us</div>
+  <ion-list>
+    <ion-item>
+      <!-- <ion-avatar slot="start">
+        <img src="../../assets/person.jpg">
+      </ion-avatar> -->
+      <ion-label>
+        <h2>Yeshi Dorji</h2>
+        <h3>Chief ICT Officer</h3>
+        <p class="ion-text-wrap">Ministry of Information and Communication</p>
+      </ion-label>
+      <!-- <ion-button slot="end" (click)="call('17609187')">
+        <ion-icon name="call"></ion-icon>
+      </ion-button> -->
+    </ion-item>
+    <ion-item>
+      <!-- <ion-avatar slot="start">
+        <img src="../../assets/person.jpg">
+      </ion-avatar> -->
+      <ion-label>
+        <h2>Poojan Sharma</h2>
+        <h3>Software Team Lead</h3>
+        <p class="ion-text-wrap">NGN Technologies Private Limited</p>
+      </ion-label>
+      <!-- <ion-button slot="end" (click)="call('17457592')">
+        <ion-icon name="call"></ion-icon>
+      </ion-button> -->
+    </ion-item>
+    <ion-item>
+      <!-- <ion-avatar slot="start">
+        <img src="../../assets/person.jpg">
+      </ion-avatar> -->
+      <ion-label>
+        <h2>Pramod Nepal</h2>
+        <h3>Software Developer</h3>
+        <p class="ion-text-wrap">NGN Technologies Private Limited</p>
+      </ion-label>
+      <!-- <ion-button slot="end" (click)="call('17505901')">
+        <ion-icon name="call"></ion-icon>
+      </ion-button> -->
+    </ion-item>
+  </ion-list>
+</ion-content>

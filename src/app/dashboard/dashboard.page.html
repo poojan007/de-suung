@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button icon-only [routerLink]="['/upcomingevents']">
+        <ion-icon name="notifications" color="primary"></ion-icon>
+        <span class="badge badge-assertive alert-count">{{upcomingEventCount}}</span>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button icon-only [routerLink]="['/changepin']">
+        <ion-icon name="cog" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button icon-only (click)="logout()">
+        <ion-icon name="log-out" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab horizontal="end" vertical="top" slot="fixed" edge class="app-button-top">
+    <ion-fab-button class="app-button">
+      <ion-icon name="apps" class="app-button-icon"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list class="app-button-margin">
+      <ion-fab-button color="light" [routerLink]="['/changepin']">
+        <ion-icon name="cog"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-slides [options]="slideOpts" pager="true">
+    <ion-slide>
+      <img src="../../assets/sliders/1.png" >
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/sliders/2.png" >
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/sliders/3.png" >
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/sliders/4.png" >
+    </ion-slide>
+  </ion-slides>
+
+  <ion-grid class="padding-0">
+    <ion-row>
+      <ion-col class="padding-0">
+        <div class="ion-text-center grid-layout">
+          <a href="#" class="anchor-custom" [routerLink]="['/upcomingevents']">
+            <div>
+              <ion-icon name="notifications" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14"> Upcoming Event </ion-label>
+          </a>
+        </div>
+      </ion-col>
+      <ion-col class="padding-0">
+        <div class="ion-text-center grid-layout">
+          <a href="#" class="anchor-custom" [routerLink]="['/registeredevents']">
+            <div>
+              <ion-icon name="link" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14"> Registered Events </ion-label>
+          </a>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="padding-0">
+        <div class="ion-text-center grid-layout">
+          <a href="#" class="anchor-custom" [routerLink]="['/contributions']">
+            <div>
+              <ion-icon name="ribbon" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14"> My Contributions </ion-label>
+          </a>
+        </div>
+      </ion-col>
+      <ion-col class="padding-0">
+        <div class="ion-text-center grid-layout">
+          <a href="#" class="anchor-custom" [routerLink]="['/profile']">
+            <div>
+              <ion-icon name="person" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14"> My Profile </ion-label>
+          </a>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="padding-0" *ngIf="showCreateEvent">
+        <div class="ion-text-center grid-layout">
+          <a href="#" class="anchor-custom" [routerLink]="['/createevent']">
+            <div>
+              <ion-icon name="add-circle" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14"> Create Event </ion-label>
+          </a>
+        </div>
+      </ion-col>
+      <ion-col class="padding-0" *ngIf="showAttendance">
+        <div class="ion-text-center grid-layout">
+          <a href="#" class="anchor-custom" [routerLink]="['/coordinatorevents']">
+            <div>
+              <ion-icon name="person-add" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14"> Attendance </ion-label>
+          </a>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-button color="dark" expand="full" [routerLink]="['/contactus']">
+    <ion-icon name="call"></ion-icon>&nbsp;&nbsp;Contact Us
+  </ion-button>
+</ion-footer>

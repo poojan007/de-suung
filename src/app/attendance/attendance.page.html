@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="sendAttendance()" color="primary">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="orange-background">
+  <div class="form-header">{{title}}</div>
+  <ion-searchbar type="text" debounce="500" (ionChange)="filterList($event)"></ion-searchbar>
+  <div *ngIf="dataList?.length != 0">
+    <ion-list>
+      <ion-item *ngFor="let data of dataList; let i=index">
+        <img class="image" src="http://202.144.139.70/photos/{{data.photo}}">
+        <ion-label>
+          <h2>{{data.name}}</h2>
+          <h3>{{data.did}}</h3>
+          <p class="ion-text-wrap">{{data.cid}}</p>
+        </ion-label>
+        <ion-checkbox color="primary" slot="end" [(ngModel)]="selected[i]" (ngModelChange)="getSelected(selected[i], data.userId)"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="dataList?.length == 0">
+    <div style="margin-top: 25%;font-size: 20px;text-align: center;color: #ff5507;">
+      <img src="../../assets/no-information.png">
+      No Registered Desuups Found
+    </div>
+  </div>
+</ion-content>

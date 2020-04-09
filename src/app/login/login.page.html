@@ -1,0 +1,40 @@
+<ion-content [fullscreen]="true" class="orange-background">
+  <div id="container" >
+    <img class="login-logo" src="../../assets/desuung-header-logo.png">
+    <form #form="ngForm" (ngSubmit)="validateLogin()">
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div padding>
+              <ion-item>
+                <ion-input class="icon-size-13" name="username" type="Number" placeholder="CID Number" [(ngModel)]="cidNo" required></ion-input>
+                <ion-icon name="person" class="icon-size-15" item-left style="color: #ff5507;"></ion-icon>
+              </ion-item>
+              <ion-item>
+                <ion-input class="icon-size-13" name="password" type="password" placeholder="Password" [(ngModel)]="password" required></ion-input>
+                <ion-icon name="key" class="icon-size-15" item-left style="color: #ff5507;"></ion-icon>
+              </ion-item>
+            </div>
+            <div padding>
+              <ion-grid class="padding-0">
+                <ion-row>
+                  <ion-col class="padding-0">
+                    <ion-button size="large" class="login-button" type="submit" [disabled]="form.invalid" expand="block">
+                      <ion-icon name="log-in" class="margin-right-3"></ion-icon>  Login
+                    </ion-button>
+                  </ion-col>
+                  <ion-col class="padding-0">
+                    <ion-button size="large" class="login-button" type="button" expand="block" [routerLink]="['/register']">
+                      <ion-icon name="person-add" class="margin-right-3"></ion-icon>  Register
+                    </ion-button>
+                  </ion-col> 
+                </ion-row>
+              </ion-grid>
+             
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

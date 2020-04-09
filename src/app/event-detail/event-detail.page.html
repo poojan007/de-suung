@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button icon-only color="primary" (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="orange-background">
+  <div class="form-header">Event Details</div>
+
+  <ion-list *ngFor="let data of dataList">
+    <ion-card>
+      <ion-card-header style="--background: #ef5e5e;" text-wrap>
+        <ion-card-subtitle style="--color: white;font-size: 20px;">{{data.title}}</ion-card-subtitle>
+        <ion-card-title style="font-size: 12px; --color: white;">{{data.startDate}} - {{data.endDate}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="description">{{data.description}}</p>
+        <hr>
+        <p><span class="title">Event Type:</span> <b>{{data.eventType}}</b></p>
+        <p><span class="title">Event Category:</span> <b>{{data.eventCategory}}</b></p>
+        <p><span class="title">Event Location:</span> <b>{{data.dzongkhag}}</b></p>
+        <p><span class="title">Duration:</span> <b>{{data.expected_working_days}} days</b></p>
+        <p><span class="title">Coordinator:</span> <b>{{data.coordinator}}</b></p>
+      </ion-card-content>
+      <div align="right">
+        <ion-button class="custom-button" (click)="register()">
+          <ion-icon name="checkmark-circle"></ion-icon> Register
+        </ion-button>
+      </div>
+    </ion-card>
+  </ion-list>
+</ion-content>
