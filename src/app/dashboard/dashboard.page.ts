@@ -78,8 +78,10 @@ export class DashboardPage implements OnInit {
   loaderToShow: any;
   upcomingEventCount = '0';
   role: string;
+  priv: string;
   showCreateEvent = false;
   showAttendance = false;
+  privArray: string[];
 
   constructor(
     private authService: AuthenticationService,
@@ -95,13 +97,18 @@ export class DashboardPage implements OnInit {
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
     this.data.userId = userData.userId;
     this.role = userData.roleName;
+    this.priv = userData.privileges;
 
-    if (this.role === 'MC' || this.role === 'Super Admin') {
-      this.showCreateEvent = true;
-    }
+    this.privArray = this.priv.split(',');
 
-    if (this.role === 'Coordinator' || this.role === 'Super Admin') {
-      this.showAttendance = true;
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.privArray.length; i++) {
+      if (this.privArray[i] === 'MANAGE_EVENT') {
+        this.showCreateEvent = true;
+      }
+      if (this.privArray[i] === 'MANAGE_ATTENDANCE') {
+        this.showAttendance = true;
+      }
     }
 
     this.getUpcomingEventCount();

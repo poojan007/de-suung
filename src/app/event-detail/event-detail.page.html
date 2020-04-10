@@ -4,7 +4,7 @@
       <ion-back-button color="primary"></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center" style="font-weight: bold;">
-      <img src="../../assets/desuung-header-logo.png" class="logo">
+      <img src="../../assets/desuung-header-logo.png" class="custom-header-logo">
     </ion-title>
     <ion-buttons slot="end">
       <ion-button icon-only color="primary" (click)="dismissModal()">
@@ -33,7 +33,7 @@
         <p><span class="title">Coordinator:</span> <b>{{data.coordinator}}</b></p>
       </ion-card-content>
       <div align="right">
-        <ion-button class="custom-button" (click)="register()">
+        <ion-button (click)="register()">
           <ion-icon name="checkmark-circle"></ion-icon> Register
         </ion-button>
       </div>

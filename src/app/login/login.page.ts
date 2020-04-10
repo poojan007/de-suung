@@ -36,6 +36,7 @@ export class LoginPage implements OnInit {
     this.data.loginId = this.cidNo;
     this.data.password = this.password;
     this.apiService.validateLogin(this.data).subscribe((response) => {
+      console.log(response);
       this.data.roleName = response.roleName;
       this.data.roleId = response.roleId;
       this.data.validation = response.validation;
@@ -55,8 +56,7 @@ export class LoginPage implements OnInit {
       this.data.agencyType = response.agency_type;
       this.data.empType = response.emp_type;
       this.data.qualification = response.qualification;
-
-      console.log(response);
+      this.data.privileges = response.userPrivileges;
 
       if (response.validation === 'true') {
         this.authservice.login(this.data);

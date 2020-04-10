@@ -10,6 +10,7 @@ export class ApiModel {
     cid: string;
     createdBy: number;
     attendanceStr: string;
+    privileges: string;
 
     roleName: string;
     roleId: number;

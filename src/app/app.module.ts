@@ -12,6 +12,8 @@ import { AuthGuard } from './guard/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { EventDetailPageModule } from './event-detail/event-detail.module';
 import { AttendancePageModule } from './attendance/attendance.module';
+import { DatePicker } from '@ionic-native/date-picker/ngx';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +31,8 @@ import { AttendancePageModule } from './attendance/attendance.module';
     SplashScreen,
     AuthenticationService,
     AuthGuard,
+    DatePicker,
+    DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

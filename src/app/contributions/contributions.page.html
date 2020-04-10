@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button color="primary"></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center" style="font-weight: bold;">
       <img src="../../assets/desuung-header-logo.png" class="logo">
@@ -16,13 +16,13 @@
       <ion-icon name="apps" class="app-button-icon"></ion-icon>
     </ion-fab-button>
     <ion-fab-list class="app-button-margin">
-      <ion-fab-button color="light" [routerLink]="['/dashboard']">
+      <ion-fab-button color="primary" [routerLink]="['/dashboard']">
         <ion-icon name="home"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" [routerLink]="['/changepin']">
+      <ion-fab-button color="primary" [routerLink]="['/changepin']">
         <ion-icon name="cog"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" [routerLink]="['/logout']">
+      <ion-fab-button color="primary" [routerLink]="['/logout']">
         <ion-icon name="log-out"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>

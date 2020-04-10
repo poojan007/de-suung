@@ -1,11 +1,11 @@
 .alert-count {
-    margin-top: -10px;
-    margin-left: -10px;
+    margin-top: -9px;
+    margin-left: -20px;
     border-radius: 14px;
     opacity: 0.9;
     color: white;
     background-color: red;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: bold;
     padding: 4px;
 }
@@ -34,4 +34,14 @@
 .anchor-custom {
     color: black;
     text-decoration: none;
+}
+
+.ios .custom-header-logo {
+    width: 75%;
+    margin-left: 0px;
+}
+
+.custom-header-logo {
+    width: 50%;
+    margin-left: -45px;
 }

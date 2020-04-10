@@ -17,13 +17,13 @@
       <ion-icon name="apps" class="app-button-icon"></ion-icon>
     </ion-fab-button>
     <ion-fab-list class="app-button-margin">
-      <ion-fab-button color="light" [routerLink]="['/dashboard']">
+      <ion-fab-button color="primary" [routerLink]="['/dashboard']">
         <ion-icon name="home"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" [routerLink]="['/changepin']">
+      <ion-fab-button color="primary" [routerLink]="['/changepin']">
         <ion-icon name="cog"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" [routerLink]="['/logout']">
+      <ion-fab-button color="primary" [routerLink]="['/logout']">
         <ion-icon name="log-out"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
@@ -43,64 +43,74 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Event Category</ion-label>
-                <ion-select class="icon-size-13" name="eventCategory" [(ngModel)]="eventCategory" required>
-                  <option value=''>Select Event Category</option>
+                <ion-select class="icon-size-13" name="eventCategory" [(ngModel)]="eventCategory" (ionChange)="getEventTypes($event);" required>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option *ngFor="let category of eventCategoryList" [value]="category.id">
+                    {{category.name}}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Event Type</ion-label>
                 <ion-select class="icon-size-13" name="eventType" [(ngModel)]="eventType" required>
-                  <option value=''>Select Event Type</option>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option *ngFor="let eventype of eventTypeList" [value]="eventype.id">
+                    {{eventype.name}}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Event Details</ion-label>
-                <ion-input class="icon-size-13" name="eventDetail" type="number" [(ngModel)]="eventDetail" required></ion-input>
+                <ion-textarea class="icon-size-13" name="eventDetail" [(ngModel)]="eventDetail" required></ion-textarea>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Location</ion-label>
                 <ion-select class="icon-size-13" name="dzongkhag" [(ngModel)]="dzongkhag" required>
-                  <option value=''>Select Dzongkhag</option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Gewog</ion-label>
-                <ion-select class="icon-size-13" name="gewog" [(ngModel)]="gewog" required>
-                  <option value=''>Select Gewog</option>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option *ngFor="let dzongkhag of dzongkhagList" [value]="dzongkhag.id">
+                    {{dzongkhag.name}}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Start Date</ion-label>
-                <ion-input class="icon-size-13" name="startDate" [(ngModel)]="startDate" required></ion-input>
+                <ion-datetime displayFormat="DD/MM/YYYY" class="icon-size-13" name="startDate" [(ngModel)]="startDate" required></ion-datetime>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">End Date</ion-label>
-                <ion-input class="icon-size-13" name="endDate" [(ngModel)]="endDate" required></ion-input>
+                <ion-datetime displayFormat="DD/MM/YYYY" class="icon-size-13" name="endDate" [(ngModel)]="endDate" required></ion-datetime>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Start Time</ion-label>
-                <ion-input class="icon-size-13" name="startTime" [(ngModel)]="startTime" required></ion-input>
+                <ion-datetime displayFormat="HH:mm" class="icon-size-13" name="startTime" [(ngModel)]="startTime" required></ion-datetime>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">End Time</ion-label>
-                <ion-input class="icon-size-13" name="endTime" [(ngModel)]="endTime" required></ion-input>
+                <ion-datetime displayFormat="HH:mm" class="icon-size-13" name="endTime" [(ngModel)]="endTime" required></ion-datetime>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Invite Desuups From</ion-label>
-                <ion-select class="icon-size-13" name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" required>
-                  <option value=''>Invite Desuups From</option>
+                <ion-select class="icon-size-13" name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" multiple="true" required>
+                  <ion-select-option *ngFor="let dzongkhag of dzongkhagList" [value]="dzongkhag.id">
+                    {{dzongkhag.name}}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Invite Desuups Batch</ion-label>
-                <ion-select class="icon-size-13" name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" required>
-                  <option value=''>Invite Desuups Batch</option>
+                <ion-select class="icon-size-13" name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" multiple="true" required>
+                  <ion-select-option *ngFor="let batch of desuupBatchList" [value]="batch.batchNo">
+                    {{batch.batchNo}}
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Coordinator</ion-label>
                 <ion-select class="icon-size-13" name="coordinator" [(ngModel)]="coordinator" required>
-                  <option value=''>Select Coordinator</option>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option *ngFor="let coordinator of coordinatorList" [value]="coordinator.id">
+                    {{coordinator.name}} - ({{coordinator.did}})
+                  </ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
@@ -113,7 +123,7 @@
               </ion-item>
             </div>
             <div padding>
-              <ion-button size="large" class="login-button" type="submit" [disabled]="form.invalid" expand="block">
+              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">
                 <ion-icon name="add-circle"></ion-icon>  Create Event
               </ion-button>
             </div>

@@ -19,6 +19,7 @@ export class RegisterPage implements OnInit {
   message: string;
 
   data: ApiModel;
+  i = 0;
 
   constructor(
     private apiService: ApiService,
@@ -38,13 +39,19 @@ export class RegisterPage implements OnInit {
     this.data.cid = this.cidNo;
 
     this.apiService.register(this.data).subscribe((response) => {
-      if (response === 'SUCCESS') {
+      console.log(response);
+      if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';
         this.message = 'Your are successfully registered, please login to start using the system';
+      } else if (response.RESULT === 'ALREADY_EXISTED') {
+        this.status = 'Warning';
+        this.message = 'User with the same CID or DID already exists, please try again with valid information';
       } else {
         this.status = 'Failure';
         this.message = 'Registration failed, please try again later';
       }
+
+      this.presentAlert();
     });
   }
 

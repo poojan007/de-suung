@@ -52,7 +52,7 @@ export class ApiService {
   register(item) {
     return this.http
       // tslint:disable-next-line: max-line-length
-      .get<any>(this.basePath + 'userRegistration&name=' + item.name + '&email=' + item.email + '&did=' + item.did + '&cid=' + item.cid + '&created_by=0', this.httpOptions)
+      .post<any>(this.basePath + 'userRegistration&name=' + item.name + '&email=' + item.email + '&did=' + item.did + '&cid=' + item.cid + '&created_by=0', this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -142,7 +142,34 @@ export class ApiService {
 
   getRegisteredDesuupList(eventId) {
     return this.http
-    .get<any>(this.basePath + 'eventUserList&eventId=' + eventId, this.httpOptions)
+    .get<any>(this.basePath + 'geteventAttendanceList&event_id=' + eventId, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+  getDropDownList(tableName, paramId, colName) {
+    return this.http
+    .get<any>(this.basePath + 'populateDropDown&tableName=' + tableName + '&paramId=' + paramId + '&colName=' + colName, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+  getBatchList() {
+    return this.http
+    .get<any>(this.basePath + 'getBatchList', this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+  createEvent(item) {
+    return this.http
+    .post<any>(this.basePath + 'createEvent', JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

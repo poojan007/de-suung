@@ -76,31 +76,35 @@
   --ion-color-light-tint: #f5f6f9;
 
   .ios .logo {
-      width: 60%;
-      margin-left: -35px;
+    width: 100%;
+    margin-left: -15px;
   }
 
   .logo {
-      width: 50%;
-      margin-left: -35px;
+    width: 70%;
+    margin-left: -45px;
   }
 
   .app-button {
-      width: 27px;
-      height: 27px;
+    width: 35px;
+    height: 35px;
   }
 
   .app-button-icon {
-      width: 15px;
+    width: 15px;
+  }
+
+  .ios .app-button-top {
+    top: -40px;
   }
 
   .app-button-top {
-      top: -40px;
+    top: -40px;
   }
 
   .app-button-margin {
-      margin: 25px 0px 0px -13px;
-      z-index: 100px;
+    margin: 40px 0px 0px -10px;
+    z-index: 100px;
   }
 }
 

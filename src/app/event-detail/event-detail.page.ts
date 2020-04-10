@@ -43,7 +43,9 @@ export class EventDetailPage implements OnInit {
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';
         this.message = 'Your have successfully registered for the event';
-
+      } else if (response.RESULT === 'ALREADY_REGISTERED') {
+        this.status = 'Success';
+        this.message = 'Your have successfully registered for the event';
       } else {
         this.status = 'Failure';
         this.message = 'Event registration failed, please try again';
@@ -69,7 +71,7 @@ export class EventDetailPage implements OnInit {
     });
   }
 
-  dismissModal(){
+  dismissModal() {
     this.dismiss();
   }
 }

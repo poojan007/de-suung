@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button color="primary"></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center" style="font-weight: bold;">
       <img src="../../assets/desuung-header-logo.png" class="logo">
@@ -26,7 +26,7 @@
           <h3>{{data.did}}</h3>
           <p class="ion-text-wrap">{{data.cid}}</p>
         </ion-label>
-        <ion-checkbox color="primary" slot="end" [(ngModel)]="selected[i]" (ngModelChange)="getSelected(selected[i], data.userId)"></ion-checkbox>
+        <ion-checkbox color="primary" slot="end" [(ngModel)]="selected[i]" (ngModelChange)="getSelected(selected[i], data.user_id)"></ion-checkbox>
       </ion-item>
     </ion-list>
   </div>
