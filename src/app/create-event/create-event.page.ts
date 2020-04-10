@@ -28,6 +28,7 @@ export class CreateEventPage implements OnInit {
   coordinator: number;
   expectedWorkingDay: number;
   totalDesuupsRequired: number;
+  attendanceAssistant: number;
 
   data: ApiModel;
   createEventModel: CreateEventModel;
@@ -38,6 +39,7 @@ export class CreateEventPage implements OnInit {
   dzongkhagList: any;
   desuupBatchList: any;
   coordinatorList: any;
+  desuupList: any;
 
   status: string;
   message: string;
@@ -62,6 +64,7 @@ export class CreateEventPage implements OnInit {
     this.getDropDownList('eventCategory', 'event_categories', 'NA', 'NA');
     this.getDropDownList('dzongkhag', 'dzongkhags', 'NA', 'NA');
     this.getDropDownList('coordinators', 'users', '2', 'userType');
+    this.getDropDownList('desuupList', 'users', 'NA', 'NA');
     this.getBatchList();
 
     this.hideLoader();
@@ -77,6 +80,8 @@ export class CreateEventPage implements OnInit {
         this.coordinatorList = response;
       } else if (requestType === 'eventTypes') {
         this.eventTypeList = response;
+      } else if (requestType === 'desuupList') {
+        this.desuupList = response;
       }
     });
   }
@@ -90,17 +95,6 @@ export class CreateEventPage implements OnInit {
   getEventTypes($event) {
     const paramId = $event.target.value;
     this.getDropDownList('eventTypes', 'event_types', paramId, 'event_category');
-  }
-
-  showCalendar() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then(
-      date => console.log('Got date: ', date),
-      err => console.log('Error occurred while getting date: ', err)
-    );
   }
 
   createEvent() {
@@ -118,11 +112,20 @@ export class CreateEventPage implements OnInit {
     this.createEventModel.coordinator_id = this.coordinator;
     this.createEventModel.expected_working_days = this.expectedWorkingDay;
     this.createEventModel.total_desuup_required = this.totalDesuupsRequired;
+    this.createEventModel.attendance_assistant = this.attendanceAssistant;
+    this.createEventModel.createdBy = this.data.userId;
+
     console.log(JSON.stringify(this.createEventModel));
     this.apiService.createEvent(this.createEventModel).subscribe((response) => {
-      this.status = 'Success';
-      this.message = 'Event has been created successfully';
-      this.presentAlert();
+      if (response.RESULT === 'SUCCESS') {
+        this.status = 'Success';
+        this.message = 'Event has been created successfully';
+        this.presentAlert();
+      } else {
+        this.status = 'Failure';
+        this.message = 'Event couldnot be added, please try again later';
+        this.presentAlert();
+      }
     });
   }
 

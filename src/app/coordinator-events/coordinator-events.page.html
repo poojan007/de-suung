@@ -42,10 +42,10 @@
           <p class="description">{{data.description}}</p>
           <hr>
           <p><span class="title">Event Type:</span> <b>{{data.event_type}}</b></p>
-          <p><span class="title">Event Category:</span> <b>{{data.event_categorie}}</b></p>
+          <p><span class="title">Event Category:</span> <b>{{data.event_category}}</b></p>
         </ion-card-content>
         <div align="right">
-          <ion-button class="custom-button" (click)="takeAttendance(data.eventId, data.title)">
+          <ion-button class="custom-button" (click)="takeAttendance(data.id, data.title)">
             <ion-icon name="bookmarks"></ion-icon> Take Attendance
           </ion-button>
         </div>

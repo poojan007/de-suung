@@ -16,10 +16,11 @@ export class AttendancePage implements OnInit {
   data: ApiModel;
   dataList = [];
   loadedDataList = [];
-  selected = [];
+  totalAbsentDays = [];
+  hiddenUserId = [];
   multiValArray: any = [];
   isItemAvailable = false;
-  attendanceStr: string;
+  attendanceStr: string = '';
   status: string;
   message: string;
 
@@ -39,7 +40,6 @@ export class AttendancePage implements OnInit {
 
     this.eventId = this.navParams.data.id;
     this.eventTitle = this.navParams.data.title;
-    console.log(this.eventId);
     this.apiService.getRegisteredDesuupList(this.eventId).subscribe((response) => {
       this.dataList  = response;
       this.loadedDataList = response;
@@ -67,29 +67,18 @@ export class AttendancePage implements OnInit {
     });
   }
 
-  getSelected(isChecked, value) {
-    if (isChecked === true) {
-      this.loadedDataList.push(value);
-    } else {
-      this.loadedDataList.splice(this.multiValArray.indexOf(value), 1);
-    }
-  }
-
   sendAttendance() {
-    if (this.loadedDataList.length > 0) {
-      for (let i = 0; i < this.loadedDataList.length; i++) {
-        if (i === 0) {
-          this.attendanceStr = this.eventId + '@' + this.loadedDataList[i];
-        } else {
-          this.attendanceStr = this.attendanceStr + ':' + this.loadedDataList[i];
-        }
+    let countFlag = 0;
+    for (let i = 0; i < this.dataList.length; i++) {
+      if (countFlag > 0) {
+        this.attendanceStr = this.attendanceStr + '@';
       }
-      console.log('Attendance String: ' + this.attendanceStr);
-    } else {
-      this.status = 'Warning';
-      this.message = 'Atleast one person has to be selected';
-      this.presentAlert();
+
+      this.attendanceStr = this.attendanceStr + this.eventId + '~' + this.dataList[i].userId + '~' + this.totalAbsentDays[i];
+      countFlag++;
     }
+
+    console.log('Attendance String: ' + this.attendanceStr);
   }
 
   async presentAlert() {
@@ -99,5 +88,15 @@ export class AttendancePage implements OnInit {
       buttons: ['OK']
     });
       await alert.present();
+  }
+
+  dismiss() {
+    this.modalCtrl.dismiss({
+      dismissed: this.status
+    });
+  }
+
+  dismissModal() {
+    this.dismiss();
   }
 }

@@ -104,6 +104,15 @@
                 </ion-select>
               </ion-item>
               <ion-item>
+                <ion-label position="floating">Attendance Assistant</ion-label>
+                <ion-select class="icon-size-13" name="attendanceAssistant" [(ngModel)]="attendanceAssistant" multiple="true" required>
+                  <ion-select-option value=""></ion-select-option>
+                  <ion-select-option *ngFor="let desuup of desuupList" [value]="desuup.id">
+                    {{desuup.name}} - ({{desuup.did}})
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
                 <ion-label position="floating">Coordinator</ion-label>
                 <ion-select class="icon-size-13" name="coordinator" [(ngModel)]="coordinator" required>
                   <ion-select-option value=""></ion-select-option>

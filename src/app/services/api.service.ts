@@ -9,7 +9,8 @@ import { resolve } from 'url';
 })
 export class ApiService {
 
-  basePath = 'http://202.144.139.70/desungAPI/index.php?apiType=';
+  //basePath = 'http://202.144.139.70/desungAPI/index.php?apiType=';
+  basePath = 'http://192.168.43.87/desungAPI/index.php?apiType=';
   private userData: any;
 
   constructor(
@@ -169,7 +170,8 @@ export class ApiService {
 
   createEvent(item) {
     return this.http
-    .post<any>(this.basePath + 'createEvent', JSON.stringify(item), this.httpOptions)
+    // tslint:disable-next-line: max-line-length
+    .get<any>(this.basePath + 'createEvent&title=' + item.title + '&eventCategory_id=' + item.eventCategory_id + '&eventType_id=' + item.eventType_id + '&description=' + item.description + '&dzongkhag_id=' + item.dzongkhag_id + '&startDate=' + item.startDate + '&endDate=' + item.endDate + '&startTime=' + item.startTime + '&endTime=' + item.endTime + '&invited_from=' + item.invited_from + '&invited_batch=' + item.invited_batch + '&coordinator_id=' + item.coordinator_id + '&expected_working_days=' + item.expected_working_days + '&total_desuup_required=' + item.total_desuup_required + '&attendance_assistant=' + item.attendance_assistant + '&createdBy=' + item.createdBy, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

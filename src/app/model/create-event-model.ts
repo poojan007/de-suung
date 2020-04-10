@@ -13,4 +13,7 @@ export class CreateEventModel {
     coordinator_id: number;
     expected_working_days: number;
     total_desuup_required: number;
+    attendance_assistant: number;
+    createdBy: string;
+    created_at: string;
 }
