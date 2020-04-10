@@ -75,6 +75,10 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
+  ion-toolbar {
+    padding-top: 10px;
+  }
+
   .ios .logo {
     width: 100%;
     margin-left: -15px;
@@ -95,11 +99,11 @@
   }
 
   .ios .app-button-top {
-    top: -40px;
+    top: -50px;
   }
 
   .app-button-top {
-    top: -40px;
+    top: -50px;
   }
 
   .app-button-margin {

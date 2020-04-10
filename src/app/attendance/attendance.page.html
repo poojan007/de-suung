@@ -14,7 +14,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="orange-background">
+<ion-content class="orange-background">
   <div class="form-header">{{title}}</div>
   <ion-searchbar type="text" debounce="500" (ionChange)="filterList($event)"></ion-searchbar>
   <div *ngIf="dataList?.length != 0">
