@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, delay } from 'rxjs/operators';
 import { resolve } from 'url';
+import { Desuup } from '../model/desuup';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  //basePath = 'http://202.144.139.70/desungAPI/index.php?apiType=';
-  basePath = 'http://192.168.43.87/desungAPI/index.php?apiType=';
+  basePath = 'http://202.144.139.70/desungAPI/index.php?apiType=';
   private userData: any;
+  desuups: any;
 
   constructor(
     private http: HttpClient
@@ -176,5 +177,27 @@ export class ApiService {
         retry(2),
         catchError(this.handleError)
       );
+  }
+
+  getDesuups(page?: number, size?: number): Desuup[] {
+    let ports = [];
+    console.log(this.desuups);
+    this.desuups.forEach(desuup => {
+        desuup.name = desuup;
+        ports.push(desuup);
+    });
+
+    if (page && size) {
+      ports = ports.slice((page - 1) * size, ((page - 1) * size) + size);
+    }
+
+    return ports;
+  }
+
+  getDesuupsAsync(page?: number, size?: number, timeout = 1000): Observable<Desuup[]> {
+    return new Observable<Desuup[]>(observer => {
+      observer.next(this.getDesuups(page, size));
+      observer.complete();
+    }).pipe(delay(timeout));
   }
 }

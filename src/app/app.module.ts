@@ -14,6 +14,7 @@ import { EventDetailPageModule } from './event-detail/event-detail.module';
 import { AttendancePageModule } from './attendance/attendance.module';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { DatePipe } from '@angular/common';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     EventDetailPageModule,
-    AttendancePageModule
+    AttendancePageModule,
+    IonicSelectableModule
   ],
   providers: [
     StatusBar,

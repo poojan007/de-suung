@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
       this.data.empType = response.emp_type;
       this.data.qualification = response.qualification;
       this.data.privileges = response.userPrivileges;
-
+      
       if (response.validation === 'true') {
         this.authservice.login(this.data);
         localStorage.setItem('cid', this.cidNo.toString());

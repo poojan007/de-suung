@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiService } from '../services/api.service';
 import { ApiModel } from '../model/api-model';
@@ -6,6 +6,9 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { CreateEventModel } from '../model/create-event-model';
 import { DatePipe } from '@angular/common';
+import { IonicSelectableComponent } from 'ionic-selectable';
+import { Subscription } from 'rxjs';
+import { Desuup } from '../model/desuup';
 
 @Component({
   selector: 'app-create-event',
@@ -40,9 +43,15 @@ export class CreateEventPage implements OnInit {
   desuupBatchList: any;
   coordinatorList: any;
   desuupList: any;
+  desuupArray: [];
 
   status: string;
   message: string;
+  toggle = true;
+
+  desuupSubscription: Subscription;
+
+  @ViewChild('inviteDesuupFromComponent', null) inviteDesuupFromComponent: IonicSelectableComponent;
 
   constructor(
     private authService: AuthenticationService,
@@ -146,11 +155,67 @@ export class CreateEventPage implements OnInit {
   }
 
   async presentAlert() {
-    const alert = await this.alertCtrl.create({
-    header: this.status.toUpperCase(),
-    message: this.message,
-    buttons: ['OK']
-  });
-    await alert.present();
-}
+      const alert = await this.alertCtrl.create({
+      header: this.status.toUpperCase(),
+      message: this.message,
+      buttons: ['OK']
+    });
+      await alert.present();
+  }
+
+  clear() {
+    this.inviteDesuupFromComponent.clear();
+    this.inviteDesuupFromComponent.close();
+  }
+
+  toggleItems() {
+    this.inviteDesuupFromComponent.toggleItems(this.toggle);
+    this.toggle = !this.toggle;
+  }
+
+  confirm() {
+    this.inviteDesuupFromComponent.confirm();
+    this.inviteDesuupFromComponent.close();
+  }
+
+  filterDesuups(desuups: Desuup[], text: string) {
+    return desuups.filter(desuup => {
+      return desuup.name.toLowerCase().indexOf(text) !== -1 ||
+        desuup.did.toLowerCase().indexOf(text) !== -1;
+    });
+  }
+
+  searchDesuups(event: {
+    component: IonicSelectableComponent,
+    text: string
+  }) {
+    const text = event.text.trim().toLowerCase();
+    event.component.startSearch();
+
+    // Close any running subscription.
+    if (this.desuupSubscription) {
+      this.desuupSubscription.unsubscribe();
+    }
+
+    if (!text) {
+      // Close any running subscription.
+      if (this.desuupSubscription) {
+        this.desuupSubscription.unsubscribe();
+      }
+
+      event.component.items = [];
+      event.component.endSearch();
+      return;
+    }
+
+    this.apiService.desuups = this.desuupList;
+    this.desuupSubscription = this.apiService.getDesuupsAsync().subscribe(desuups => {
+      if (this.desuupSubscription.closed) {
+        return;
+      }
+
+      event.component.items = this.filterDesuups(desuups, text);
+      event.component.endSearch();
+    });
+  }
 }

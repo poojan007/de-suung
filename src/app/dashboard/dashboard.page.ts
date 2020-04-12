@@ -98,16 +98,20 @@ export class DashboardPage implements OnInit {
     this.data.userId = userData.userId;
     this.role = userData.roleName;
     this.priv = userData.privileges;
-
-    this.privArray = this.priv.split(',');
-
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.privArray.length; i++) {
-      if (this.privArray[i] === 'MANAGE_EVENT') {
-        this.showCreateEvent = true;
-      }
-      if (this.privArray[i] === 'MANAGE_ATTENDANCE') {
-        this.showAttendance = true;
+    console.log('Privileges in dashboard: ' + this.priv);
+    if (this.priv === null) {
+      this.showCreateEvent = false;
+      this.showAttendance = false;
+    } else {
+      this.privArray = this.priv.split(',');
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < this.privArray.length; i++) {
+        if (this.privArray[i] === 'MANAGE_EVENT') {
+          this.showCreateEvent = true;
+        }
+        if (this.privArray[i] === 'MANAGE_ATTENDANCE') {
+          this.showAttendance = true;
+        }
       }
     }
 
