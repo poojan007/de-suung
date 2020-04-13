@@ -69,6 +69,8 @@ export class AttendancePage implements OnInit {
 
   sendAttendance() {
     let countFlag = 0;
+    this.attendanceStr = '';
+
     for (let i = 0; i < this.dataList.length; i++) {
       if (countFlag > 0) {
         this.attendanceStr = this.attendanceStr + '@';
@@ -78,7 +80,19 @@ export class AttendancePage implements OnInit {
       countFlag++;
     }
 
-    console.log('Attendance String: ' + this.attendanceStr);
+    console.log(this.attendanceStr);
+
+    this.apiService.postDesuupAttendance(this.attendanceStr).subscribe((response) => {
+      if (response.RESULT === 'SUCCESS') {
+        this.status = 'Successful';
+        this.message = 'Attendance has been successfully updated';
+      } else {
+        this.status = 'Failure';
+        this.message = 'Attendance update failed, please try again';
+      }
+
+      this.presentAlert();
+    });
   }
 
   async presentAlert() {

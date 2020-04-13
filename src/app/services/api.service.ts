@@ -179,6 +179,15 @@ export class ApiService {
       );
   }
 
+  postDesuupAttendance(attendanceStr) {
+    return this.http
+    .get<any>(this.basePath + 'saveAttendance&attendanceStr=' + attendanceStr, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
   getDesuups(page?: number, size?: number): Desuup[] {
     let ports = [];
     console.log(this.desuups);
