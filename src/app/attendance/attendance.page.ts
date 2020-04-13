@@ -41,6 +41,7 @@ export class AttendancePage implements OnInit {
     this.eventId = this.navParams.data.id;
     this.eventTitle = this.navParams.data.title;
     this.apiService.getRegisteredDesuupList(this.eventId).subscribe((response) => {
+      console.log(response);
       this.dataList  = response;
       this.loadedDataList = response;
     });
