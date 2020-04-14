@@ -37,31 +37,44 @@ export class LoginPage implements OnInit {
     this.data.password = this.password;
     this.apiService.validateLogin(this.data).subscribe((response) => {
       console.log(response);
-      this.data.roleName = response.roleName;
-      this.data.roleId = response.roleId;
+
       this.data.validation = response.validation;
-      this.data.userId = response.userId;
       this.data.name = response.name;
       this.data.did = response.did;
+      this.data.cid = response.cid;
+      this.data.roleName = response.roleName;
+      this.data.roleId = response.roleId;
+      this.data.userId = response.userId;
+      this.data.batchNo = response.batchNo;
+      this.data.userType = response.usertype;
+      this.data.location = response.location;
+      this.data.dzongkhagId = response.dzongkhag_id;
+      this.data.gewog = response.gewog_id;
       this.data.village = response.village;
+      this.data.agencyType = response.agency_type;
+      this.data.agencyId = response.agency_id;
+      this.data.empType = response.emptype;
+      this.data.designation = response.designation;
+      this.data.profession = response.profession_id;
       this.data.bloodgroup = response.bloodgroup;
-      this.data.maritalStatus = response.maritalStatus;
+      this.data.maritalStatus = response.marital_status;
       this.data.dob = response.dob;
+      this.data.qualification = response.qualification;
       this.data.gender = response.gender;
       this.data.email = response.email;
-      this.data.location = response.location;
-      this.data.userType = response.userType;
-      this.data.dzongkhag = response.dzongkhag;
-      this.data.gewog = response.gewog;
-      this.data.agencyType = response.agency_type;
-      this.data.empType = response.emp_type;
-      this.data.qualification = response.qualification;
+      this.data.mobile = response.mobile;
+      this.data.isProfileUpdateNeeded = response.is_profile_update_needed;
       this.data.privileges = response.userPrivileges;
-      
+
       if (response.validation === 'true') {
         this.authservice.login(this.data);
         localStorage.setItem('cid', this.cidNo.toString());
-        this.navCtrl.navigateForward('/dashboard');
+
+        if (this.data.isProfileUpdateNeeded === 'Y') {
+          this.navCtrl.navigateForward('/updateprofile');
+        } else {
+          this.navCtrl.navigateForward('/dashboard');
+        }
       } else {
         this.presentAlert();
       }

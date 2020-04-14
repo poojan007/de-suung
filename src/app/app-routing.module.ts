@@ -66,6 +66,11 @@ const routes: Routes = [
     path: 'logout',
     loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'updateprofile',
+    loadChildren: () => import('./updateprofile/updateprofile.module').then( m => m.UpdateprofilePageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

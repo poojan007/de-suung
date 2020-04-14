@@ -188,6 +188,15 @@ export class ApiService {
       );
   }
 
+  postUpdateProfile(item) {
+    return this.http
+    .post<any>(this.basePath + 'updateProfile', JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
   getDesuups(page?: number, size?: number): Desuup[] {
     let ports = [];
     console.log(this.desuups);

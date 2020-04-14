@@ -124,7 +124,6 @@ export class CreateEventPage implements OnInit {
     this.createEventModel.attendance_assistant = this.attendanceAssistant;
     this.createEventModel.createdBy = this.data.userId;
 
-    console.log(JSON.stringify(this.createEventModel));
     this.apiService.createEvent(this.createEventModel).subscribe((response) => {
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';

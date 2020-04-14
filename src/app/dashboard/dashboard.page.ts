@@ -98,7 +98,7 @@ export class DashboardPage implements OnInit {
     this.data.userId = userData.userId;
     this.role = userData.roleName;
     this.priv = userData.privileges;
-    console.log('Privileges in dashboard: ' + this.priv);
+
     if (this.priv === null) {
       this.showCreateEvent = false;
       this.showAttendance = false;

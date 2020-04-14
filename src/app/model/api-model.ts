@@ -11,7 +11,6 @@ export class ApiModel {
     createdBy: number;
     attendanceStr: string;
     privileges: string;
-
     roleName: string;
     roleId: number;
     validation: string;
@@ -27,4 +26,14 @@ export class ApiModel {
     agencyType: string;
     empType: string;
     qualification: string;
+    isProfileUpdateNeeded: string;
+    batchNo: string;
+    usertype: number;
+    dzongkhagId: number;
+    gewogId: number;
+    agencyId: number;
+    emptype: number;
+    designation: string;
+    profession: number;
+    mobile: number;
 }
