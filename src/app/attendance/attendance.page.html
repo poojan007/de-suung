@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content class="orange-background">
-  <div class="form-header">{{title}}</div>
+  <div class="form-header">{{eventTitle}}</div>
   <ion-searchbar type="text" debounce="500" (ionChange)="filterList($event)"></ion-searchbar>
   <form #form="ngForm" (ngSubmit)="sendAttendance()">
     <div *ngIf="dataList?.length != 0">
