@@ -63,7 +63,8 @@ export class ApiService {
 
   getUpcomingEvents(item) {
     return this.http
-      .get<any>(this.basePath + 'userEventList&userId=' + item.userId, this.httpOptions)
+      // tslint:disable-next-line: max-line-length
+      .get<any>(this.basePath + 'userEventList&userId=' + item.userId + '&locationId=' + item.location + '&batchNo=' + item.batchNo, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

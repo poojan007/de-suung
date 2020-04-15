@@ -29,6 +29,8 @@ export class UpcomingeventPage implements OnInit {
     this.showLoader();
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
     this.data.userId = userData.userId;
+    this.data.location = userData.location;
+    this.data.batchNo = userData.batchNo;
 
     this.apiService.getUpcomingEvents(this.data).subscribe((response) => {
       this.dataList  = response;

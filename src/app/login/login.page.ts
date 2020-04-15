@@ -36,8 +36,6 @@ export class LoginPage implements OnInit {
     this.data.loginId = this.cidNo;
     this.data.password = this.password;
     this.apiService.validateLogin(this.data).subscribe((response) => {
-      console.log(response);
-
       this.data.validation = response.validation;
       this.data.name = response.name;
       this.data.did = response.did;
