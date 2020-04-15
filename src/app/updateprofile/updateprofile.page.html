@@ -20,19 +20,19 @@
             <div padding>
               <ion-item>
                 <ion-label position="floating">Name</ion-label>
-                <ion-input class="icon-size-13" name="desuupName" type="text" [(ngModel)]="desuupName" required></ion-input>
+                <ion-input class="icon-size-13" name="desuupName" type="text" [(ngModel)]="desuupName" [value]="desuupName" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Email</ion-label>
-                <ion-input class="icon-size-13" name="email" type="email" [(ngModel)]="email" required></ion-input>
+                <ion-input class="icon-size-13" name="email" type="email" [(ngModel)]="email" [value]="email" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Mobile No</ion-label>
-                <ion-input class="icon-size-13" name="mobileNo" type="number" [(ngModel)]="mobileNo" required></ion-input>
+                <ion-input class="icon-size-13" name="mobileNo" type="number" [(ngModel)]="mobileNo" [value]="mobileNo" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Marital Status</ion-label>
-                <ion-select class="icon-size-13" name="maritalStatus" [(ngModel)]="maritalStatus" required>
+                <ion-select class="icon-size-13" name="maritalStatus" [(ngModel)]="maritalStatus" [value]="maritalStatus" required>
                   <ion-select-option value="Single">Single</ion-select-option>
                   <ion-select-option value="Married">Married</ion-select-option>
                   <ion-select-option value="Divorced">Divorced</ion-select-option>
@@ -40,7 +40,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Present Dzongkhag/Location</ion-label>
-                <ion-select class="icon-size-13" name="location" [(ngModel)]="location" required>
+                <ion-select class="icon-size-13" name="location" [(ngModel)]="location" [value]="location" required>
                   <ion-select-option *ngFor="let dzongkhag of dzongkhagList" [value]="dzongkhag.id">
                     {{dzongkhag.name}}
                   </ion-select-option>
@@ -48,7 +48,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Agency Type</ion-label>
-                <ion-select class="icon-size-13" name="agencyType" [(ngModel)]="agencyType" (ionChange)="getAgencyList($event);" required >
+                <ion-select class="icon-size-13" name="agencyType" [(ngModel)]="agencyType" [value]="agencyType" (ionChange)="getAgencyList($event);" required >
                   <ion-select-option *ngFor="let agencyType of agencyTypeList" [value]="agencyType.id">
                     {{agencyType.name}}
                   </ion-select-option>
@@ -56,7 +56,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Present Address/Agency</ion-label>
-                <ion-select class="icon-size-13" name="agency" [(ngModel)]="agency" required>
+                <ion-select class="icon-size-13" name="agency" [(ngModel)]="agency" [value]="agency" required>
                   <ion-select-option *ngFor="let agency of agencyList" [value]="agency.id">
                     {{agency.name}}
                   </ion-select-option>
@@ -64,7 +64,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Employment Type</ion-label>
-                <ion-select class="icon-size-13" name="employmentType" [(ngModel)]="employmentType" required>
+                <ion-select class="icon-size-13" name="employmentType" [(ngModel)]="employmentType" [value]="employmentType" required>
                   <ion-select-option *ngFor="let empType of empTypeList" [value]="empType.id">
                     {{empType.name}}
                   </ion-select-option>
@@ -72,11 +72,11 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Designation</ion-label>
-                <ion-input class="icon-size-13" name="designation" type="text" [(ngModel)]="designation" required></ion-input>
+                <ion-input class="icon-size-13" name="designation" type="text" [(ngModel)]="designation" [value]="designation" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Profession</ion-label>
-                <ion-select class="icon-size-13" name="profession" [(ngModel)]="profession" required>
+                <ion-select class="icon-size-13" name="profession" [(ngModel)]="profession" [value]="profession" required>
                   <ion-select-option *ngFor="let profession of professionalList" [value]="profession.id">
                     {{profession.name}}
                   </ion-select-option>
@@ -84,7 +84,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Qualification</ion-label>
-                <ion-select class="icon-size-13" name="qualification" [(ngModel)]="qualification" required>
+                <ion-select class="icon-size-13" name="qualification" [(ngModel)]="qualification" [value]="qualification" required>
                   <ion-select-option *ngFor="let qualification of qualificationList" [value]="qualification.id">
                     {{qualification.name}}
                   </ion-select-option>

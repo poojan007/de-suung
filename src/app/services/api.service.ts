@@ -190,7 +190,8 @@ export class ApiService {
 
   postUpdateProfile(item) {
     return this.http
-    .post<any>(this.basePath + 'updateProfile', JSON.stringify(item), this.httpOptions)
+    // tslint:disable-next-line: max-line-length
+    .get<any>(this.basePath + 'updateProfile&userId=' + item.userId + '&name=' + item.name + '&email=' + item.email + '&mobile=' + item.mobile + '&maritalStatus=' + item.maritalStatus + '&location=' + item.location + '&agencyType=' + item.agencyType + '&agencyId=' + item.agencyId + '&empType=' + item.empType + '&designation=' + item.designation + '&profession=' + item.profession + '&qualification=' + item.qualification, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { ApiModel } from '../model/api-model';
 
@@ -41,19 +41,20 @@ export class UpdateprofilePage implements OnInit {
   profession: number;
   qualification: string;
 
+  status: string;
+  message: string;
+
   data: ApiModel;
 
   constructor(
     private authService: AuthenticationService,
     private loadingCtrl: LoadingController,
     private apiService: ApiService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertCtrl: AlertController
   ) {
     this.data = new ApiModel();
-  }
 
-  ngOnInit() {
-    this.showLoader();
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
     this.userId = userData.userId;
     this.desuupName = userData.name;
@@ -75,7 +76,10 @@ export class UpdateprofilePage implements OnInit {
     this.designation = userData.designation;
     this.profession = userData.profession;
     this.qualification = userData.qualification;
+  }
 
+  ngOnInit() {
+    this.showLoader();
     this.getDropDownList('dzongkhag', 'dzongkhags', 'NA', 'NA');
     this.getDropDownList('gewog', 'gewogs', 'NA', 'NA');
     this.getDropDownList('agencyType', 'agency_types', 'NA', 'NA');
@@ -83,7 +87,6 @@ export class UpdateprofilePage implements OnInit {
     this.getDropDownList('qualification', 'qualifications', 'NA', 'NA');
     this.getDropDownList('profession', 'professions', 'NA', 'NA');
     this.getDropDownList('agencyList', 'agencies', this.agencyType, 'agency_type');
-
     this.hideLoader();
   }
 
@@ -128,9 +131,26 @@ export class UpdateprofilePage implements OnInit {
 
     console.log(JSON.stringify(this.data));
     this.apiService.postUpdateProfile(this.data).subscribe((response) => {
-      console.log(response);
-      this.navCtrl.navigateForward('/dashboard');
+      if (response.RESULT === 'SUCCESS') {
+        this.status = 'Successful';
+        this.message = 'Your profile has been successfully updated. Please wait, you will be redirected to your dashboard';
+        this.navCtrl.navigateForward('/dashboard');
+      } else {
+        this.status = 'Failure';
+        this.message = 'Your profile update failed, please try again.';
+      }
+
+      this.presentAlert();
     });
+  }
+
+  async presentAlert() {
+      const alert = await this.alertCtrl.create({
+      header: this.status.toUpperCase(),
+      message: this.message,
+      buttons: ['OK']
+    });
+      await alert.present();
   }
 
   showLoader() {
