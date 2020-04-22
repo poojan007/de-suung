@@ -31,7 +31,7 @@ export class CreateEventPage implements OnInit {
   coordinator: number;
   expectedWorkingDay: number;
   totalDesuupsRequired: number;
-  attendanceAssistant: number;
+  attendanceAssistant = 0;
 
   data: ApiModel;
   createEventModel: CreateEventModel;
@@ -48,10 +48,12 @@ export class CreateEventPage implements OnInit {
   status: string;
   message: string;
   toggle = true;
+  toggleBatch = true;
 
   desuupSubscription: Subscription;
 
   @ViewChild('inviteDesuupFromComponent', null) inviteDesuupFromComponent: IonicSelectableComponent;
+  @ViewChild('inviteBatchComponent', null) inviteBatchComponent: IonicSelectableComponent;
 
   constructor(
     private authService: AuthenticationService,
@@ -73,7 +75,7 @@ export class CreateEventPage implements OnInit {
     this.getDropDownList('eventCategory', 'event_categories', 'NA', 'NA');
     this.getDropDownList('dzongkhag', 'dzongkhags', 'NA', 'NA');
     this.getDropDownList('coordinators', 'users', '2', 'userType');
-    this.getDropDownList('desuupList', 'users', 'NA', 'NA');
+    // this.getDropDownList('desuupList', 'users', 'NA', 'NA');
     this.getBatchList();
 
     this.hideLoader();
@@ -119,7 +121,12 @@ export class CreateEventPage implements OnInit {
     this.createEventModel.invited_from = this.inviteDesuupsFrom;
     this.createEventModel.invited_batch = this.inviteDesuupsBatch;
     this.createEventModel.coordinator_id = this.coordinator;
-    this.createEventModel.expected_working_days = this.expectedWorkingDay;
+
+    const date1: any = new Date(this.startDate);
+    const date2: any = new Date(this.endDate);
+    const diffDays: any = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
+
+    this.createEventModel.expected_working_days = diffDays;
     this.createEventModel.total_desuup_required = this.totalDesuupsRequired;
     this.createEventModel.attendance_assistant = this.attendanceAssistant;
     this.createEventModel.createdBy = this.data.userId;
@@ -177,44 +184,18 @@ export class CreateEventPage implements OnInit {
     this.inviteDesuupFromComponent.close();
   }
 
-  filterDesuups(desuups: Desuup[], text: string) {
-    return desuups.filter(desuup => {
-      return desuup.name.toLowerCase().indexOf(text) !== -1 ||
-        desuup.did.toLowerCase().indexOf(text) !== -1;
-    });
+  clearBatch() {
+    this.inviteBatchComponent.clear();
+    this.inviteBatchComponent.close();
   }
 
-  searchDesuups(event: {
-    component: IonicSelectableComponent,
-    text: string
-  }) {
-    const text = event.text.trim().toLowerCase();
-    event.component.startSearch();
+  toggleBatchItems() {
+    this.inviteBatchComponent.toggleItems(this.toggleBatch);
+    this.toggleBatch = !this.toggleBatch;
+  }
 
-    // Close any running subscription.
-    if (this.desuupSubscription) {
-      this.desuupSubscription.unsubscribe();
-    }
-
-    if (!text) {
-      // Close any running subscription.
-      if (this.desuupSubscription) {
-        this.desuupSubscription.unsubscribe();
-      }
-
-      event.component.items = [];
-      event.component.endSearch();
-      return;
-    }
-
-    this.apiService.desuups = this.desuupList;
-    this.desuupSubscription = this.apiService.getDesuupsAsync().subscribe(desuups => {
-      if (this.desuupSubscription.closed) {
-        return;
-      }
-
-      event.component.items = this.filterDesuups(desuups, text);
-      event.component.endSearch();
-    });
+  confirmBatch() {
+    this.inviteBatchComponent.confirm();
+    this.inviteBatchComponent.close();
   }
 }

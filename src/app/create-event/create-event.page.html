@@ -62,12 +62,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Location</ion-label>
-                <ion-select class="icon-size-13" name="dzongkhag" [(ngModel)]="dzongkhag" required>
-                  <ion-select-option *ngFor="let dzongkhag of dzongkhagList" [value]="dzongkhag.id">
-                    {{dzongkhag.name}}
-                  </ion-select-option>
-                </ion-select>
-                <!-- <ionic-selectable name="dzongkhag" [(ngModel)]="dzongkhag" 
+                <ionic-selectable name="dzongkhag" [(ngModel)]="dzongkhag" 
                 [items]="dzongkhagList" itemValueField="id" itemTextField="name" 
                 [canSearch]="true" headerColor="primary" searchFailText="Nothing found">
                 <ng-template ionicSelectableCloseButtonTemplate>
@@ -76,7 +71,7 @@
                 <ng-template ionicSelectableTitleTemplate>
                   Location
                 </ng-template>
-                </ionic-selectable> -->
+                </ionic-selectable>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Start Date</ion-label>
@@ -96,12 +91,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Invite Desuups From</ion-label>
-                <ion-select class="icon-size-13" name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" multiple="true" required>
-                  <ion-select-option *ngFor="let dzongkhag of dzongkhagList" [value]="dzongkhag.id">
-                    {{dzongkhag.name}}
-                  </ion-select-option>
-                </ion-select>
-                <!-- <ionic-selectable #inviteDesuupFromComponent name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" 
+                <ionic-selectable #inviteDesuupFromComponent name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" 
                 [items]="dzongkhagList" itemValueField="id" itemTextField="name" 
                 [canSearch]="true" [isMultiple]="true" headerColor="primary" 
                 searchFailText="Nothing found">
@@ -128,16 +118,11 @@
                     </ion-toolbar>
                   </ion-footer>
                 </ng-template>
-                </ionic-selectable> -->
+                </ionic-selectable>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Invite Desuups Batch</ion-label>
-                <ion-select class="icon-size-13" name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" multiple="true" required>
-                  <ion-select-option *ngFor="let batch of desuupBatchList" [value]="batch.batchNo">
-                    {{batch.batchNo}}
-                  </ion-select-option>
-                </ion-select>
-                <!-- <ionic-selectable name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" 
+                <ionic-selectable #inviteBatchComponent name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" 
                 [items]="desuupBatchList" itemValueField="batchNo" itemTextField="batchNo" 
                 [canSearch]="true" [isMultiple]="true" headerColor="primary" searchFailText="Nothing found">
                 <ng-template ionicSelectableCloseButtonTemplate>
@@ -149,38 +134,28 @@
                 <ng-template ionicSelectableItemTemplate let-invitedBatch="item">
                   {{ invitedBatch.batchNo }}
                 </ng-template>
-                </ionic-selectable> -->
+                <ng-template ionicSelectableFooterTemplate>
+                  <ion-footer>
+                    <ion-toolbar>
+                      <ion-row text-center>
+                        <ion-col size="4">
+                          <ion-button fill="clear" (click)="clearBatch()">Clear</ion-button>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-button fill="clear" (click)="toggleBatchItems()">Toggle</ion-button>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-button fill="clear" (click)="confirmBatch()">Confirm</ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-toolbar>
+                  </ion-footer>
+                </ng-template>
+                </ionic-selectable>
               </ion-item>
               <ion-item>
-                <ion-label position="floating">Attendance Assistant</ion-label>
-                <ion-select class="icon-size-13" name="attendanceAssistant" [(ngModel)]="attendanceAssistant" multiple="true" required>
-                  <ion-select-option *ngFor="let desuup of desuupList" [value]="desuup.id">
-                    {{desuup.name}} - ({{desuup.did}})
-                  </ion-select-option>
-                </ion-select>
-                <!-- <ionic-selectable name="attendanceAssistant" [(ngModel)]="attendanceAssistant" 
-                [items]="desuupList" itemValueField="id" itemTextField="name" 
-                [canSearch]="true" [isMultiple]="true" headerColor="primary" 
-                searchFailText="Nothing found">
-                <ng-template ionicSelectableCloseButtonTemplate>
-                  <ion-icon name="close-circle"></ion-icon>
-                </ng-template>
-                <ng-template ionicSelectableTitleTemplate>
-                  Attendance Assistant
-                </ng-template>
-                <ng-template ionicSelectableItemTemplate let-attendanceAssistant="item">
-                  {{ attendanceAssistant.name }} ({{attendanceAssistant.did}})
-                </ng-template>
-                </ionic-selectable> -->
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Coordinator</ion-label>
-                <ion-select class="icon-size-13" name="coordinator" [(ngModel)]="coordinator" required>
-                  <ion-select-option *ngFor="let coordinator of coordinatorList" [value]="coordinator.id">
-                    {{coordinator.name}} - ({{coordinator.did}})
-                  </ion-select-option>
-                </ion-select>
-                <!-- <ionic-selectable name="coordinator" [(ngModel)]="coordinator" 
+                 <ion-label position="floating">Coordinator</ion-label>
+                <ionic-selectable name="coordinator" [(ngModel)]="coordinator" 
                 [items]="coordinatorList" itemValueField="id" itemTextField="name" 
                 [canSearch]="true" headerColor="primary" searchFailText="Nothing found">
                 <ng-template ionicSelectableCloseButtonTemplate>
@@ -192,11 +167,7 @@
                 <ng-template ionicSelectableItemTemplate let-coordinator="item">
                   {{ coordinator.name }} ({{coordinator.did}})
                 </ng-template>
-                </ionic-selectable> -->
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Expected Working Days</ion-label>
-                <ion-input type="number" class="icon-size-13" name="expectedWorkingDay" [(ngModel)]="expectedWorkingDay" required></ion-input>
+                </ionic-selectable>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Total Desuups Required</ion-label>
