@@ -86,3 +86,13 @@ ion-content ion-toolbar {
     width: 75%;
     margin-top: -20px;
   }
+
+  .card-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .has-card-footer {
+    padding-bottom: 15px;
+  }

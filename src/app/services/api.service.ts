@@ -199,6 +199,15 @@ export class ApiService {
       );
   }
 
+  postQRCodeAttendance(item) {
+    return this.http
+    .get<any>(this.basePath + 'saveAttendance&eventId=' + item.eventId + '&userId=' + item.userId, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
   getDesuups(page?: number, size?: number): Desuup[] {
     let ports = [];
     console.log(this.desuups);

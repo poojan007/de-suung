@@ -4,6 +4,7 @@ import { ApiService } from '../services/api.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { AttendancePage } from '../attendance/attendance.page';
+import { GenerateQrPage } from '../generate-qr/generate-qr.page';
 
 @Component({
   selector: 'app-coordinator-events',
@@ -63,6 +64,26 @@ export class CoordinatorEventsPage implements OnInit {
       componentProps: {
         id: eventId,
         title: eventTitle
+      }
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      this.apiService.getCoordinatorEventList(this.data).subscribe((response) => {
+        this.dataList  = response;
+      });
+    });
+    return await modal.present();
+  }
+
+  async generateQRCode(eventId, eventTitle, startDateStr, endDateStr) {
+    const modal = await this.modalCtrl.create({
+      component: GenerateQrPage,
+      swipeToClose: true,
+      presentingElement: await this.modalCtrl.getTop(),
+      componentProps: {
+        id: eventId,
+        title: eventTitle,
+        startDate: startDateStr,
+        endDate: endDateStr
       }
     });
     modal.onDidDismiss().then((dataReturned) => {

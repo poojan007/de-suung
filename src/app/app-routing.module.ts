@@ -66,6 +66,16 @@ const routes: Routes = [
     path: 'updateprofile',
     loadChildren: () => import('./updateprofile/updateprofile.module').then( m => m.UpdateprofilePageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'generate-qr',
+    loadChildren: () => import('./generate-qr/generate-qr.module').then( m => m.GenerateQrPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'scanqr',
+    loadChildren: () => import('./scanqr/scanqr.module').then( m => m.ScanqrPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

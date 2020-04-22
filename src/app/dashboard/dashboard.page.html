@@ -109,6 +109,18 @@
         </div>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col class="padding-0" *ngIf="showScanQR">
+        <div class="ion-text-center grid-layout">
+          <a href="#" class="anchor-custom" [routerLink]="['/scanqr']">
+            <div>
+              <ion-icon name="person-add" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14"> Scan QR Code </ion-label>
+          </a>
+        </div>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
 <ion-footer>

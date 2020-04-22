@@ -1,0 +1,22 @@
+ion-content ion-toolbar {
+    --background: translucent;
+}
+
+.form-header {
+    text-align: center;
+    background-color: #3880ff;
+    padding: 10px;
+    /* font-weight: bold; */
+    color: white;
+    letter-spacing: 1px;
+}  
+
+.qrcode {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.qrclass {
+    background-image: url('../../assets/qr_logo.png');
+    width: 100%;
+}

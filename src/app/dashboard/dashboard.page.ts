@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -81,7 +81,10 @@ export class DashboardPage implements OnInit {
   priv: string;
   showCreateEvent = false;
   showAttendance = false;
+  showScanQR = false;
   privArray: string[];
+  scannedData: any;
+  toast: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -105,6 +108,7 @@ export class DashboardPage implements OnInit {
     if (this.priv === null) {
       this.showCreateEvent = false;
       this.showAttendance = false;
+      this.showScanQR = false;
     } else {
       this.privArray = this.priv.split(',');
       // tslint:disable-next-line: prefer-for-of
@@ -116,6 +120,8 @@ export class DashboardPage implements OnInit {
           this.showAttendance = true;
         }
       }
+
+      this.showScanQR = true;
     }
 
     this.getUpcomingEventCount();
@@ -155,5 +161,4 @@ export class DashboardPage implements OnInit {
     this.navCtrl.navigateForward('');
     this.hideLoader();
   }
-
 }

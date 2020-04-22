@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button icon-only color="primary" (click)="dismissModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="form-header">Scan me to record your attendance</div>
+  <ion-card style="margin-top: 5px;">
+    <ion-card-header style="--background: #ef5e5e;" text-wrap>
+      <ion-card-subtitle style="--color: white;font-size: 20px;">{{eventTitle}}</ion-card-subtitle>
+      <ion-card-title style="font-size: 12px; --color: white;">{{startDate | date}} - {{endDate | date}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="qrcode ion-text-center">
+      <ngx-qrcode 
+        [qrc-element-type]="canvas" 
+        [qrc-value]="qrData" 
+        qrc-class="qrclass" 
+        qrc-errorCorrectionLevel="L" 
+        qrc-version="70" 
+        qrc-colorLight="#0000ff"> 
+      </ngx-qrcode>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

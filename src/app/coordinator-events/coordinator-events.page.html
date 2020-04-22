@@ -44,11 +44,22 @@
           <p><span class="title">Event Type:</span> <b>{{data.event_type}}</b></p>
           <p><span class="title">Event Category:</span> <b>{{data.event_category}}</b></p>
         </ion-card-content>
-        <div align="right">
-          <ion-button (click)="takeAttendance(data.id, data.title)">
-            <ion-icon name="bookmarks"></ion-icon> Take Attendance
-          </ion-button>
-        </div>
+        <ion-footer>
+          <ion-row>
+            <ion-col>
+              <ion-button fill="clear" (click)="generateQRCode(data.id, data.title, data.startDate, data.endDate)">
+                <ion-icon name="barcode"></ion-icon>
+                <div>QR Code</div>
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button fill="clear" (click)="takeAttendance(data.id, data.title)">
+                <ion-icon name="bookmarks"></ion-icon>
+                <div>Attendance</div>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-footer>
       </ion-card>
     </ion-list>
   </div>

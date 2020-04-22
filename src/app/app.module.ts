@@ -15,6 +15,9 @@ import { AttendancePageModule } from './attendance/attendance.module';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { DatePipe } from '@angular/common';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { GenerateQrPageModule } from './generate-qr/generate-qr.module';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +29,9 @@ import { IonicSelectableModule } from 'ionic-selectable';
     HttpClientModule,
     EventDetailPageModule,
     AttendancePageModule,
-    IonicSelectableModule
+    IonicSelectableModule,
+    GenerateQrPageModule,
+    NgxQRCodeModule
   ],
   providers: [
     StatusBar,
@@ -35,6 +40,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
     AuthGuard,
     DatePicker,
     DatePipe,
+    BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
