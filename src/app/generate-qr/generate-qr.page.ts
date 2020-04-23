@@ -15,7 +15,7 @@ export class GenerateQrPage implements OnInit {
   @Input() endDate: string;
   status: string;
 
-  elementType = 'canvas';
+  elementType = 'img';
   QRCode: Qrmodel;
   qrData: string;
 

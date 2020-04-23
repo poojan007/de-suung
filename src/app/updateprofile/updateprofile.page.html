@@ -47,6 +47,14 @@
                 </ion-select>
               </ion-item>
               <ion-item>
+                <ion-label position="floating">Employment Type</ion-label>
+                <ion-select class="icon-size-13" name="employmentType" [(ngModel)]="employmentType" [value]="employmentType" (ionChange)="toggleForm($event)" required>
+                  <ion-select-option *ngFor="let empType of empTypeList" [value]="empType.id">
+                    {{empType.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="show">
                 <ion-label position="floating">Agency Type</ion-label>
                 <ion-select class="icon-size-13" name="agencyType" [(ngModel)]="agencyType" [value]="agencyType" (ionChange)="getAgencyList($event);" required >
                   <ion-select-option *ngFor="let agencyType of agencyTypeList" [value]="agencyType.id">
@@ -54,7 +62,7 @@
                   </ion-select-option>
                 </ion-select>
               </ion-item>
-              <ion-item>
+              <ion-item *ngIf="show">
                 <ion-label position="floating">Present Address/Agency</ion-label>
                 <ion-select class="icon-size-13" name="agency" [(ngModel)]="agency" [value]="agency" required>
                   <ion-select-option *ngFor="let agency of agencyList" [value]="agency.id">
@@ -62,19 +70,11 @@
                   </ion-select-option>
                 </ion-select>
               </ion-item>
-              <ion-item>
-                <ion-label position="floating">Employment Type</ion-label>
-                <ion-select class="icon-size-13" name="employmentType" [(ngModel)]="employmentType" [value]="employmentType" required>
-                  <ion-select-option *ngFor="let empType of empTypeList" [value]="empType.id">
-                    {{empType.name}}
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
+              <ion-item *ngIf="show">
                 <ion-label position="floating">Designation</ion-label>
                 <ion-input class="icon-size-13" name="designation" type="text" [(ngModel)]="designation" [value]="designation" required></ion-input>
               </ion-item>
-              <ion-item>
+              <ion-item *ngIf="show">
                 <ion-label position="floating">Profession</ion-label>
                 <ion-select class="icon-size-13" name="profession" [(ngModel)]="profession" [value]="profession" required>
                   <ion-select-option *ngFor="let profession of professionalList" [value]="profession.id">

@@ -16,7 +16,7 @@ ion-content ion-toolbar {
     padding-right: 0px;
 }
 
-.qrclass {
+.qrclass > img {
     background-image: url('../../assets/qr_logo.png');
-    width: 100%;
+    width: 200px;
 }

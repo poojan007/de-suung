@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Platform, ToastController, NavController, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../services/api.service';
@@ -20,6 +20,8 @@ export class ScanqrPage implements OnInit {
   userId: number;
   qrData: Qrmodel;
 
+  barcodeScannerOptions: BarcodeScannerOptions;
+
   constructor(
     private barcodeScanner: BarcodeScanner,
     private platform: Platform,
@@ -29,6 +31,11 @@ export class ScanqrPage implements OnInit {
     private authService: AuthenticationService
   ) {
     this.qrData = new Qrmodel();
+    //Options
+    this.barcodeScannerOptions = {
+      showTorchButton: true,
+      showFlipCameraButton: true
+    };
   }
 
   ngOnInit() {
@@ -39,7 +46,7 @@ export class ScanqrPage implements OnInit {
 
   scanQRCode() {
     this.preventBack = this.platform.backButton.subscribeWithPriority(9999, () => {});
-    this.barcodeScanner.scan().then((barcodeData) => {
+    this.barcodeScanner.scan(this.barcodeScannerOptions).then((barcodeData) => {
         if (barcodeData.cancelled) {
             return;
         }
@@ -59,9 +66,6 @@ export class ScanqrPage implements OnInit {
     const scannedText: any = JSON.stringify(this.scannedData.text);
     this.qrData.site = scannedText;
     this.qrData.uid = this.userId;
-    // alert(JSON.stringify(this.scannedData));
-    // alert(scannedText);
-   // alert(JSON.stringify(this.qrData));
     this.apiService.postQRCodeAttendance(this.qrData).subscribe((response) => {
     //  alert(response);
       if (response.RESULT === 'SUCCESS') {

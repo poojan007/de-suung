@@ -120,10 +120,9 @@ export class DashboardPage implements OnInit {
           this.showAttendance = true;
         }
       }
-
-      this.showScanQR = true;
     }
 
+    this.showScanQR = true;
     this.getUpcomingEventCount();
     this.hideLoader();
   }
