@@ -56,9 +56,14 @@ export class ScanqrPage implements OnInit {
   }
 
   sendAttendance() {
-    this.qrData.id = this.scannedData.id;
+    const scannedText: any = JSON.stringify(this.scannedData.text);
+    this.qrData.site = scannedText;
     this.qrData.uid = this.userId;
+    // alert(JSON.stringify(this.scannedData));
+    // alert(scannedText);
+   // alert(JSON.stringify(this.qrData));
     this.apiService.postQRCodeAttendance(this.qrData).subscribe((response) => {
+    //  alert(response);
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';
         this.message = 'Your attendance has been successfully record';
@@ -66,7 +71,6 @@ export class ScanqrPage implements OnInit {
         this.status = 'Failure';
         this.message = 'Your attendance couldnot be recorded, please try again';
       }
-
       this.presentAlert();
     });
   }

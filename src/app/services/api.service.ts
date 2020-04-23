@@ -201,7 +201,7 @@ export class ApiService {
 
   postQRCodeAttendance(item) {
     return this.http
-    .get<any>(this.basePath + 'saveAttendance&eventId=' + item.eventId + '&userId=' + item.userId, this.httpOptions)
+    .get<any>(this.basePath + 'qrCodeAttendance&eventId=' + item.site + '&userId=' + item.uid, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
