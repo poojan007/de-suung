@@ -45,6 +45,7 @@ export class UpdateprofilePage implements OnInit {
   message: string;
 
   data: ApiModel;
+  show = false;
 
   constructor(
     private authService: AuthenticationService,
@@ -167,5 +168,15 @@ export class UpdateprofilePage implements OnInit {
     setTimeout(() => {
       this.loadingCtrl.dismiss();
     }, 2000);
+  }
+
+  toggleForm($event) {
+    const type = $event.target.value;
+    console.log(type);
+    if (type === '1') {
+      this.show = true;
+    } else {
+      this.show = false;
+    }
   }
 }
