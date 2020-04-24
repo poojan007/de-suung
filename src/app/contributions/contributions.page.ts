@@ -29,6 +29,7 @@ export class ContributionsPage implements OnInit {
     this.data.userId = userData.userId;
 
     this.apiService.getContributions(this.data).subscribe((response) => {
+      console.log(response);
       this.dataList  = response;
     });
 
