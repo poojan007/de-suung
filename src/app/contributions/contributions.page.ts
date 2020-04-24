@@ -48,6 +48,6 @@ export class ContributionsPage implements OnInit {
   hideLoader() {
     setTimeout(() => {
       this.loadingCtrl.dismiss();
-    }, 4000);
+    }, 1000);
   }
 }

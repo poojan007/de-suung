@@ -151,7 +151,7 @@ export class DashboardPage implements OnInit {
   hideLoader() {
     setTimeout(() => {
       this.loadingCtrl.dismiss();
-    }, 2000);
+    }, 1000);
   }
 
   logout() {

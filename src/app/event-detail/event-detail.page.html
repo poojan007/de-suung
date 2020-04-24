@@ -20,7 +20,7 @@
     <ion-card>
       <ion-card-header style="--background: #ef5e5e;" text-wrap>
         <ion-card-subtitle style="--color: white;font-size: 20px;">{{data.title}}</ion-card-subtitle>
-        <ion-card-title style="font-size: 12px; --color: white;">{{data.startDate}} - {{data.endDate}}</ion-card-title>
+        <ion-card-title style="font-size: 12px; --color: white;">{{data.startDate | date}} - {{data.endDate | date}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <p class="description">{{data.description}}</p>
@@ -30,8 +30,10 @@
         <p><span class="title">Event Location:</span> <b>{{data.dzongkhag}}</b></p>
         <p><span class="title">Duration:</span> <b>{{data.expected_working_days}} days</b></p>
         <p><span class="title">Coordinator:</span> <b>{{data.coordinator}}</b></p>
+        <p><span class="title">Total Desuups Required:</span> <b>{{data.total_desuup_required}}</b></p>
+        <p><span class="title">Total Desuups Registered:</span> <b>{{data.totalDesuupRegistered}}</b></p>
       </ion-card-content>
-      <div align="right">
+      <div align="right" *ngIf="data.total_desuup_required !== data.totalDesuupRegistered">
         <ion-button (click)="register()">
           <ion-icon name="checkmark-circle"></ion-icon> Register
         </ion-button>

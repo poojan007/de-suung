@@ -52,7 +52,7 @@ export class UpcomingeventPage implements OnInit {
   hideLoader() {
     setTimeout(() => {
       this.loadingCtrl.dismiss();
-    }, 4000);
+    }, 1000);
   }
 
   doRefresh(event) {

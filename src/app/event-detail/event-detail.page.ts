@@ -33,6 +33,7 @@ export class EventDetailPage implements OnInit {
 
     this.eventId = this.navParams.data.id;
     this.apiService.getEventDetails(this.eventId).subscribe((response) => {
+      console.log(response);
       this.dataList  = response;
     });
   }
