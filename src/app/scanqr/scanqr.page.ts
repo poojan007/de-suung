@@ -70,7 +70,7 @@ export class ScanqrPage implements OnInit {
     //  alert(response);
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';
-        this.message = 'Your attendance has been successfully record';
+        this.message = 'Your attendance has been successfully recorded';
       } else {
         this.status = 'Failure';
         this.message = 'Your attendance couldnot be recorded, please try again';

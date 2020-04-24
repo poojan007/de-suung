@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@ionic-native/app-update": "^5.24.0",
+    "@ionic-native/app-version": "^5.24.0",
     "@ionic-native/barcode-scanner": "^5.24.0",
     "@ionic-native/call-number": "^4.20.0",
     "@ionic-native/core": "^5.0.7",
@@ -31,6 +33,9 @@
     "cordova-android": "^8.1.0",
     "cordova-ios": "5.1.1",
     "cordova-plugin-add-swift-support": "^2.0.2",
+    "cordova-plugin-app-update": "^2.0.2",
+    "cordova-plugin-app-version": "^0.1.9",
+    "cordova-plugin-appversion": "^1.0.0",
     "cordova-plugin-datepicker": "^0.9.3",
     "core-js": "^2.5.4",
     "ionic-selectable": "^4.5.0",
@@ -88,7 +93,9 @@
       "phonegap-plugin-barcodescanner": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "call-number": {}
+      "call-number": {},
+      "cordova-plugin-app-version": {},
+      "cordova-plugin-app-update": {}
     },
     "platforms": [
       "android",

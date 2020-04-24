@@ -10,7 +10,7 @@ import { Desuup } from '../model/desuup';
 })
 export class ApiService {
 
-  basePath = 'http://202.144.139.70/desungAPI/index.php?apiType=';
+  basePath = 'https://app.desuung.org.bt/desungAPI/index.php?apiType=';
   private userData: any;
   desuups: any;
 

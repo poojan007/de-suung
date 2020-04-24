@@ -18,6 +18,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { GenerateQrPageModule } from './generate-qr/generate-qr.module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { AppUpdate } from '@ionic-native/app-update/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +42,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     DatePicker,
     DatePipe,
     BarcodeScanner,
+    AppUpdate,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
