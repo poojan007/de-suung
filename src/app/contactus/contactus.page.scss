@@ -70,3 +70,20 @@
       --background: #ff5507;
     }
   }
+
+  ion-card {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    ion-card-title {
+      font-size: 20px;
+    }
+
+    ion-card-content {
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-bottom: 10px;
+    }
+  }

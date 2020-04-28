@@ -48,7 +48,10 @@
     </platform>
     <platform name="ios">
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-            <string>To Scan QR Code</string>
+            <string>To Scan QR Code for attendance for certain events</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+            <string>We use your location for getting the current location of the person for prompt deployment to certain assignment.</string>
         </edit-config>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />

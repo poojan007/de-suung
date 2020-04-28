@@ -19,6 +19,10 @@ import { GenerateQrPageModule } from './generate-qr/generate-qr.module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +47,10 @@ import { AppUpdate } from '@ionic-native/app-update/ngx';
     DatePipe,
     BarcodeScanner,
     AppUpdate,
+    CallNumber,
+    EmailComposer,
+    Geolocation,
+    NativeGeocoder,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

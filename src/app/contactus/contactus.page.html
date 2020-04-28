@@ -29,48 +29,49 @@
   </ion-fab>
 
   <div class="form-header">Contact Us</div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>De-Suung Head Office</ion-card-title>
+      <ion-card-subtitle>Lungtenphug, Thimphu</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="call" slot="end" style="color:#ff5507" (click)="call('+9752340353')"></ion-icon>
+        <ion-label>+975-2-340353/341277</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="mail" slot="end" style="color:#ff5507" (click)="sendEmail()"></ion-icon>
+        <ion-label>desuung11@gmail.com</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="form-header">Contributors</div>
   <ion-list>
     <ion-item>
-      <!-- <ion-avatar slot="start">
-        <img src="../../assets/person.jpg">
-      </ion-avatar> -->
       <ion-label>
         <h2>Yeshi Dorji</h2>
         <h3>Chief ICT Officer</h3>
         <p class="ion-text-wrap">Ministry of Information and Communications</p>
         <p class="ion-text-wrap">ydorji@moic.gov.bt</p>
       </ion-label>
-      <!-- <ion-button slot="end" (click)="call('17609187')">
-        <ion-icon name="call"></ion-icon>
-      </ion-button> -->
     </ion-item>
     <ion-item>
-      <!-- <ion-avatar slot="start">
-        <img src="../../assets/person.jpg">
-      </ion-avatar> -->
       <ion-label>
         <h2>Poojan Sharma</h2>
         <h3>Software Team Lead</h3>
         <p class="ion-text-wrap">NGN Technologies Private Limited</p>
         <p class="ion-text-wrap">poojan.sharma@ecentric.ngn.bt</p>
       </ion-label>
-      <!-- <ion-button slot="end" (click)="call('17457592')">
-        <ion-icon name="call"></ion-icon>
-      </ion-button> -->
     </ion-item>
     <ion-item>
-      <!-- <ion-avatar slot="start">
-        <img src="../../assets/person.jpg">
-      </ion-avatar> -->
       <ion-label>
         <h2>Pramod Nepal</h2>
         <h3>Software Developer</h3>
         <p class="ion-text-wrap">NGN Technologies Private Limited</p>
         <p class="ion-text-wrap">promod.nepal@ecentric.ngn.bt</p>
       </ion-label>
-      <!-- <ion-button slot="end" (click)="call('17505901')">
-        <ion-icon name="call"></ion-icon>
-      </ion-button> -->
     </ion-item>
   </ion-list>
 </ion-content>

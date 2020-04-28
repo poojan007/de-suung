@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, Platform, AlertController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geomodel } from '../model/geomodel';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { Qrmodel } from '../model/qrmodel';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -75,6 +81,7 @@ export class DashboardPage implements OnInit {
   };
 
   data: ApiModel;
+  geoData: Geomodel;
   loaderToShow: any;
   upcomingEventCount = '0';
   role: string;
@@ -86,18 +93,50 @@ export class DashboardPage implements OnInit {
   scannedData: any;
   toast: any;
 
+  geoLatitude: number;
+  geoLongitude: number;
+  geoAccuracy: number;
+  geoAddress: string;
+
+  // Geocoder configuration
+  geoencoderOptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 1
+  };
+
+  status: string;
+  message: string;
+  userId: number;
+  qrData: Qrmodel;
+  barcodeScannerOptions: BarcodeScannerOptions;
+  scannerState = new BehaviorSubject(false);
+  availableState = new BehaviorSubject(false);
+
   constructor(
     private authService: AuthenticationService,
     private loadingCtrl: LoadingController,
     private apiService: ApiService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private nativeGeocoder: NativeGeocoder,
+    private platform: Platform,
+    private geolocation: Geolocation,
+    private barcodeScanner: BarcodeScanner,
+    private alertCtrl: AlertController
   ) {
     this.data = new ApiModel();
+    this.geoData = new Geomodel();
+
+    this.barcodeScannerOptions = {
+      showTorchButton: true,
+      showFlipCameraButton: true
+    };
   }
 
   ngOnInit() {
     this.showLoader();
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
+    console.log(userData);
+
     this.data.userId = userData.userId;
     this.data.location = userData.location;
     this.data.batchNo = userData.batchNo;
@@ -111,6 +150,7 @@ export class DashboardPage implements OnInit {
       this.showScanQR = false;
     } else {
       this.privArray = this.priv.split(',');
+
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.privArray.length; i++) {
         if (this.privArray[i] === 'MANAGE_EVENT') {
@@ -159,5 +199,124 @@ export class DashboardPage implements OnInit {
     this.authService.logout();
     this.navCtrl.navigateForward('');
     this.hideLoader();
+  }
+
+  updateStatus() {
+    this.getGeoLocation();
+  }
+
+  getGeoLocation() {
+    this.platform.ready().then(() => {
+      if (this.platform.is('android')) {
+        this.geolocation.getCurrentPosition().then((position) => {
+          this.geoLatitude = position.coords.latitude;
+          this.geoLongitude = position.coords.longitude;
+          this.getGeoencoder(position.coords.latitude, position.coords.longitude);
+        });
+      }
+    });
+  }
+
+  // geocoder method to fetch address from coordinates passed as arguments
+  getGeoencoder(latitude, longitude) {
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+    .then((result) => {
+      const response = JSON.parse(JSON.stringify(result[0]));
+      this.geoData.userId = this.data.userId;
+      this.geoData.latitude = response.latitude;
+      this.geoData.longitude = response.longitude;
+      this.geoData.dzongkhag = response.administrativeArea;
+      this.geoData.locality = response.locality;
+      this.geoData.exactLocation = response.thoroughfare;
+      if (this.availableState.value) {
+        this.geoData.status = 'AVAILABLE';
+      } else {
+        this.geoData.status = 'NOT_AVAILABLE';
+      }
+      alert(JSON.stringify(this.geoData));
+
+      this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
+        if (res.RESULT === 'SUCCESS') {
+          this.status = 'Success';
+          this.message = 'Your status has been updated as AVAILABLE';
+        } else {
+          this.status = 'Failure';
+          this.message = 'Your status couldnot be updated, please try again';
+        }
+        this.presentAlert();
+      });
+    })
+    .catch((error: any) => {
+      alert('Error getting location' + JSON.stringify(error));
+    });
+  }
+
+  scanQRCode() {
+    if (this.scannerState.value) {
+      this.scannerState.next(false);
+      return;
+    } else {
+      this.barcodeScanner.scan(this.barcodeScannerOptions).then((barcodeData) => {
+        if (barcodeData.cancelled) {
+            return;
+        }
+        this.navCtrl.pop();
+        this.scannedData = barcodeData;
+        this.sendAttendance();
+    }, (err) => {
+        console.error(err);
+    });
+    }
+  }
+
+  sendAttendance() {
+    const scannedText: any = JSON.stringify(this.scannedData.text);
+    this.qrData.site = scannedText;
+    this.qrData.uid = this.userId;
+    this.apiService.postQRCodeAttendance(this.qrData).subscribe((response) => {
+      if (response.RESULT === 'SUCCESS') {
+        this.scannerState.next(true);
+        this.status = 'Success';
+        this.message = 'Your attendance has been successfully recorded';
+      } else {
+        this.status = 'Failure';
+        this.message = 'Your attendance couldnot be recorded, please try again';
+      }
+      this.presentAlert();
+    });
+  }
+
+  async presentAlert() {
+      const alert = await this.alertCtrl.create({
+      header: this.status.toUpperCase(),
+      message: this.message,
+      buttons: ['OK']
+    });
+      await alert.present();
+  }
+
+  async presentConfirm() {
+    this.availableState.next(false);
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmation',
+      message: 'Click on Yes to confirm your availability, otherwise click on No',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.availableState.next(true);
+            this.updateStatus();
+          }
+        },
+        {
+          text: 'No',
+          handler: () => {
+            this.availableState.next(false);
+            this.updateStatus();
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }

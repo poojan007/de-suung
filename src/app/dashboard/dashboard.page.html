@@ -109,10 +109,21 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col class="padding-0" *ngIf="showScanQR">
+    <ion-row *ngIf="showScanQR">
+      <ion-col class="padding-0">
+        <div class="ion-text-center grid-layout">
+          <a class="anchor-custom" (click)="presentConfirm()">
+            <div>
+              <ion-icon name="megaphone" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14"> Update Status </ion-label>
+          </a>
+        </div>
+      </ion-col>
+      <ion-col class="padding-0">
         <div class="ion-text-center grid-layout">
           <a href="#" class="anchor-custom" [routerLink]="['/scanqr']">
+          <!-- <a class="anchor-custom" (click)="scanQRCode()"> -->
             <div>
               <ion-icon name="barcode" class="icon-border"></ion-icon>
             </div>
