@@ -79,7 +79,13 @@ const routes: Routes = [
   },
   {
     path: 'profile-qrcode',
-    loadChildren: () => import('./profile-qrcode/profile-qrcode.module').then( m => m.ProfileQrcodePageModule)
+    loadChildren: () => import('./profile-qrcode/profile-qrcode.module').then( m => m.ProfileQrcodePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'desuupnearby',
+    loadChildren: () => import('./desuup-nearby/desuup-nearby.module').then( m => m.DesuupNearbyPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 
