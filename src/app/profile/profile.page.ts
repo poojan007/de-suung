@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiModel } from '../model/api-model';
 import { ApiService } from '../services/api.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController } from '@ionic/angular';
+import { PopoverComponent } from '../component/popover/popover.component';
 
 @Component({
   selector: 'app-profile',
@@ -13,20 +14,30 @@ export class ProfilePage implements OnInit {
 
   loaderToShow: any;
   data: ApiModel;
-  name: string;
-  desuupId: string;
-  cidNo: string;
+
+  bloodGroup: string;
+  cidNo: number;
+  did: string;
   dob: string;
-  gender: string;
+  dzongkhag: string;
   email: string;
+  empType: string;
+  gender: string;
+  gewog: string;
   location: string;
+  maritalStatus: string;
   photoUrl: string;
+  qualification: string;
+  name: string;
+  userType: string;
+  village: string;
 
   constructor(
     private apiService: ApiService,
     private authService: AuthenticationService,
     private loadingCtrl: LoadingController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) {
     this.data = new ApiModel();
   }
@@ -37,14 +48,22 @@ export class ProfilePage implements OnInit {
     this.data.userId = userData.userId;
 
     this.apiService.getProfile(this.data).subscribe((response) => {
-      this.name = response[0].userName;
-      this.desuupId = response[0].did;
+      this.bloodGroup = response[0].bloodgroup;
       this.cidNo = response[0].cid;
+      this.did = response[0].did;
       this.dob = response[0].dob;
-      this.gender = response[0].gender;
+      this.dzongkhag = response[0].dzongkhag;
       this.email = response[0].email;
+      this.empType = response[0].emp_type;
+      this.gender = response[0].gender;
+      this.gewog = response[0].gewog;
       this.location = response[0].location;
+      this.maritalStatus = response[0].marital_status;
       this.photoUrl = response[0].photo;
+      this.qualification = response[0].qualification;
+      this.name = response[0].userName;
+      this.userType = response[0].userType;
+      this.village = response[0].village;
     });
 
     this.hideLoader();
@@ -66,13 +85,12 @@ export class ProfilePage implements OnInit {
     }, 1000);
   }
 
-  back() {
-    this.navCtrl.navigateForward('/dashboard');
-  }
-
-  doRefresh(event) {
-    this.apiService.getProfile(this.data.userId).subscribe(data => {
-      event.complete();
+  async presentPopOver(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      event: ev,
+      translucent: true
     });
+    return await popover.present();
   }
 }

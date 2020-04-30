@@ -1,80 +1,146 @@
-<ion-header translucent no-border>
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="light" (click)="back()">
-        <ion-icon slot="start" name="arrow-back"></ion-icon>
-        My Profile
-      </ion-button>
+      <ion-back-button color="primary"></ion-back-button>
     </ion-buttons>
-    <ion-title>&nbsp;</ion-title>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" src="../../assets/checkmark-filled.svg"></ion-icon>
-       </ion-button>
+      <ion-button (click)="presentPopOver($event)" color="primary">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" slot="fixed">
-  <div class="card">
-    <div class="header">
-      <div class="avatar">
-        <img src="http://202.144.139.70/photos/{{photoUrl}}" alt="">
+<ion-content [fullscreen]="true">
+  <div class="col-12">
+      <div class="float-center">
+        <img class="profile-img" src="http://202.144.139.70/photos/{{photoUrl}}">
       </div>
-    </div>
-    <div class="card-body">
-        <div class="user-meta ion-text-center">
-          <h3 class="playername">{{name}}</h3>
-        </div>
-        <ion-list>
-          <ion-item class="custom-font">
-            <ion-label class="country">
-              Desuup ID:
-            </ion-label>
-            <ion-label slot="end" class="ion-text-wrap">
-              {{desuupId}}
-            </ion-label>
-          </ion-item>
-          <ion-item class="custom-font">
-            <ion-label class="country">
-              CID Number: 
-            </ion-label>
-            <ion-label slot="end" class="ion-text-wrap">
-              {{cidNo}}
-            </ion-label>
-          </ion-item>
-          <ion-item class="custom-font">
-            <ion-label class="country">
-              DOB: 
-            </ion-label>
-            <ion-label slot="end" class="ion-text-wrap">
-              {{dob}}
-            </ion-label>
-          </ion-item>
-          <ion-item class="custom-font">
-            <ion-label class="country">
-              Gender: 
-            </ion-label>
-            <ion-label slot="end" class="ion-text-wrap">
-              {{gender}}
-            </ion-label>
-          </ion-item>
-          <ion-item class="custom-font">
-            <ion-label class="country">
-              Location: 
-            </ion-label>
-            <ion-label slot="end" class="ion-text-wrap">
-              {{location}}
-            </ion-label>
-          </ion-item>
-          <ion-item class="custom-font">
-            <ion-label class="country">
-              Email: 
-            </ion-label>
-            <ion-label slot="end" class="ion-text-wrap">
-              {{email}}
-            </ion-label>
-          </ion-item>
-        </ion-list>
-    </div>
   </div>
+  <div class="float-center margin-0">
+    <h6 class="margin-0">{{name}}</h6>
+    <p class="margin-0">{{did}}</p>
+  </div>
+  <div>
+    <ion-segment scrollable="true">
+      <ion-segment>
+        <ion-card style="width: 50px; height: 50px;">
+          <ion-card-header>
+            <img src="http://202.144.139.70/photos/{{photoUrl}}">
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>Friends</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-segment>
+      <ion-segment>
+        <ion-card style="width: 50px; height: 50px;">
+          <ion-card-header>
+            <img src="http://202.144.139.70/photos/{{photoUrl}}">
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>Friends</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-segment>
+      <ion-segment>
+        <ion-card style="width: 50px; height: 50px;">
+          <ion-card-header>
+            <img src="http://202.144.139.70/photos/{{photoUrl}}">
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>Friends</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-segment>
+      <ion-segment>
+        <ion-card style="width: 50px; height: 50px;">
+          <ion-card-header>
+            <img src="http://202.144.139.70/photos/{{photoUrl}}">
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>Friends</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-segment>
+      <ion-segment>
+        <ion-card style="width: 50px; height: 50px;">
+          <ion-card-header>
+            <img src="http://202.144.139.70/photos/{{photoUrl}}">
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>Friends</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-segment>
+      <ion-segment>
+        <ion-card style="width: 50px; height: 50px;">
+          <ion-card-header>
+            <img src="http://202.144.139.70/photos/{{photoUrl}}">
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>Friends</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-segment>
+      <ion-segment>
+        <ion-card style="width: 50px; height: 50px;">
+          <ion-card-header>
+            <img src="http://202.144.139.70/photos/{{photoUrl}}">
+          </ion-card-header>
+        </ion-card>
+      </ion-segment>
+      <ion-segment>
+        <ion-card style="width: 50px; height: 50px;">
+          <ion-card-header>
+            <img src="http://202.144.139.70/photos/{{photoUrl}}">
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>Friends</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-segment>
+    </ion-segment>
+  </div>
+  <div class="col-12 div-container">
+    <div class="margin-top-bottom text-header">
+      <ion-icon name="person-sharp"></ion-icon> Personal Information
+    </div>
+    <div class="margin-top-bottom text-label">
+      <ion-icon name="card-sharp"></ion-icon><label class="margin-left-5">{{cidNo}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <ion-icon name="mail-sharp"></ion-icon><label class="margin-left-5">{{email}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><ion-icon name="call-sharp"></ion-icon></label><label class="margin-left-5">17505901</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><ion-icon name="calendar-sharp"></ion-icon></label><label class="margin-left-5">{{dob | date}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><ion-icon name="location-sharp"></ion-icon></label><label class="margin-left-5">{{dzongkhag}}, {{gewog}}, {{village}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><ion-icon name="male-female-sharp"></ion-icon></label><label class="margin-left-5">{{gender}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><ion-icon name="water-sharp"></ion-icon></label><label class="margin-left-5">{{bloodGroup}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><ion-icon name="people-sharp"></ion-icon></label><label class="margin-left-5">{{empType}}</label>
+    </div>
+  </div> 
+  <div class="col-12 div-container">
+    <div class="margin-top-bottom text-header">
+      <ion-icon name="home-sharp"></ion-icon> Present Address Information
+    </div>
+    <div class="margin-top-bottom text-label">
+      <ion-icon name="location-sharp"></ion-icon><label>{{location}}</label>
+    </div>
+    
+  </div> 
+  
 </ion-content>

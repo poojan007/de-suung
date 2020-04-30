@@ -5,5 +5,5 @@ export class Geomodel {
     dzongkhag: string;
     locality: string;
     exactLocation: string;
-    status: string;
+    availableStatus: string;
 }

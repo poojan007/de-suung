@@ -211,7 +211,7 @@ export class ApiService {
   postAvailableStatus(item) {
     return this.http
       // tslint:disable-next-line: max-line-length
-      .get<any>(this.basePath + 'postAvailableStatus&userId=' + item.userId + '&latitude=' + item.latitude + '&longitude=' + item.longitude + '&dzongkhag=' + item.dzongkhag + '&locality=' + item.locality + '&exactLocation=' + item.exactLocation, this.httpOptions)
+      .get<any>(this.basePath + 'postAvailableStatus&userId=' + item.userId + '&latitude=' + item.latitude + '&longitude=' + item.longitude + '&dzongkhag=' + item.dzongkhag + '&locality=' + item.locality + '&exactLocation=' + item.exactLocation + '&availableStatus=' + item.availableStatus, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

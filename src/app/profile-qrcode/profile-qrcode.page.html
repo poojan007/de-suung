@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button icon-only color="primary" (click)="dismissModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end"></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="orange-background">
+  <ion-card style="margin-top: 5px;">
+    <ion-card-content class="qrcode ion-text-center">
+      <ngx-qrcode 
+        [qrc-element-type]="canvas" 
+        [qrc-value]="profileQrData"
+        qrc-class="qrclass" 
+        qrc-errorCorrectionLevel="L" 
+        qrc-version="8" 
+        qrc-colorLight="#0000ff"> 
+      </ngx-qrcode>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -20,8 +20,6 @@ export class ScanqrPage implements OnInit {
   userId: number;
   qrData: Qrmodel;
 
-  barcodeScannerOptions: BarcodeScannerOptions;
-
   constructor(
     private barcodeScanner: BarcodeScanner,
     private platform: Platform,
@@ -31,11 +29,6 @@ export class ScanqrPage implements OnInit {
     private authService: AuthenticationService
   ) {
     this.qrData = new Qrmodel();
-    //Options
-    this.barcodeScannerOptions = {
-      showTorchButton: true,
-      showFlipCameraButton: true
-    };
   }
 
   ngOnInit() {
@@ -46,7 +39,7 @@ export class ScanqrPage implements OnInit {
 
   scanQRCode() {
     this.preventBack = this.platform.backButton.subscribeWithPriority(9999, () => {});
-    this.barcodeScanner.scan(this.barcodeScannerOptions).then((barcodeData) => {
+    this.barcodeScanner.scan().then((barcodeData) => {
         if (barcodeData.cancelled) {
             return;
         }

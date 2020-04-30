@@ -1,83 +1,57 @@
-ion-content {
-    --background: url(../../assets/background_full.jpg) no-repeat top center/cover fixed, #fff;
-    position: relative;
-    height: auto;
-    width: 100%;
-
-    ion-button {
-        margin-top: 1em;
-        margin-bottom: 1em
-    }
-
-    img {
-        width: 100% !important;
-        height: 120% !important;
-    }
+.profile-img
+{
+    object-fit: cover;
+    width: 36vw;
+    height: 36vw;
+    border-radius: 50%;
 }
-
-ion-toolbar {
-    --background: transparent;
-}
-
-.card {
-    margin: 0 auto;
-
-    .header {
-        height: 200px; // 20vh;
-
-        .avatar {
-            width: 160px; //40vw
-            height: 160px;
-            position: relative;
-            margin: 0 auto;
-
-            img {
-                display: block;
-                border-radius: 50%;
-                position: absolute;
-                bottom: calc(-1*(80px + 4px)); // -42px;
-                border: 8px solid #9Dc912;
-                background-color: #fff;
-            }
-        }
-    }
-}
-
-.card-body {
-    background-color: #ffffff;
-    padding-top: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: calc(100vh - (200px + 56px));
-    overflow: hidden;
-
-    .user-meta {
-        padding-top: 10px;
-
-        .playername {
-            font-size: 20px;
-            font-weight: 600;
-            color: #303940;
-        }
-
-        .country {
-            font-size: 90%;
-            color: #949ea6;
-            text-transform: uppercase;
-            margin: 0 auto;
-        }
-    }
-}
-
-.form-header {
+.float-center
+{
     text-align: center;
-    background-color: #9cc0ff;
-    padding: 10px;
+}
+.col-12
+{
+    width: 95%;
+    margin: 8px;
+}
+.col-6
+{
+    width: 50%;
+}
+.margin-0
+{
+    margin: 0px;
+}
+.text-label
+{
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 8px;
+    border-bottom: 0.7px solid #0000000f;
+}
+.text-header
+{
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 8px;
     font-weight: bold;
-    color: white;
-    letter-spacing: 1px;
-}  
-
-.custom-font {
-    font-size: 15px;
+}
+.margin-top-bottom
+{
+    margin: 0px 0px 1px 0px;
+}
+.div-container
+{
+   // box-shadow: 3px 6px 3px #0000002e;
+}
+.margin-top-20{
+    margin-top: 20px;
+}
+.margin-left-20
+{
+    margin-left: 25px;
+}
+.margin-left-5
+{
+    margin-left: 5px;
 }

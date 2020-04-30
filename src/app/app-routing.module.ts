@@ -76,6 +76,10 @@ const routes: Routes = [
     path: 'scanqr',
     loadChildren: () => import('./scanqr/scanqr.module').then( m => m.ScanqrPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile-qrcode',
+    loadChildren: () => import('./profile-qrcode/profile-qrcode.module').then( m => m.ProfileQrcodePageModule)
   }
 ];
 

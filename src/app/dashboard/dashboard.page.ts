@@ -229,13 +229,14 @@ export class DashboardPage implements OnInit {
       this.geoData.locality = response.locality;
       this.geoData.exactLocation = response.thoroughfare;
       if (this.availableState.value) {
-        this.geoData.status = 'AVAILABLE';
+        this.geoData.availableStatus = 'AVAILABLE';
       } else {
-        this.geoData.status = 'NOT_AVAILABLE';
+        this.geoData.availableStatus = 'NOT_AVAILABLE';
       }
-      alert(JSON.stringify(this.geoData));
+     // alert(JSON.stringify(this.geoData));
 
       this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
+      //  alert(res);
         if (res.RESULT === 'SUCCESS') {
           this.status = 'Success';
           this.message = 'Your status has been updated as AVAILABLE';

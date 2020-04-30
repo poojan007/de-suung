@@ -23,6 +23,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { ProfileQrcodePageModule } from './profile-qrcode/profile-qrcode.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +37,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     AttendancePageModule,
     IonicSelectableModule,
     GenerateQrPageModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
+    ProfileQrcodePageModule
   ],
   providers: [
     StatusBar,
