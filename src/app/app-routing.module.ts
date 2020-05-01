@@ -86,6 +86,11 @@ const routes: Routes = [
     path: 'desuupnearby',
     loadChildren: () => import('./desuup-nearby/desuup-nearby.module').then( m => m.DesuupNearbyPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'shop',
+    loadChildren: () => import('./desuung-shop/desuung-shop.module').then( m => m.DesuungShopPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

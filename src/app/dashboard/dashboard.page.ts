@@ -135,7 +135,6 @@ export class DashboardPage implements OnInit {
   ngOnInit() {
     this.showLoader();
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
-    console.log(userData);
 
     this.data.userId = userData.userId;
     this.data.location = userData.location;
@@ -233,10 +232,8 @@ export class DashboardPage implements OnInit {
       } else {
         this.geoData.availableStatus = 'NOT_AVAILABLE';
       }
-     // alert(JSON.stringify(this.geoData));
 
       this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
-      //  alert(res);
         if (res.RESULT === 'SUCCESS') {
           this.status = 'Success';
           this.message = 'Your status has been updated as AVAILABLE';

@@ -24,11 +24,9 @@ export class ContactusPage implements OnInit {
     .catch(err => console.log('Error launching dialer', err));
   }
 
-  sendEmail(){
-    this.emailComposer.isAvailable().then((available: boolean) =>{
-      if (available) {
-        // Now we know we can send
-      }
+  sendEmail() {
+    this.emailComposer.isAvailable().then((available: boolean) => {
+      if (available) {}
      });
 
     const email = {
@@ -36,7 +34,7 @@ export class ContactusPage implements OnInit {
        subject: 'Desuung App Issues',
        body: 'Please write your email here',
        isHtml: true
-     }
+     };
      // Send a text message using default options
     this.emailComposer.open(email);
   }

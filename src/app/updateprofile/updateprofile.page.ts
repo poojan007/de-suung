@@ -88,6 +88,11 @@ export class UpdateprofilePage implements OnInit {
     this.getDropDownList('qualification', 'qualifications', 'NA', 'NA');
     this.getDropDownList('profession', 'professions', 'NA', 'NA');
     this.getDropDownList('agencyList', 'agencies', this.agencyType, 'agency_type');
+
+    if (this.employmentType === '1') {
+      this.show = true;
+    }
+
     this.hideLoader();
   }
 
@@ -130,7 +135,6 @@ export class UpdateprofilePage implements OnInit {
     this.data.profession = this.profession;
     this.data.qualification = this.qualification;
 
-    console.log(JSON.stringify(this.data));
     this.apiService.postUpdateProfile(this.data).subscribe((response) => {
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Successful';
@@ -172,7 +176,6 @@ export class UpdateprofilePage implements OnInit {
 
   toggleForm($event) {
     const type = $event.target.value;
-    console.log(type);
     if (type === '1') {
       this.show = true;
     } else {
