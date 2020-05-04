@@ -44,7 +44,8 @@ export class ApiService {
 
   validateLogin(item) {
     return this.http
-      .get<any>(this.basePath + 'userValidation&loginId=' + item.loginId + '&password=' + item.password, this.httpOptions)
+      // tslint:disable-next-line: max-line-length
+      .get<any>(this.basePath + 'userValidation&loginId=' + item.loginId + '&password=' + item.password + '&fcmToken=' + item.fcmToken, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

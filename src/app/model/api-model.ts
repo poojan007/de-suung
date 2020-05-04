@@ -36,4 +36,5 @@ export class ApiModel {
     designation: string;
     profession: number;
     mobile: number;
+    fcmToken: string;
 }

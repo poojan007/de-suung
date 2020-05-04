@@ -111,6 +111,10 @@ const routes: Routes = [
     path: 'tor',
     loadChildren: () => import('./tor/tor.module').then( m => m.TorPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   }
 ];
 

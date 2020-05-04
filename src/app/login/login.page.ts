@@ -35,6 +35,10 @@ export class LoginPage implements OnInit {
   validateLogin() {
     this.data.loginId = this.cidNo;
     this.data.password = this.password;
+    this.data.fcmToken = this.authservice.getItem('fcm_token');
+
+    console.log('Login Data: ' + JSON.stringify(this.data));
+
     this.apiService.validateLogin(this.data).subscribe((response) => {
       this.data.validation = response.validation;
       this.data.name = response.name;

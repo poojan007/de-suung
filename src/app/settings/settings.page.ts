@@ -27,8 +27,6 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.trackLocation = this.locationService.getItem('track_me');
-    alert(this.trackLocation);
-
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
     this.data.userId = userData.userId;
 
@@ -42,7 +40,7 @@ export class SettingsPage implements OnInit {
   toggleLocationTracking() {
     this.locationService.setItem('track_me', this.trackLocation);
     if (!this.trackLocation) {
-      this.locationService.removeItem('track_me');
+      this.locationService.setItem('track_me', false);
       this.locationService.stopBackgroundGeolocation();
     } else {
       this.locationService.startBackgroundGeolocation();
