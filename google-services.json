@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "610684709968",
+    "firebase_url": "https://desuung-884bb.firebaseio.com",
+    "project_id": "desuung-884bb",
+    "storage_bucket": "desuung-884bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610684709968:android:bcef1b9b163b084a373555",
+        "android_client_info": {
+          "package_name": "bt.org.desuung"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610684709968-vv0rn913gulpa5al6q0tld8toqg0reum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXPORr2wdDocwZ54Tk1lXJLstkC4bYCIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610684709968-vv0rn913gulpa5al6q0tld8toqg0reum.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "610684709968-s89ujkph6fqcgo264dk6i7gl6m65n2sm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "bt.org.desuung"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

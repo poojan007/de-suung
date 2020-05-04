@@ -31,6 +31,7 @@ export class ProfilePage implements OnInit {
   name: string;
   userType: string;
   village: string;
+  mobileNo: number;
 
   constructor(
     private apiService: ApiService,
@@ -48,6 +49,7 @@ export class ProfilePage implements OnInit {
     this.data.userId = userData.userId;
 
     this.apiService.getProfile(this.data).subscribe((response) => {
+      console.log(response);
       this.bloodGroup = response[0].bloodgroup;
       this.cidNo = response[0].cid;
       this.did = response[0].did;
@@ -64,6 +66,7 @@ export class ProfilePage implements OnInit {
       this.name = response[0].userName;
       this.userType = response[0].userType;
       this.village = response[0].village;
+      this.mobileNo = response[0].mobile;
     });
 
     this.hideLoader();

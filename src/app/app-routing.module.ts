@@ -91,6 +91,26 @@ const routes: Routes = [
     path: 'shop',
     loadChildren: () => import('./desuung-shop/desuung-shop.module').then( m => m.DesuungShopPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'appinfo',
+    loadChildren: () => import('./appinfo/appinfo.module').then( m => m.AppinfoPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'faq',
+    loadChildren: () => import('./faq/faq.module').then( m => m.FaqPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'tor',
+    loadChildren: () => import('./tor/tor.module').then( m => m.TorPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

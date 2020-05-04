@@ -95,6 +95,7 @@ export class DashboardPage implements OnInit {
 
   geoLatitude: number;
   geoLongitude: number;
+  geoAltitude: number;
   geoAccuracy: number;
   geoAddress: string;
 
@@ -206,13 +207,14 @@ export class DashboardPage implements OnInit {
 
   getGeoLocation() {
     this.platform.ready().then(() => {
-      if (this.platform.is('android')) {
+      // if (this.platform.is('android')) {
         this.geolocation.getCurrentPosition().then((position) => {
           this.geoLatitude = position.coords.latitude;
           this.geoLongitude = position.coords.longitude;
+          this.geoAltitude = position.coords.altitude;
           this.getGeoencoder(position.coords.latitude, position.coords.longitude);
         });
-      }
+      // }
     });
   }
 
@@ -224,6 +226,7 @@ export class DashboardPage implements OnInit {
       this.geoData.userId = this.data.userId;
       this.geoData.latitude = response.latitude;
       this.geoData.longitude = response.longitude;
+      this.geoData.altitude = this.geoAltitude;
       this.geoData.dzongkhag = response.administrativeArea;
       this.geoData.locality = response.locality;
       this.geoData.exactLocation = response.thoroughfare;
@@ -297,17 +300,17 @@ export class DashboardPage implements OnInit {
     this.availableState.next(false);
     const alert = await this.alertCtrl.create({
       header: 'Confirmation',
-      message: 'Click on Yes to confirm your availability, otherwise click on No',
+      message: 'Click on YES to confirm your availability, otherwise click on NO',
       buttons: [
         {
-          text: 'Yes',
+          text: 'YES',
           handler: () => {
             this.availableState.next(true);
             this.updateStatus();
           }
         },
         {
-          text: 'No',
+          text: 'NO',
           handler: () => {
             this.availableState.next(false);
             this.updateStatus();

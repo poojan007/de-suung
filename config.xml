@@ -51,7 +51,7 @@
             <string>To Scan QR Code for attendance for certain events</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-            <string>We use your location for getting the current location of the person for prompt deployment to certain assignment.</string>
+            <string>We use your location for getting the current location of the person for prompt deployment to certain assignment during times of disasters.</string>
         </edit-config>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
