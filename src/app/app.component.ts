@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChildren } from '@angular/core';
 
 import { Platform, LoadingController, AlertController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -7,6 +7,7 @@ import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { AuthenticationService } from './services/authentication.service';
 import { LocationtrackerService } from './services/locationtracker.service';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,8 @@ export class AppComponent {
   message: string;
   navigateUrl: string;
 
+  @ViewChildren('myNav') nav: NavController;
+
 
   constructor(
     private platform: Platform,
@@ -31,7 +34,8 @@ export class AppComponent {
     private authService: AuthenticationService,
     private locationService: LocationtrackerService,
     private fcm: FCM,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -57,14 +61,17 @@ export class AppComponent {
 
       // Code to enable background location tracking
       const trackMeFlag = this.locationService.getItem('track_me');
+      const userData = JSON.parse(this.authService.getItem('USER_INFO'));
+
       if (trackMeFlag === 'true') {
-        this.locationService.startBackgroundGeolocation();
+        this.locationService.startBackgroundGeolocation(userData.userId);
       } else if (trackMeFlag === 'false') {
         this.locationService.stopBackgroundGeolocation();
-      } else {
-        this.locationService.setItem('track_me', true);
-        this.locationService.startBackgroundGeolocation();
       }
+      // else {
+      //   this.locationService.setItem('track_me', true);
+      //   this.locationService.startBackgroundGeolocation(userData.userId);
+      // }
 
       // Code to enable Firebase Cloud Messaging
       this.fcm.subscribeToTopic('desuung');
@@ -78,19 +85,20 @@ export class AppComponent {
       });
 
       this.fcm.onNotification().subscribe(data => {
+        console.log(JSON.stringify(data));
         if (data.wasTapped) {
-          console.log('data was tapped');
-          console.log(JSON.stringify(data));
-          if (data.message.data.type === 'INCIDENT_ALERT') {
-            this.navCtrl.navigateRoot('/map');
+          if (data.type === 'INCIDENT_ALERT') {
+            this.navCtrl.navigateForward('/map');
+            this.authService.setItem('latlng', data);
           } else {
-            this.navCtrl.navigateRoot('/upcomingevents');
+            this.navCtrl.navigateForward('/upcomingevents');
           }
         } else {
           this.status = data.title;
           this.message = data.body;
           if (data.type === 'INCIDENT_ALERT') {
             this.navigateUrl = '/map';
+            this.authService.setItem('latlng', data);
           } else {
             this.navigateUrl = '/upcomingevents';
           }

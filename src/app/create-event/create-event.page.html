@@ -131,6 +131,14 @@
                 </ionic-selectable> -->
               </ion-item>
               <ion-item>
+                <ion-label position="floating">Invite Desuups-Occupation Group</ion-label>
+                <ion-select class="icon-size-13" name="profession" [(ngModel)]="profession" multiple="true" required>
+                  <ion-select-option *ngFor="let profession of occupationGroupList" [value]="profession.id">
+                    {{profession.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
                 <ion-label position="floating">Invite Desuups Batch</ion-label>
                 <ion-select class="icon-size-13" name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" multiple="true" required>
                   <ion-select-option *ngFor="let desuup of desuupBatchList" [value]="desuup.batchNo">
@@ -193,6 +201,24 @@
                 <ion-label position="floating">Total Desuups Required</ion-label>
                 <ion-input type="number" class="icon-size-13" name="totalDesuupsRequired" [(ngModel)]="totalDesuupsRequired" required></ion-input>
               </ion-item>
+              <ion-item>
+                <ion-label position="floating">Radius(in meters)</ion-label>
+                <ion-input type="number" class="icon-size-13" name="eventAreaRadius" [(ngModel)]="eventAreaRadius" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+                <ion-list [hidden]="autocompleteItems.length == 0">
+                  <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
+                    {{ item.description }}
+                  </ion-item>
+                </ion-list>
+              </ion-item>
+              <div class="map-wrapper" style="height: 100%;">      
+                <div id="map_center">
+                  <ion-icon name="pin" size="large" color="danger"></ion-icon>      
+                </div>
+                <div #map id="map"  style="height: 100%;"></div>
+              </div>
             </div>
             <div padding>
               <ion-button size="large" type="submit" [disabled]="createEventForm.invalid" expand="block">

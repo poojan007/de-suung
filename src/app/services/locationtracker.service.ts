@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 // tslint:disable-next-line: max-line-length
-import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse, BackgroundGeolocationEvents } from '@ionic-native/background-geolocation/ngx';
+import { HttpClient } from '@angular/common/http';
+import { ApiService } from './api.service';
+import { Geomodel } from '../model/geomodel';
+import { NativeGeocoderOptions, NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +14,13 @@ import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocati
 export class LocationtrackerService {
 
   trackState = new BehaviorSubject(false);
+  geoData: Geomodel;
   watch: any;
   lat: number;
   lng: number;
   bearing: number;
   speed: number;
+  intervalTime = 180000;
 
   config: BackgroundGeolocationConfig = {
     desiredAccuracy: 10,
@@ -21,27 +28,93 @@ export class LocationtrackerService {
     distanceFilter: 30,
     debug: false, //  enable this hear sounds for background-geolocation life-cycle.
     stopOnTerminate: false, // enable this to clear background location settings when the app terminates
-    interval: 2000
+    stopOnStillActivity: true
+  };
+
+  // Geocoder configuration
+  geoencoderOptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 1
   };
 
   constructor(
-    public backgroundGeolocation: BackgroundGeolocation
-  ) {}
+    public backgroundGeolocation: BackgroundGeolocation,
+    private http: HttpClient,
+    private apiService: ApiService,
+    private nativeGeocoder: NativeGeocoder,
+    private toastCtrl: ToastController
+  ) {
+    this.geoData = new Geomodel();
+  }
 
-  startBackgroundGeolocation() {
-    this.backgroundGeolocation.configure(this.config)
-      .then((location: BackgroundGeolocationResponse) => {
-        this.backgroundGeolocation.finish(); // FOR IOS ONLY
+  startBackgroundGeolocation(userId) {
+    this.backgroundGeolocation.configure(this.config).then(() => {
+      this.backgroundGeolocation
+        .on(BackgroundGeolocationEvents.location)
+        .subscribe((location: BackgroundGeolocationResponse) => {
+          console.log(location);
+          this.interval(location, userId);
+        });
     });
     // start recording location
     this.backgroundGeolocation.start();
     this.trackState.next(true);
   }
 
+  sendGPS(location, userId) {
+    if (location.speed === undefined) {
+      location.speed = 0;
+    }
+
+    this.getGeoencoder(location.latitude, location.longitude, userId);
+    this.backgroundGeolocation.finish();
+  }
+
+  interval(location, userId) {
+    setInterval(() => {
+      this.sendGPS(location, userId);
+    }, this.intervalTime);
+  }
+
+  getGeoencoder(latitude, longitude, userId) {
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+    .then((result) => {
+      const response = JSON.parse(JSON.stringify(result[0]));
+      this.geoData.userId = userId;
+      this.geoData.latitude = response.latitude;
+      this.geoData.longitude = response.longitude;
+      this.geoData.altitude = response.altitude;
+      this.geoData.dzongkhag = response.administrativeArea;
+      this.geoData.locality = response.locality;
+      this.geoData.exactLocation = response.thoroughfare;
+      this.geoData.availableStatus = 'AVAILABLE';
+
+      this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
+        if (res.RESULT === 'SUCCESS') {
+          this.presentToast();
+        }
+      });
+    })
+    .catch((error: any) => {
+      alert('Error getting location' + JSON.stringify(error));
+    });
+  }
+
   stopBackgroundGeolocation() {
     // If you wish to turn OFF background-tracking, call the #stop method.
     this.backgroundGeolocation.stop();
+    this.backgroundGeolocation.finish();
     this.trackState.next(false);
+  }
+
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Your location was successfully pushed',
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.onDidDismiss();
+    toast.present();
   }
 
   clear() {

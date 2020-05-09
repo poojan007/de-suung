@@ -11,7 +11,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
   <ion-fab horizontal="end" vertical="top" slot="fixed" edge class="app-button-top">
     <ion-fab-button class="app-button">
       <ion-icon name="apps" class="app-button-icon"></ion-icon>
@@ -28,15 +28,12 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  <div class="form-header">Frequently Asked Questions</div>
-  <ion-list *ngFor="let faq of faqList; let i of index">
-    <ion-list-header>
-      <ion-label><h1>{{faq.question}}</h1></ion-label>
-    </ion-list-header>
-    <ion-item lines="none">
-      <ion-label color="dark" class="ion-text-wrap">
-        {{faq.answer}}
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <div class="form-header">Entertainment</div>
+
+  <div style="margin-top: 50%; font-size: 20px; text-align: center; color: #ff5507;">
+      <img style="width: 100px;" src="../../assets/no-information.png">
+  </div>
+  <div style="font-size: 20px; text-align: center; color: #ff5507;">
+      This feature is coming soon
+  </div>
 </ion-content>

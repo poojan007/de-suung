@@ -7,4 +7,6 @@ export class Geomodel {
     locality: string;
     exactLocation: string;
     availableStatus: string;
+    incidentMsg: string;
+    title: string;
 }

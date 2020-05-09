@@ -1,0 +1,19 @@
+.form-header {
+    text-align: center;
+    background-color: #3880ff;
+    padding: 10px;
+    color: white;
+    letter-spacing: 1px;
+} 
+
+#map_canvas {
+  width: 100%;
+  height: 65vh;
+}
+
+ion-card {
+  max-height: 200px;
+  overflow: scroll;
+  position: absolute;
+  z-index: 1;
+}

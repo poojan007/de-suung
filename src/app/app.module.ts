@@ -27,6 +27,8 @@ import { ProfileQrcodePageModule } from './profile-qrcode/profile-qrcode.module'
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { Spherical } from '@ionic-native/google-maps';
+import { IncidentAlertPageModule } from './incident-alert/incident-alert.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,7 +43,8 @@ import { FCM } from '@ionic-native/fcm/ngx';
     IonicSelectableModule,
     GenerateQrPageModule,
     NgxQRCodeModule,
-    ProfileQrcodePageModule
+    ProfileQrcodePageModule,
+    IncidentAlertPageModule
   ],
   providers: [
     StatusBar,
@@ -59,6 +62,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
     AppVersion,
     BackgroundGeolocation,
     FCM,
+    Spherical,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

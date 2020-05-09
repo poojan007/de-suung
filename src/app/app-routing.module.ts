@@ -115,6 +115,16 @@ const routes: Routes = [
   {
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
+  },
+  {
+    path: 'incident-alert',
+    loadChildren: () => import('./incident-alert/incident-alert.module').then( m => m.IncidentAlertPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'entertainment',
+    loadChildren: () => import('./entertainment/entertainment.module').then( m => m.EntertainmentPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

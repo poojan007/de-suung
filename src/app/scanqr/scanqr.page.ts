@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
-import { Platform, ToastController, NavController, AlertController } from '@ionic/angular';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Platform, NavController, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../services/api.service';
 import { Qrmodel } from '../model/qrmodel';
 import { AuthenticationService } from '../services/authentication.service';
+import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-scanqr',
@@ -19,6 +21,12 @@ export class ScanqrPage implements OnInit {
   scannedData: any;
   userId: number;
   qrData: Qrmodel;
+  latitude: number;
+  longitude: number;
+  altitude: number;
+  dzongkhag: string;
+  locality: string;
+  exactLocation: string;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -26,7 +34,9 @@ export class ScanqrPage implements OnInit {
     private alertCtrl: AlertController,
     private navCtrl: NavController,
     private apiService: ApiService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private nativeGeocoder: NativeGeocoder,
+    private geolocation: Geolocation,
   ) {
     this.qrData = new Qrmodel();
   }
@@ -45,7 +55,7 @@ export class ScanqrPage implements OnInit {
         }
         this.navCtrl.pop();
         this.scannedData = barcodeData;
-        this.sendAttendance();
+        this.getGeoLocation();
     }, (err) => {
         console.error(err);
     }).finally(() => {
@@ -55,12 +65,52 @@ export class ScanqrPage implements OnInit {
     });
   }
 
+  getGeoLocation() {
+    this.platform.ready().then(() => {
+      // if (this.platform.is('android')) {
+        this.geolocation.getCurrentPosition().then((position) => {
+          this.altitude = position.coords.altitude;
+          this.getGeoencoder(position.coords.latitude, position.coords.longitude);
+        });
+      // }
+    });
+  }
+
+  // geocoder method to fetch address from coordinates passed as arguments
+  getGeoencoder(latitude, longitude) {
+    // Geocoder configuration
+    const geoencoderOptions: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 1
+    };
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, geoencoderOptions)
+    .then((result) => {
+      const response = JSON.parse(JSON.stringify(result[0]));
+      this.latitude = response.latitude;
+      this.longitude = response.longitude;
+      this.altitude = this.altitude;
+      this.dzongkhag = response.administrativeArea;
+      this.locality = response.locality;
+      this.exactLocation = response.thoroughfare;
+
+      this.sendAttendance();
+    })
+    .catch((error: any) => {
+      alert('Error getting location' + JSON.stringify(error));
+    });
+  }
+
   sendAttendance() {
     const scannedText: any = JSON.stringify(this.scannedData.text);
     this.qrData.site = scannedText;
     this.qrData.uid = this.userId;
+    this.qrData.latitude = this.latitude;
+    this.qrData.longitude = this.longitude;
+    this.qrData.altitude = this.latitude;
+    this.qrData.dzongkhag = this.dzongkhag;
+    this.qrData.locality = this.locality;
+    this.qrData.exactLocation = this.exactLocation;
     this.apiService.postQRCodeAttendance(this.qrData).subscribe((response) => {
-    //  alert(response);
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';
         this.message = 'Your attendance has been successfully recorded';

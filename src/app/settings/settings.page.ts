@@ -43,7 +43,7 @@ export class SettingsPage implements OnInit {
       this.locationService.setItem('track_me', false);
       this.locationService.stopBackgroundGeolocation();
     } else {
-      this.locationService.startBackgroundGeolocation();
+      this.locationService.startBackgroundGeolocation(this.data.userId);
     }
   }
 }

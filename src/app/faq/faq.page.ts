@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-faq',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqPage implements OnInit {
 
-  constructor() { }
+  faqList: any;
+
+  constructor(
+    private apiService: ApiService
+  ) { }
 
   ngOnInit() {
+    this.getDropDownList('faq', 'NA', 'NA');
+  }
+
+  getDropDownList(tableName, paramId, colName) {
+    this.apiService.getDropDownList(tableName, paramId, colName).subscribe((response) => {
+      this.faqList = response;
+    });
   }
 
 }

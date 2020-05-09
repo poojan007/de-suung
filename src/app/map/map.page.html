@@ -1,9 +1,63 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Map</ion-title>
+<ion-header [translucent]="true">
+ 
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Incident Zone</ion-title>
   </ion-toolbar>
+ 
 </ion-header>
 
-<ion-content>
-<h1>Google Map Will Go Here</h1>
+<ion-content [fullscreen]="true">
+  <ion-card>
+		<ion-card-content>
+			<div #directionsPanel></div>
+		</ion-card-content>
+	</ion-card>
+  <div id="map_canvas"></div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <b>Your Location</b>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Latitude</b>
+      </ion-col>
+      <ion-col>
+        {{myLatitude}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Longitude</b>
+      </ion-col>
+      <ion-col>
+        {{myLongitude}}
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col size="3">
+        <b>Distance</b>
+      </ion-col>
+      <ion-col>
+        {{myDistance}}&nbsp;km
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col size="3">
+        <b>Address</b>
+      </ion-col>
+      <ion-col>
+        {{myAddress}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<!-- <ion-footer>
+  <ion-button color="primary" expand="full" (click)="getDirection()">
+    <ion-icon name="compass"></ion-icon>&nbsp;&nbsp;Get Direction
+  </ion-button>
+</ion-footer> -->

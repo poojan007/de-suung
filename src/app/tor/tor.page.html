@@ -29,5 +29,14 @@
     </ion-fab-list>
   </ion-fab>
   <div class="form-header">Terms and Privacy Policy</div>
-
+  <ion-list *ngFor="let tor of torList; let i of index">
+    <ion-list-header>
+      <ion-label><h1>{{tor.title}}</h1></ion-label>
+    </ion-list-header>
+    <ion-item lines="none">
+      <ion-label color="dark" class="ion-text-wrap">
+        {{tor.description}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

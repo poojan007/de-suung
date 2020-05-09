@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, NavController, Platform, AlertController } from '@ionic/angular';
+import { LoadingController, NavController, Platform, AlertController, ModalController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Geomodel } from '../model/geomodel';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Qrmodel } from '../model/qrmodel';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { IncidentAlertPage } from '../incident-alert/incident-alert.page';
 
 @Component({
   selector: 'app-dashboard',
@@ -122,7 +123,8 @@ export class DashboardPage implements OnInit {
     private platform: Platform,
     private geolocation: Geolocation,
     private barcodeScanner: BarcodeScanner,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController
   ) {
     this.data = new ApiModel();
     this.geoData = new Geomodel();
@@ -319,5 +321,16 @@ export class DashboardPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  async reportIncident() {
+    const modal = await this.modalCtrl.create({
+      component: IncidentAlertPage,
+      swipeToClose: true,
+      presentingElement: await this.modalCtrl.getTop()
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+    });
+    return await modal.present();
   }
 }

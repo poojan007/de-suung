@@ -20,6 +20,9 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="orientation" value="portrait" />
+    <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyA2OR9NCts43D7CLtAxovY1zonifMtMVis" />
+    <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyA2OR9NCts43D7CLtAxovY1zonifMtMVis" />
+    <preference name="UseLegacySwiftLanguageVersion" value="true" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
@@ -52,6 +55,9 @@
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
             <string>We use your location for getting the current location of the person for prompt deployment to certain assignment during times of disasters.</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationAlwaysUsageDescription">
+            <string>We track the users location, unless turned off explicitly. Tracking of the users location is basically to alert them if any disaster is report in their locality for prompt deployment. </string>
         </edit-config>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />

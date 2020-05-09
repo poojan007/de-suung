@@ -47,7 +47,7 @@ export class ApiService {
       // tslint:disable-next-line: max-line-length
       .get<any>(this.basePath + 'userValidation&loginId=' + item.loginId + '&password=' + item.password + '&fcmToken=' + item.fcmToken, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -57,7 +57,7 @@ export class ApiService {
       // tslint:disable-next-line: max-line-length
       .post<any>(this.basePath + 'userRegistration&name=' + item.name + '&email=' + item.email + '&did=' + item.did + '&cid=' + item.cid + '&created_by=0', this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -67,7 +67,7 @@ export class ApiService {
       // tslint:disable-next-line: max-line-length
       .get<any>(this.basePath + 'userEventList&userId=' + item.userId + '&locationId=' + item.location + '&batchNo=' + item.batchNo, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -76,7 +76,7 @@ export class ApiService {
     return this.http
       .get<any>(this.basePath + 'registeredEventList&userId=' + item.userId, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -85,7 +85,7 @@ export class ApiService {
     return this.http
       .get<any>(this.basePath + 'myContribution&userId=' + item.userId, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -94,7 +94,7 @@ export class ApiService {
     return this.http
       .get<any>(this.basePath + 'viewProfile&userId=' + item.userId, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -103,7 +103,7 @@ export class ApiService {
     return this.http
       .get<any>(this.basePath + 'getDzongkhagList', this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -112,7 +112,7 @@ export class ApiService {
     return this.http
     .get<any>(this.basePath + 'eventCancellation&userId=' + item.userId + '&eventId=' + item.eventId, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -121,7 +121,7 @@ export class ApiService {
     return this.http
     .get<any>(this.basePath + 'eventDetails&event_id=' + eventId, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -130,7 +130,7 @@ export class ApiService {
     return this.http
     .get<any>(this.basePath + 'eventRegistration&eventId=' + item.eventId + '&userId=' + item.userId, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -139,7 +139,7 @@ export class ApiService {
     return this.http
     .get<any>(this.basePath + 'coordinatorEventList&userId=' + item.userId, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -148,7 +148,7 @@ export class ApiService {
     return this.http
     .get<any>(this.basePath + 'geteventAttendanceList&event_id=' + eventId, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -157,7 +157,7 @@ export class ApiService {
     return this.http
     .get<any>(this.basePath + 'populateDropDown&tableName=' + tableName + '&paramId=' + paramId + '&colName=' + colName, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -166,7 +166,7 @@ export class ApiService {
     return this.http
     .get<any>(this.basePath + 'getBatchList', this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -176,7 +176,7 @@ export class ApiService {
     // tslint:disable-next-line: max-line-length
     .get<any>(this.basePath + 'createEvent&title=' + item.title + '&eventCategory_id=' + item.eventCategory_id + '&eventType_id=' + item.eventType_id + '&description=' + item.description + '&dzongkhag_id=' + item.dzongkhag_id + '&startDate=' + item.startDate + '&endDate=' + item.endDate + '&startTime=' + item.startTime + '&endTime=' + item.endTime + '&invited_from=' + item.invited_from + '&invited_batch=' + item.invited_batch + '&coordinator_id=' + item.coordinator_id + '&expected_working_days=' + item.expected_working_days + '&total_desuup_required=' + item.total_desuup_required + '&attendance_assistant=' + item.attendance_assistant + '&createdBy=' + item.createdBy, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -185,7 +185,7 @@ export class ApiService {
     return this.http
     .get<any>(this.basePath + 'saveAttendance&attendanceStr=' + attendanceStr, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -195,16 +195,17 @@ export class ApiService {
     // tslint:disable-next-line: max-line-length
     .get<any>(this.basePath + 'updateProfile&userId=' + item.userId + '&name=' + item.name + '&email=' + item.email + '&mobile=' + item.mobile + '&maritalStatus=' + item.maritalStatus + '&location=' + item.location + '&agencyType=' + item.agencyType + '&agencyId=' + item.agencyId + '&empType=' + item.empType + '&designation=' + item.designation + '&profession=' + item.profession + '&qualification=' + item.qualification, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
 
   postQRCodeAttendance(item) {
     return this.http
-    .get<any>(this.basePath + 'qrCodeAttendance&eventId=' + item.site + '&userId=' + item.uid, this.httpOptions)
+    // tslint:disable-next-line: max-line-length
+    .get<any>(this.basePath + 'qrCodeAttendance&eventId=' + item.site + '&userId=' + item.uid + '&latitude=' + item.latitude + '&longitude=' + item.longitude, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -214,7 +215,35 @@ export class ApiService {
       // tslint:disable-next-line: max-line-length
       .get<any>(this.basePath + 'postAvailableStatus&userId=' + item.userId + '&latitude=' + item.latitude + '&longitude=' + item.longitude + '&dzongkhag=' + item.dzongkhag + '&locality=' + item.locality + '&exactLocation=' + item.exactLocation + '&availableStatus=' + item.availableStatus + '&altitude=' + item.altitude, this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  postIncidentAlert(item) {
+    return this.http
+    // tslint:disable-next-line: max-line-length
+    .get<any>(this.basePath + 'incidentAlert&title=' + item.title + '&body=' + item.incidentMsg + '&type=INCIDENT_ALERT&latitude=' + item.latitude + '&longitude=' + item.longitude + '&altitude=' + item.altitude + '&userId=' + item.userId, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  postBackgroundLocation(item) {
+    return this.http
+      // tslint:disable-next-line: max-line-length
+      .get<any>(this.basePath + 'postAvailableStatus&userId=' + item.userId + '&latitude=' + item.latitude + '&longitude=' + item.longitude + '&dzongkhag=' + item.dzongkhag + '&locality=' + item.locality + '&exactLocation=' + item.exactLocation + '&availableStatus=AVAILABLE' + '&altitude=' + item.altitude, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  sendOTP(mobile, otp) {
+    return this.http
+      .get<any>(this.basePath + 'sendOTP&mobile=' + mobile + '&otp=' + otp, this.httpOptions)
+      .pipe(
         catchError(this.handleError)
       );
   }
