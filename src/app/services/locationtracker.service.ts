@@ -23,12 +23,14 @@ export class LocationtrackerService {
   intervalTime = 180000;
 
   config: BackgroundGeolocationConfig = {
-    desiredAccuracy: 10,
-    stationaryRadius: 20,
-    distanceFilter: 30,
-    debug: false, //  enable this hear sounds for background-geolocation life-cycle.
-    stopOnTerminate: false, // enable this to clear background location settings when the app terminates
-    stopOnStillActivity: true
+    stationaryRadius: 5,
+    distanceFilter: 5,
+    notificationTitle: 'De-Suung App Background Tracking',
+    notificationText: 'ENABLED',
+    debug: false,
+    interval: 10000,
+    fastestInterval: 5000,
+    activitiesInterval: 10000
   };
 
   // Geocoder configuration

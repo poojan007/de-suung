@@ -19,6 +19,8 @@ export class UpdateprofilePage implements OnInit {
   empTypeList: [];
   qualificationList: [];
   professionalList: [];
+  skillList: [];
+  interestList: [];
 
   userId: string;
   desuupName: string;
@@ -40,6 +42,8 @@ export class UpdateprofilePage implements OnInit {
   designation: string;
   profession: number;
   qualification: string;
+  skills: string;
+  interests: string;
 
   status: string;
   message: string;
@@ -88,6 +92,8 @@ export class UpdateprofilePage implements OnInit {
     this.getDropDownList('qualification', 'qualifications', 'NA', 'NA');
     this.getDropDownList('profession', 'professions', 'NA', 'NA');
     this.getDropDownList('agencyList', 'agencies', this.agencyType, 'agency_type');
+    this.getDropDownList('skills', 'skills', 'NA', 'NA');
+    this.getDropDownList('interests', 'interests', 'NA', 'NA');
 
     if (this.employmentType === '1') {
       this.show = true;
@@ -112,6 +118,10 @@ export class UpdateprofilePage implements OnInit {
         this.qualificationList = response;
       } else if (requestType === 'profession') {
         this.professionalList = response;
+      } else if (requestType === 'skills') {
+        this.skillList = response;
+      } else if (requestType === 'interests') {
+        this.interestList = response;
       }
     });
   }

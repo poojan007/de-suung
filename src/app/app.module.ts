@@ -29,6 +29,7 @@ import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx'
 import { FCM } from '@ionic-native/fcm/ngx';
 import { Spherical } from '@ionic-native/google-maps';
 import { IncidentAlertPageModule } from './incident-alert/incident-alert.module';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -44,7 +45,11 @@ import { IncidentAlertPageModule } from './incident-alert/incident-alert.module'
     GenerateQrPageModule,
     NgxQRCodeModule,
     ProfileQrcodePageModule,
-    IncidentAlertPageModule
+    IncidentAlertPageModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA2OR9NCts43D7CLtAxovY1zonifMtMVis',
+      libraries: ['places']
+    })
   ],
   providers: [
     StatusBar,

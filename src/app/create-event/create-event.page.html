@@ -7,6 +7,9 @@
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
+      <!-- <ion-button color="dark" (click)="openModal()">
+        <ion-icon name="locate"></ion-icon>&nbsp;Set Location
+      </ion-button> -->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -145,36 +148,6 @@
                     {{desuup.batchNo}}
                   </ion-select-option>
                 </ion-select>
-                <!-- <ionic-selectable #inviteBatchComponent name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" 
-                [items]="desuupBatchList" itemValueField="batchNo" itemTextField="batchNo" 
-                [canSearch]="true" [isMultiple]="true" headerColor="primary" searchFailText="Nothing found">
-                <ng-template ionicSelectableCloseButtonTemplate>
-                  <ion-icon name="close-circle"></ion-icon>
-                </ng-template>
-                <ng-template ionicSelectableTitleTemplate>
-                  Invite Desuups Batch
-                </ng-template>
-                <ng-template ionicSelectableItemTemplate let-invitedBatch="item">
-                  {{ invitedBatch.batchNo }}
-                </ng-template>
-                <ng-template ionicSelectableFooterTemplate>
-                  <ion-footer>
-                    <ion-toolbar>
-                      <ion-row text-center>
-                        <ion-col size="4">
-                          <ion-button fill="clear" (click)="clearBatch()">Clear</ion-button>
-                        </ion-col>
-                        <ion-col size="4">
-                          <ion-button fill="clear" (click)="toggleBatchItems()">Toggle</ion-button>
-                        </ion-col>
-                        <ion-col size="4">
-                          <ion-button fill="clear" (click)="confirmBatch()">Confirm</ion-button>
-                        </ion-col>
-                      </ion-row>
-                    </ion-toolbar>
-                  </ion-footer>
-                </ng-template>
-                </ionic-selectable> -->
               </ion-item>
               <ion-item>
                  <ion-label position="floating">Coordinator</ion-label>
@@ -183,19 +156,6 @@
                     {{coordinator.name}}
                   </ion-select-option>
                 </ion-select>
-                <!-- <ionic-selectable name="coordinator" [(ngModel)]="coordinator" 
-                [items]="coordinatorList" itemValueField="id" itemTextField="name" 
-                [canSearch]="true" headerColor="primary" searchFailText="Nothing found">
-                <ng-template ionicSelectableCloseButtonTemplate>
-                  <ion-icon name="close-circle"></ion-icon>
-                </ng-template>
-                <ng-template ionicSelectableTitleTemplate>
-                  Event Coordinator
-                </ng-template>
-                <ng-template ionicSelectableItemTemplate let-coordinator="item">
-                  {{ coordinator.name }} ({{coordinator.did}})
-                </ng-template>
-                </ionic-selectable> -->
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Total Desuups Required</ion-label>
@@ -205,20 +165,6 @@
                 <ion-label position="floating">Radius(in meters)</ion-label>
                 <ion-input type="number" class="icon-size-13" name="eventAreaRadius" [(ngModel)]="eventAreaRadius" required></ion-input>
               </ion-item>
-              <ion-item>
-                <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
-                <ion-list [hidden]="autocompleteItems.length == 0">
-                  <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
-                    {{ item.description }}
-                  </ion-item>
-                </ion-list>
-              </ion-item>
-              <div class="map-wrapper" style="height: 100%;">      
-                <div id="map_center">
-                  <ion-icon name="pin" size="large" color="danger"></ion-icon>      
-                </div>
-                <div #map id="map"  style="height: 100%;"></div>
-              </div>
             </div>
             <div padding>
               <ion-button size="large" type="submit" [disabled]="createEventForm.invalid" expand="block">

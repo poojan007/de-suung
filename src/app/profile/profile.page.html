@@ -128,9 +128,6 @@
       <label><ion-icon name="calendar-sharp"></ion-icon></label><label class="margin-left-5">{{dob}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label><ion-icon name="location-sharp"></ion-icon></label><label class="margin-left-5 ion-text-wrap">{{dzongkhag}}, {{gewog}}, {{village}}</label>
-    </div>
-    <div class="margin-top-bottom text-label">
       <label><ion-icon name="male-female-sharp"></ion-icon></label><label class="margin-left-5">{{gender}}</label>
     </div>
     <div class="margin-top-bottom text-label">
@@ -138,6 +135,9 @@
     </div>
     <div class="margin-top-bottom text-label">
       <label><ion-icon name="people-sharp"></ion-icon></label><label class="margin-left-5">{{empType}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><ion-icon name="location-sharp"></ion-icon></label><label class="margin-left-5 ion-text-wrap">{{dzongkhag}}, {{gewog}}, {{village}}</label>
     </div>
   </div> 
   <div class="col-12 div-container">
@@ -147,7 +147,23 @@
     <div class="margin-top-bottom text-label">
       <ion-icon name="location-sharp"></ion-icon><label>{{location}}</label>
     </div>
-    
-  </div> 
+  </div>  
+  <div class="col-12 div-container" *ngIf="empType === 'Employed'">
+    <div class="margin-top-bottom text-header">
+      <ion-icon name="ribbon-sharp"></ion-icon> Job Details
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label>{{agencyType}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label>{{agency}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label>{{designation}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label>{{occupationGroup}}</label>
+    </div>
+  </div>
   
 </ion-content>
