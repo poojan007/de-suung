@@ -28,9 +28,9 @@ export class LocationtrackerService {
     notificationTitle: 'De-Suung App Background Tracking',
     notificationText: 'ENABLED',
     debug: false,
-    interval: 10000,
-    fastestInterval: 5000,
-    activitiesInterval: 10000
+    // interval: 10000,
+    // fastestInterval: 5000,
+    // activitiesInterval: 10000
   };
 
   // Geocoder configuration
@@ -54,7 +54,6 @@ export class LocationtrackerService {
       this.backgroundGeolocation
         .on(BackgroundGeolocationEvents.location)
         .subscribe((location: BackgroundGeolocationResponse) => {
-          console.log(location);
           this.interval(location, userId);
         });
     });
@@ -91,10 +90,10 @@ export class LocationtrackerService {
       this.geoData.exactLocation = response.thoroughfare;
       this.geoData.availableStatus = 'AVAILABLE';
 
+      // alert('Request Data: ' + JSON.stringify(this.geoData));
       this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
-        if (res.RESULT === 'SUCCESS') {
-          this.presentToast();
-        }
+        // alert('Response Data: ' + JSON.stringify(res));
+        this.presentToast();
       });
     })
     .catch((error: any) => {

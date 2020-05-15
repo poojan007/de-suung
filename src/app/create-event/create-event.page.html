@@ -45,7 +45,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Event Category</ion-label>
-                <ion-select class="icon-size-13" name="eventCategory" [(ngModel)]="eventCategory" (ionChange)="getEventTypes($event);" required>
+                <ion-select class="icon-size-13 my_ion_select" name="eventCategory" [(ngModel)]="eventCategory" (ionChange)="getEventTypes($event);" required>
                   <ion-select-option *ngFor="let category of eventCategoryList" [value]="category.id">
                     {{category.name}}
                   </ion-select-option>
@@ -53,7 +53,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Event Type</ion-label>
-                <ion-select class="icon-size-13" name="eventType" [(ngModel)]="eventType" required>
+                <ion-select class="icon-size-13 my_ion_select" name="eventType" [(ngModel)]="eventType" required>
                   <ion-select-option *ngFor="let eventype of eventTypeList" [value]="eventype.id">
                     {{eventype.name}}
                   </ion-select-option>
@@ -65,21 +65,11 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Location</ion-label>
-                <ion-select class="icon-size-13" name="dzongkhag" [(ngModel)]="dzongkhag" required>
+                <ion-select class="icon-size-13 my_ion_select" name="dzongkhag" [(ngModel)]="dzongkhag" required>
                   <ion-select-option *ngFor="let dzongkhag of dzongkhagList" [value]="dzongkhag.id">
                     {{dzongkhag.name}}
                   </ion-select-option>
                 </ion-select>
-                <!-- <ionic-selectable name="dzongkhag" [(ngModel)]="dzongkhag" 
-                [items]="dzongkhagList" itemValueField="id" itemTextField="name" 
-                [canSearch]="true" headerColor="primary" searchFailText="Nothing found">
-                <ng-template ionicSelectableCloseButtonTemplate>
-                  <ion-icon name="close-circle"></ion-icon>
-                </ng-template>
-                <ng-template ionicSelectableTitleTemplate>
-                  Location
-                </ng-template>
-                </ionic-selectable> -->
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Start Date</ion-label>
@@ -99,43 +89,15 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Invite Desuups From</ion-label>
-                <ion-select class="icon-size-13" name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" multiple="true" required>
+                <ion-select class="icon-size-13 my_ion_select" name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" multiple="true" required>
                   <ion-select-option *ngFor="let dzongkhag of dzongkhagList" [value]="dzongkhag.id">
                     {{dzongkhag.name}}
                   </ion-select-option>
                 </ion-select>
-                <!-- <ionic-selectable #inviteDesuupFromComponent name="inviteDesuupsFrom" [(ngModel)]="inviteDesuupsFrom" 
-                [items]="dzongkhagList" itemValueField="id" itemTextField="name" 
-                [canSearch]="true" [isMultiple]="true" headerColor="primary" 
-                searchFailText="Nothing found">
-                <ng-template ionicSelectableCloseButtonTemplate>
-                  <ion-icon name="close-circle"></ion-icon>
-                </ng-template>
-                <ng-template ionicSelectableTitleTemplate>
-                  Invite Desuups From
-                </ng-template>
-                <ng-template ionicSelectableFooterTemplate>
-                  <ion-footer>
-                    <ion-toolbar>
-                      <ion-row text-center>
-                        <ion-col size="4">
-                          <ion-button fill="clear" (click)="clear()">Clear</ion-button>
-                        </ion-col>
-                        <ion-col size="4">
-                          <ion-button fill="clear" (click)="toggleItems()">Toggle</ion-button>
-                        </ion-col>
-                        <ion-col size="4">
-                          <ion-button fill="clear" (click)="confirm()">Confirm</ion-button>
-                        </ion-col>
-                      </ion-row>
-                    </ion-toolbar>
-                  </ion-footer>
-                </ng-template>
-                </ionic-selectable> -->
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Invite Desuups-Occupation Group</ion-label>
-                <ion-select class="icon-size-13" name="profession" [(ngModel)]="profession" multiple="true" required>
+                <ion-select class="icon-size-13 my_ion_select" name="profession" [(ngModel)]="profession" multiple="true" required>
                   <ion-select-option *ngFor="let profession of occupationGroupList" [value]="profession.id">
                     {{profession.name}}
                   </ion-select-option>
@@ -143,7 +105,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Invite Desuups Batch</ion-label>
-                <ion-select class="icon-size-13" name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" multiple="true" required>
+                <ion-select class="icon-size-13 my_ion_select" name="inviteDesuupsBatch" [(ngModel)]="inviteDesuupsBatch" multiple="true" required>
                   <ion-select-option *ngFor="let desuup of desuupBatchList" [value]="desuup.batchNo">
                     {{desuup.batchNo}}
                   </ion-select-option>
@@ -151,7 +113,7 @@
               </ion-item>
               <ion-item>
                  <ion-label position="floating">Coordinator</ion-label>
-                 <ion-select class="icon-size-13" name="coordinator" [(ngModel)]="coordinator" required>
+                 <ion-select class="icon-size-13 my_ion_select" name="coordinator" [(ngModel)]="coordinator" required>
                   <ion-select-option *ngFor="let coordinator of coordinatorList" [value]="coordinator.id">
                     {{coordinator.name}}
                   </ion-select-option>

@@ -42,8 +42,8 @@ export class UpdateprofilePage implements OnInit {
   designation: string;
   profession: number;
   qualification: string;
-  skills: string;
-  interests: string;
+  skills: any;
+  interests: any;
 
   status: string;
   message: string;
@@ -59,31 +59,10 @@ export class UpdateprofilePage implements OnInit {
     private alertCtrl: AlertController
   ) {
     this.data = new ApiModel();
-
-    const userData = JSON.parse(this.authService.getItem('USER_INFO'));
-    this.userId = userData.userId;
-    this.desuupName = userData.name;
-    this.email = userData.email;
-    this.mobileNo = userData.mobile;
-    this.desuupId  = userData.did;
-    this.cidNo = userData.cid;
-    this.gender = userData.gender;
-    this.maritalStatus = userData.maritalStatus;
-    this.dob = userData.dob;
-    this.dzongkhag = userData.dzongkhagId;
-    this.gewog = userData.gewog;
-    this.village = userData.village;
-    this.location = userData.location;
-    this.bloodGroup = userData.bloodgroup;
-    this.agencyType = userData.agencyType;
-    this.agency = userData.agencyId;
-    this.employmentType = userData.empType;
-    this.designation = userData.designation;
-    this.profession = userData.profession;
-    this.qualification = userData.qualification;
   }
 
   ngOnInit() {
+    const userData = JSON.parse(this.authService.getItem('USER_INFO'));
     this.showLoader();
     this.getDropDownList('dzongkhag', 'dzongkhags', 'NA', 'NA');
     this.getDropDownList('gewog', 'gewogs', 'NA', 'NA');
@@ -91,7 +70,7 @@ export class UpdateprofilePage implements OnInit {
     this.getDropDownList('empType', 'emp_types', 'NA', 'NA');
     this.getDropDownList('qualification', 'qualifications', 'NA', 'NA');
     this.getDropDownList('profession', 'professions', 'NA', 'NA');
-    this.getDropDownList('agencyList', 'agencies', this.agencyType, 'agency_type');
+    this.getDropDownList('agencyList', 'agencies', userData.agencyType, 'agency_type');
     this.getDropDownList('skills', 'skills', 'NA', 'NA');
     this.getDropDownList('interests', 'interests', 'NA', 'NA');
 
@@ -100,6 +79,10 @@ export class UpdateprofilePage implements OnInit {
     }
 
     this.hideLoader();
+  }
+
+  ionViewDidEnter() {
+    this.setFormValues();
   }
 
   getDropDownList(requestType, tableName, paramId, colName) {
@@ -126,6 +109,33 @@ export class UpdateprofilePage implements OnInit {
     });
   }
 
+  setFormValues() {
+    const userData = JSON.parse(this.authService.getItem('USER_INFO'));
+    this.userId = userData.userId;
+    this.desuupName = userData.name;
+    this.email = userData.email;
+    this.mobileNo = userData.mobile;
+    this.desuupId  = userData.did;
+    this.cidNo = userData.cid;
+    this.gender = userData.gender;
+    this.maritalStatus = userData.maritalStatus;
+    this.dob = userData.dob;
+    this.dzongkhag = userData.dzongkhagId;
+    this.gewog = userData.gewog;
+    this.village = userData.village;
+    this.location = userData.location;
+    this.bloodGroup = userData.bloodgroup;
+    this.agencyType = userData.agencyType;
+    this.agency = userData.agencyId;
+    this.employmentType = userData.empType;
+    this.designation = userData.designation;
+    this.profession = userData.profession;
+    this.qualification = userData.qualification;
+    this.profession = userData.profession;
+    this.interests = userData.interest.split(',', userData.interest.length);
+    this.skills = userData.skill.split(',', userData.skill.length);
+  }
+
   getAgencyList($event) {
     const paramId = $event.target.value;
     this.getDropDownList('agencyList', 'agencies', paramId, 'agency_type');
@@ -144,11 +154,15 @@ export class UpdateprofilePage implements OnInit {
     this.data.designation = this.designation;
     this.data.profession = this.profession;
     this.data.qualification = this.qualification;
+    this.data.interest = this.interests.join(',');
+    this.data.skill = this.skills.join(',');
+
+    console.log(JSON.stringify(this.data));
 
     this.apiService.postUpdateProfile(this.data).subscribe((response) => {
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Successful';
-        this.message = 'Your profile has been successfully updated. Please wait, you will be redirected to your dashboard';
+        this.message = 'Your profile has been successfully updated.';
         this.navCtrl.navigateForward('/dashboard');
       } else {
         this.status = 'Failure';

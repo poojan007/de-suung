@@ -37,4 +37,6 @@ export class ApiModel {
     profession: number;
     mobile: number;
     fcmToken: string;
+    interest: string;
+    skill: string;
 }

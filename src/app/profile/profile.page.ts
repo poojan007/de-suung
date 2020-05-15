@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiModel } from '../model/api-model';
 import { ApiService } from '../services/api.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { LoadingController, NavController, PopoverController } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController, ActionSheetController, ModalController } from '@ionic/angular';
 import { PopoverComponent } from '../component/popover/popover.component';
+import { ProfileQrcodePage } from '../profile-qrcode/profile-qrcode.page';
 
 @Component({
   selector: 'app-profile',
@@ -32,13 +33,21 @@ export class ProfilePage implements OnInit {
   userType: string;
   village: string;
   mobileNo: number;
+  agencyType: string;
+  agencyName: string;
+  designation: string;
+  occupationalGroup: string;
+  interests: string;
+  skills: string;
 
   constructor(
     private apiService: ApiService,
     private authService: AuthenticationService,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private actionSheetController: ActionSheetController,
+    private modalCtrl: ModalController
   ) {
     this.data = new ApiModel();
   }
@@ -49,7 +58,6 @@ export class ProfilePage implements OnInit {
     this.data.userId = userData.userId;
 
     this.apiService.getProfile(this.data).subscribe((response) => {
-      console.log(response);
       this.bloodGroup = response[0].bloodgroup;
       this.cidNo = response[0].cid;
       this.did = response[0].did;
@@ -67,6 +75,12 @@ export class ProfilePage implements OnInit {
       this.userType = response[0].userType;
       this.village = response[0].village;
       this.mobileNo = response[0].mobile;
+      this.agencyType = response[0].agency_type;
+      this.agencyName = response[0].agencyName;
+      this.designation = response[0].designation;
+      this.occupationalGroup = response[0].occupationalGroup;
+      this.interests = response[0].userInterest;
+      this.skills = response[0].userSkill;
     });
 
     this.hideLoader();
@@ -95,5 +109,41 @@ export class ProfilePage implements OnInit {
       translucent: true
     });
     return await popover.present();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Profile Actions',
+      buttons: [{
+        text: 'Profile QR Code',
+        icon: 'barcode',
+        handler: () => {
+          this.generateQRCode();
+        }
+      }, {
+        text: 'Update Profile',
+        icon: 'person',
+        handler: () => {
+          this.navCtrl.navigateForward('/updateprofile');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  async generateQRCode() {
+    const modal = await this.modalCtrl.create({
+      component: ProfileQrcodePage,
+      swipeToClose: true,
+      presentingElement: await this.modalCtrl.getTop()
+    });
+    return await modal.present();
   }
 }

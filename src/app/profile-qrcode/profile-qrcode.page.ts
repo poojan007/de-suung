@@ -22,12 +22,14 @@ export class ProfileQrcodePage implements OnInit {
 
   ngOnInit() {
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
-    this.data.id = userData.userId;
+    this.data.desuupUID = userData.userId;
     this.data.name = userData.name;
     this.data.did = userData.did;
-    this.data.cid = userData.cid;
     this.data.batchNo = userData.batchNo;
     this.data.bloodGroup = userData.bloodgroup;
+    this.data.email = userData.email;
+    this.data.mobile = userData.mobile;
+    this.data.designation = userData.designation;
 
     this.profileQrData = JSON.stringify(this.data);
   }

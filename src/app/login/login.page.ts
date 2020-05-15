@@ -40,7 +40,6 @@ export class LoginPage implements OnInit {
     this.data.fcmToken = JSON.parse(this.authservice.getItem('fcm_token'));
 
     this.apiService.validateLogin(this.data).subscribe((response) => {
-      console.log(response);
       this.data.validation = response.validation;
       this.data.name = response.name;
       this.data.did = response.did;
@@ -69,6 +68,8 @@ export class LoginPage implements OnInit {
       this.data.isProfileUpdateNeeded = response.is_profile_update_needed;
       this.isProfileUpdateNeeded = response.is_profile_update_needed;
       this.data.privileges = response.userPrivileges;
+      this.data.interest = response.interest;
+      this.data.skill = response.skill;
 
       if (response.validation === 'true') {
         const twoFactorAuthentication = this.authservice.getItem('two_factor_authentication');

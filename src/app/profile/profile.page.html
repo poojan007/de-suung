@@ -7,7 +7,7 @@
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="presentPopOver($event)" color="primary">
+      <ion-button (click)="presentActionSheet()" color="primary">
         <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -156,13 +156,28 @@
       <label>{{agencyType}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label>{{agency}}</label>
+      <label>{{agencyName}}</label>
     </div>
     <div class="margin-top-bottom text-label">
       <label>{{designation}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label>{{occupationGroup}}</label>
+      <label>{{occupationalGroup}}</label>
+    </div>
+  </div>
+  <div class="col-12 div-container" *ngIf="empType === 'Employed'">
+    <div class="margin-top-bottom text-header">
+      <ion-icon name="ribbon-sharp"></ion-icon> Interests & Skills
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><b>Interests:</b></label>
+      <br/>
+      <label>{{interests}}</label>
+    </div>
+    <div class="margin-top-bottom text-label">
+      <label><b>Skills:</b></label>
+      <br/>
+      <label>{{skills}}</label>
     </div>
   </div>
   

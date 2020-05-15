@@ -1,8 +1,10 @@
 export class Desuup {
-    id: number;
+    desuupUID: number;
     name: string;
     did: string;
-    cid: number;
     batchNo: number;
     bloodGroup: string;
+    email: string;
+    mobile: number;
+    designation: string;
 }

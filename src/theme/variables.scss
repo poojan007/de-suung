@@ -110,6 +110,35 @@
     margin: 40px 0px 0px -10px;
     z-index: 100px;
   }
+
+  .alert-radio-label.sc-ion-alert-md {
+    padding-left: 52px;
+    padding-right: 26px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    flex: 1;
+    color: var(--ion-color-step-850, #262626);
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+  }
+
+  .alert-checkbox-label.sc-ion-alert-md {
+    padding-left: 52px;
+    padding-right: 26px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    flex: 1;
+    color: var(--ion-color-step-850, #262626);
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+  }
+
+  ion-select {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
