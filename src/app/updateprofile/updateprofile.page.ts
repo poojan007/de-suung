@@ -157,7 +157,7 @@ export class UpdateprofilePage implements OnInit {
     this.data.interest = this.interests.join(',');
     this.data.skill = this.skills.join(',');
 
-    console.log(JSON.stringify(this.data));
+    console.log('Update Profile Data: ' + JSON.stringify(this.data));
 
     this.apiService.postUpdateProfile(this.data).subscribe((response) => {
       if (response.RESULT === 'SUCCESS') {

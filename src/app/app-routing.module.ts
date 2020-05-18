@@ -125,6 +125,11 @@ const routes: Routes = [
     path: 'entertainment',
     loadChildren: () => import('./entertainment/entertainment.module').then( m => m.EntertainmentPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'disclaimer',
+    loadChildren: () => import('./disclaimer/disclaimer.module').then( m => m.DisclaimerPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

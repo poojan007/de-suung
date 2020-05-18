@@ -111,7 +111,7 @@ export class LocationtrackerService {
   async presentToast() {
     const toast = await this.toastCtrl.create({
       message: 'Your location was successfully pushed',
-      duration: 3000,
+      duration: 1000,
       position: 'bottom'
     });
     toast.onDidDismiss();

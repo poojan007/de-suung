@@ -28,14 +28,14 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  <div class="form-header">Terms and Privacy Policy</div>
-  <ion-list *ngFor="let tor of torList; let i of index">
-    <ion-list-header>
-      <ion-label><h1>{{tor.title}}</h1></ion-label>
-    </ion-list-header>
+  <div class="form-header">Disclaimer</div>
+  <ion-list>
     <ion-item lines="none">
       <ion-label color="dark" class="ion-text-wrap ion-text-justify">
-        {{tor.description}}
+        All Users must strictly comply with health safety requirements 
+        (SOP and guidelines) and must adhere to Acts, Policies and 
+        regulations in place of the Royal Government of Bhutan. 
+        For details visit. <a href="http://www.moh.gov.bt" target="_blank">www.moh.gov.bt</a>
       </ion-label>
     </ion-item>
   </ion-list>

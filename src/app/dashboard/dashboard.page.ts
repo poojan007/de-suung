@@ -136,7 +136,7 @@ export class DashboardPage implements OnInit {
   }
 
   ngOnInit() {
-    this.showLoader();
+    // this.showLoader();
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
 
     this.data.userId = userData.userId;
@@ -166,7 +166,7 @@ export class DashboardPage implements OnInit {
 
     this.showScanQR = true;
     this.getUpcomingEventCount();
-    this.hideLoader();
+    // this.hideLoader();
   }
 
   ionViewWillEnter() {
