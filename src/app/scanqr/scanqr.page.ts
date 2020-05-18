@@ -18,7 +18,7 @@ export class ScanqrPage implements OnInit {
   private preventBack: Subscription;
   status: string;
   message: string;
-  scannedData: any;
+  scannedData: {};
   userId: number;
   qrData: Qrmodel;
   latitude: number;
@@ -27,6 +27,11 @@ export class ScanqrPage implements OnInit {
   dzongkhag: string;
   locality: string;
   exactLocation: string;
+
+  eventLat: number;
+  eventLong: number;
+  eventRadius: number;
+  eventId: number;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -94,14 +99,34 @@ export class ScanqrPage implements OnInit {
       this.exactLocation = response.thoroughfare;
 
       this.sendAttendance();
+      // this.checkIfAttendanceWithInTheGeofence(this.latitude, this.longitude);
     })
     .catch((error: any) => {
       alert('Error getting location' + JSON.stringify(error));
     });
   }
 
+  checkIfAttendanceWithInTheGeofence(latitude, longitude) {
+    const scannedText = this.scannedData['text'].id;
+    this.eventId = scannedText.id;
+
+    this.apiService.getEventDetails(this.eventId).subscribe((response) => {
+      this.eventLat = response.latitude;
+      this.eventLong = response.longitude;
+      this.eventRadius = response.radius;
+    });
+
+    // if (true) {
+    //   this.sendAttendance();
+    // } else {
+    //   this.status = 'Warning';
+    //   this.message = 'Your attendance cannot be recorded because your not within the specified event radius';
+    //   this.presentAlert();
+    // }
+  }
+
   sendAttendance() {
-    const scannedText: any = JSON.stringify(this.scannedData.text);
+    const scannedText: any = JSON.stringify(this.scannedData['text']);
     this.qrData.site = scannedText;
     this.qrData.uid = this.userId;
     this.qrData.latitude = this.latitude;
@@ -113,10 +138,14 @@ export class ScanqrPage implements OnInit {
     this.apiService.postQRCodeAttendance(this.qrData).subscribe((response) => {
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';
-        this.message = 'Your attendance has been successfully recorded';
+        this.message = 'Your attendance has been successfully recorded.';
+      } else if (response.RESULT === 'LOCATION_MISMATCH') {
+        this.status = 'Location Mismatch';
+        // tslint:disable-next-line: max-line-length
+        this.message = 'Your attendance cannot be recorded because your not within the specified event perimeter. Note: Your current location has been recorded.';
       } else {
         this.status = 'Failure';
-        this.message = 'Your attendance couldnot be recorded, please try again';
+        this.message = 'Your attendance couldnot be recorded, please try again.';
       }
       this.presentAlert();
     });
