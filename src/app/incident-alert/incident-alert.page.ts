@@ -21,6 +21,9 @@ export class IncidentAlertPage implements OnInit {
   showBroadCastMsgDiv = false;
   locationList: any;
 
+  message: string;
+  location: any;
+
   constructor(
     private modalCtrl: ModalController,
     private authService: AuthenticationService,
@@ -78,10 +81,25 @@ export class IncidentAlertPage implements OnInit {
     });
   }
 
+  broadCastMessage() {
+    this.alertData.message = this.message;
+    this.alertData.location = this.location.join(',');
+    this.apiService.broadCastMessage(this.alertData).subscribe((res) => {
+      if (res.RESULT === 'SUCCESS') {
+      this.status = 'Success';
+      this.msg = 'Message has been successfully broadcasted to the selected desuups';
+      } else {
+        this.status = 'Failure';
+        this.msg = 'Message broadcast failed, please try again';
+      }
+    });
+    this.presentAlert();
+  }
+
   async presentAlert() {
     const alert = await this.alertCtrl.create({
-      header: 'Success',
-      message: 'Incident alert has been successfully broadcasted to all the nearby desuups',
+      header: this.status,
+      message: this.message,
       buttons: ['OK']
     });
     await alert.present();

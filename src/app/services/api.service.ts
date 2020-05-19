@@ -248,6 +248,15 @@ export class ApiService {
       );
   }
 
+  broadCastMessage(item) {
+    return this.http
+    .get<any>(this.basePath + 'broadCastMessage&message=' + item.message + '&location=' + item.location, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
   getDesuups(page?: number, size?: number): Desuup[] {
     let ports = [];
     console.log(this.desuups);

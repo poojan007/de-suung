@@ -9,4 +9,6 @@ export class Geomodel {
     availableStatus: string;
     incidentMsg: string;
     title: string;
+    message: string;
+    location: string;
 }
