@@ -1,14 +1,14 @@
-import { Component, ViewChildren } from '@angular/core';
+import { Component, ViewChildren, NgZone } from '@angular/core';
 
-import { Platform, LoadingController, AlertController, NavController } from '@ionic/angular';
+import { Platform, LoadingController, AlertController, NavController, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { AuthenticationService } from './services/authentication.service';
 import { LocationtrackerService } from './services/locationtracker.service';
 import { FCM } from '@ionic-native/fcm/ngx';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { CodePush, SyncStatus } from '@ionic-native/code-push';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +23,9 @@ export class AppComponent {
   status: string;
   message: string;
   navigateUrl: string;
+  receivedBytes: number;
+  totalBytes: number;
+  progressStatus: string;
 
   public NetworkStatus: BehaviorSubject<boolean>;
   private WatchConnect: Subscription;
@@ -33,23 +36,24 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private appUpdate: AppUpdate,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private authService: AuthenticationService,
     private locationService: LocationtrackerService,
     private fcm: FCM,
     private navCtrl: NavController,
-    private router: Router
+    private ngZone: NgZone,
+    private toastCtrl: ToastController,
+    private network: Network
   ) {
     this.NetworkStatus = new BehaviorSubject(false);
-    // this.CheckNetworkStatus();
-    // this.CreateNetworkObserverSubscriptions();
+    this.CheckNetworkStatus();
+    this.CreateNetworkObserverSubscriptions();
     this.initializeApp();
 
-    // if (this.networkFlag) {
-    this.setupApp();
-    // }
+    if (this.networkFlag) {
+      this.setupApp();
+    }
   }
 
   initializeApp() {
@@ -62,17 +66,32 @@ export class AppComponent {
   }
 
   setupApp() {
-    // Code to check for app updates
-    if (this.platform.is('android') || this.platform.is('ios')) {
-      this.showLoader();
-      const updateUrl = 'https://app.desuung.org.bt/app/app_update.xml';
-      this.appUpdate.checkAppUpdate(updateUrl).then(update => {
-        this.hideLoader();
-      }).catch(error => {
-        this.hideLoader();
-        console.log('Error: ' + error.msg);
+    this.platform.ready().then(() => {
+      CodePush.sync({}, (progress) => {
+        this.ngZone.run(() => {
+          this.receivedBytes = progress.receivedBytes;
+          this.totalBytes = progress.totalBytes;
+        });
+      }).subscribe((status) => {
+        if (status === SyncStatus.CHECKING_FOR_UPDATE) {
+          this.progressStatus = 'Checking for update';
+        } else if (status === SyncStatus.DOWNLOADING_PACKAGE) {
+          this.progressStatus = 'Downloading package';
+        } else if (status === SyncStatus.IN_PROGRESS) {
+          this.progressStatus = 'In progress';
+        } else if (status === SyncStatus.INSTALLING_UPDATE) {
+          this.progressStatus = 'Installing updates';
+        } else if (status === SyncStatus.UP_TO_DATE) {
+          this.progressStatus = 'App is up to date';
+        } else if (status === SyncStatus.UPDATE_INSTALLED) {
+          this.progressStatus = 'Updates installed';
+        } else if (status === SyncStatus.ERROR) {
+          this.progressStatus = 'Error occurred, please try restarting your app';
+        }
+
+        this.presentToast(this.progressStatus);
       });
-    }
+    });
 
     // Code to enable background location tracking
     const trackMeFlag = this.locationService.getItem('track_me');
@@ -119,6 +138,45 @@ export class AppComponent {
     });
 
     this.fcm.unsubscribeFromTopic('desuung');
+  }
+
+  CheckNetworkStatus() {
+    if ( this.platform.is('cordova') ) {
+        if ( this.network.type === undefined || this.network.type === null || this.network.type === 'unknown') {
+            this.UpdateNetworkStatus(false);
+        } else {
+            this.UpdateNetworkStatus(true);
+            this.networkFlag = true;
+        }
+    } else {
+        this.UpdateNetworkStatus(navigator.onLine);
+    }
+  }
+
+  CreateNetworkObserverSubscriptions() {
+    this.WatchConnect = this.network.onConnect().subscribe(
+      data => {
+        this.UpdateNetworkStatus(true);
+        this.setupApp();
+      }, error => { console.log(error); }
+    );
+    this.WatchDisconnect = this.network.onDisconnect().subscribe(
+        data => { this.UpdateNetworkStatus(false); },
+        error => { console.log(error); }
+    );
+  }
+
+  UpdateNetworkStatus(IsOnline: boolean) {
+    console.log('Network ', (IsOnline === true ? 'Online' : 'Offline'));
+    if (!IsOnline) {
+      this.status = 'Warning';
+      this.message = 'Internet connection unavailable. Please connect to internet and try again';
+      this.presentAlert();
+    } else {
+      this.progressStatus = 'Your back online';
+      this.presentToast(this.progressStatus);
+    }
+    this.NetworkStatus.next(IsOnline);
   }
 
   showLoader() {
@@ -169,39 +227,13 @@ export class AppComponent {
     await alert.present();
   }
 
-  // CheckNetworkStatus() {
-  //   if ( this.platform.is('cordova') ) {
-  //       if ( this.network.type === undefined || this.network.type === null || this.network.type === 'unknown') {
-  //           this.UpdateNetworkStatus(false);
-  //       } else {
-  //           this.UpdateNetworkStatus(true);
-  //           this.networkFlag = true;
-  //       }
-  //   } else {
-  //       this.UpdateNetworkStatus(navigator.onLine);
-  //   }
-  // }
-
-  // CreateNetworkObserverSubscriptions() {
-  //   this.WatchConnect = this.network.onConnect().subscribe(
-  //     data => {
-  //       this.UpdateNetworkStatus(true);
-  //       this.setupApp();
-  //     }, error => { console.log(error); }
-  //   );
-  //   this.WatchDisconnect = this.network.onDisconnect().subscribe(
-  //       data => { this.UpdateNetworkStatus(false); },
-  //       error => { console.log(error); }
-  //   );
-  // }
-
-  // UpdateNetworkStatus(IsOnline: boolean) {
-  //   console.log('Network ', (IsOnline === true ? 'Online' : 'Offline') );
-  //   if (! IsOnline) {
-  //     this.status = 'ERROR';
-  //     this.message = 'Internet Connection Unavailable. Please connect to internet and try again';
-  //     this.presentAlert();
-  //   }
-  //   this.NetworkStatus.next(IsOnline);
-  // }
+  async presentToast(progressMsg) {
+    const toast = await this.toastCtrl.create({
+      message: progressMsg,
+      duration: 1000,
+      position: 'bottom'
+    });
+    toast.onDidDismiss();
+    toast.present();
+  }
 }

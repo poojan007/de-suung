@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -18,7 +17,6 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { GenerateQrPageModule } from './generate-qr/generate-qr.module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -27,9 +25,9 @@ import { ProfileQrcodePageModule } from './profile-qrcode/profile-qrcode.module'
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
-import { Spherical } from '@ionic-native/google-maps';
 import { IncidentAlertPageModule } from './incident-alert/incident-alert.module';
-import { AgmCoreModule } from '@agm/core';
+import { AppUpdate } from '@ionic-native/app-update/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,11 +43,7 @@ import { AgmCoreModule } from '@agm/core';
     GenerateQrPageModule,
     NgxQRCodeModule,
     ProfileQrcodePageModule,
-    IncidentAlertPageModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA2OR9NCts43D7CLtAxovY1zonifMtMVis',
-      libraries: ['places']
-    })
+    IncidentAlertPageModule
   ],
   providers: [
     StatusBar,
@@ -59,7 +53,6 @@ import { AgmCoreModule } from '@agm/core';
     DatePicker,
     DatePipe,
     BarcodeScanner,
-    AppUpdate,
     CallNumber,
     EmailComposer,
     Geolocation,
@@ -67,7 +60,8 @@ import { AgmCoreModule } from '@agm/core';
     AppVersion,
     BackgroundGeolocation,
     FCM,
-    Spherical,
+    AppUpdate,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

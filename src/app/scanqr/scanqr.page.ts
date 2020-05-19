@@ -115,14 +115,6 @@ export class ScanqrPage implements OnInit {
       this.eventLong = response.longitude;
       this.eventRadius = response.radius;
     });
-
-    // if (true) {
-    //   this.sendAttendance();
-    // } else {
-    //   this.status = 'Warning';
-    //   this.message = 'Your attendance cannot be recorded because your not within the specified event radius';
-    //   this.presentAlert();
-    // }
   }
 
   sendAttendance() {
@@ -136,6 +128,7 @@ export class ScanqrPage implements OnInit {
     this.qrData.locality = this.locality;
     this.qrData.exactLocation = this.exactLocation;
     this.apiService.postQRCodeAttendance(this.qrData).subscribe((response) => {
+      alert(JSON.stringify(response));
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';
         this.message = 'Your attendance has been successfully recorded.';

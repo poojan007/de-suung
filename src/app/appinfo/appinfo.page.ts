@@ -15,10 +15,6 @@ export class AppinfoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.appVersion.getAppName());
-    // console.log(this.appVersion.getPackageName());
-    // console.log(this.appVersion.getVersionCode());
-    // console.log(this.appVersion.getVersionNumber());
     this.appVersion.getVersionNumber().then(version => {
       this.versionNo = version;
     });

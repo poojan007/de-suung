@@ -1,6 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="bt.org.desuung" version="1.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>De-Suung</name>
+    <!-- <platform name="android">
+        <preference name="CodePushDeploymentKey" value="tgZbnWL7WeeBPgIaW2brr8sa70NKCisqMcs9e" />
+    </platform>
+    <platform name="ios">
+        <preference name="CodePushDeploymentKey" value="tgZbnWL7WeeBPgIaW2brr8sa70NKCisqMcs9e" />
+    </platform> -->
+    <platform name="android">
+        <preference name="CodePushDeploymentKey" value="OmNZ3gYl20RZlbQA2Tf0Kot2d6GnM3NFktwTZp" />
+    </platform>
+    <platform name="ios">
+        <preference name="CodePushDeploymentKey" value="OmNZ3gYl20RZlbQA2Tf0Kot2d6GnM3NFktwTZp" />
+    </platform>
+    <name>Desuung</name>
     <description>An app for desuung</description>
     <author email="poojan.d.sharma@gmail.com" href="http://www.ngn.bt/">NGN Technologies Private Limited</author>
     <content src="index.html" />
