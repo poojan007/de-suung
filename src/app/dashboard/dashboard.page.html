@@ -86,7 +86,17 @@
           </a>
         </div>
       </ion-col>
-      <ion-col class="grid-layout" *ngIf="showScanQR">
+      <ion-col class="grid-layout">
+        <div class="ion-text-center">
+          <a class="anchor-custom" (click)="broadCastMessage()">
+            <div>
+              <ion-icon name="megaphone" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14 ion-text-wrap ion-text-center"> Broad Cast Message </ion-label>
+          </a>
+        </div>
+      </ion-col>
+      <!-- <ion-col class="grid-layout" *ngIf="showScanQR">
         <div class="ion-text-center">
           <a class="anchor-custom" (click)="presentConfirm()">
             <div>
@@ -95,7 +105,7 @@
             <ion-label class="text-14 ion-text-wrap ion-text-center"> Update Status </ion-label>
           </a>
         </div>
-      </ion-col>
+      </ion-col> -->
       <ion-col class="grid-layout" *ngIf="showScanQR">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/scanqr']">
@@ -109,16 +119,6 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col class="grid-layout">
-        <div class="ion-text-center">
-          <a class="anchor-custom" (click)="reportIncident()">
-            <div>
-              <ion-icon name="alert" class="icon-border"></ion-icon>
-            </div>
-            <ion-label class="text-14 ion-text-wrap ion-text-center"> Report Incident </ion-label>
-          </a>
-        </div>
-      </ion-col>
       <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/shop']">
@@ -139,8 +139,6 @@
           </a>
         </div>
       </ion-col>
-    </ion-row>
-    <ion-row>
       <ion-col class="grid-layout" *ngIf="showCreateEvent">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/createevent']">
@@ -151,6 +149,8 @@
           </a>
         </div>
       </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col class="grid-layout" *ngIf="showAttendance">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/coordinatorevents']">
@@ -161,6 +161,7 @@
           </a>
         </div>
       </ion-col>
+      <ion-col class="grid-layout"></ion-col>
       <ion-col class="grid-layout"></ion-col>
     </ion-row>
   </ion-grid>

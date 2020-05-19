@@ -18,6 +18,8 @@ export class IncidentAlertPage implements OnInit {
   eventDetail: string;
   msg: string;
   status: string;
+  showBroadCastMsgDiv = false;
+  locationList: any;
 
   constructor(
     private modalCtrl: ModalController,
@@ -34,6 +36,21 @@ export class IncidentAlertPage implements OnInit {
   ngOnInit() {
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
     this.data.userId = userData.userId;
+    this.data.roleId = userData.roleId;
+
+    if (userData.roleId === '1') {
+      this.showBroadCastMsgDiv = true;
+    }
+
+    this.getDropDownList('location', 'dzongkhags', 'NA', 'NA');
+  }
+
+  getDropDownList(requestType, tableName, paramId, colName) {
+    this.apiService.getDropDownList(tableName, paramId, colName).subscribe((response) => {
+      if (requestType === 'location') {
+        this.locationList = response;
+      }
+    });
   }
 
   reportIncidentAlert() {
@@ -47,7 +64,6 @@ export class IncidentAlertPage implements OnInit {
           this.alertData.title = 'Incident Alert';
           console.log(JSON.stringify(this.alertData));
           this.apiService.postIncidentAlert(this.alertData).subscribe((res) => {
-            console.log(res);
             // if (res.RESULT === 'SUCCESS') {
             // this.status = 'Success';
             // this.msg = 'Incident alert has been successfully broadcasted to all the nearby desuups';

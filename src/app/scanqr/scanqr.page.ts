@@ -135,7 +135,7 @@ export class ScanqrPage implements OnInit {
       } else if (response.RESULT === 'LOCATION_MISMATCH') {
         this.status = 'Location Mismatch';
         // tslint:disable-next-line: max-line-length
-        this.message = 'Your attendance cannot be recorded because your not within the specified event perimeter. Note: Your current location has been recorded.';
+        this.message = 'Your attendance cannot be recorded because you are not within the specified event perimeter. Note: Your current location has been recorded.';
       } else {
         this.status = 'Failure';
         this.message = 'Your attendance couldnot be recorded, please try again.';

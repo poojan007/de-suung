@@ -323,7 +323,7 @@ export class DashboardPage implements OnInit {
     await alert.present();
   }
 
-  async reportIncident() {
+  async broadCastMessage() {
     const modal = await this.modalCtrl.create({
       component: IncidentAlertPage,
       swipeToClose: true,

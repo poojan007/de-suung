@@ -142,9 +142,9 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-code-push": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-file-transfer": {},
       "cordova-plugin-zip": {},
-      "cordova-plugin-app-update": {}
+      "cordova-plugin-app-update": {},
+      "cordova-plugin-file-transfer": {}
     },
     "platforms": [
       "ios",
