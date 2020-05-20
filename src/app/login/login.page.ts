@@ -82,6 +82,7 @@ export class LoginPage implements OnInit {
         } else {
           this.authservice.login(this.data);
           localStorage.setItem('cid', this.cidNo.toString());
+          localStorage.setItem('userId', response.userId);
 
           if (this.data.isProfileUpdateNeeded === 'Y') {
             this.navCtrl.navigateForward('/updateprofile');

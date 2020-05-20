@@ -250,7 +250,8 @@ export class ApiService {
 
   broadCastMessage(item) {
     return this.http
-    .get<any>(this.basePath + 'broadCastMessage&message=' + item.message + '&location=' + item.location, this.httpOptions)
+    // tslint:disable-next-line: max-line-length
+    .get<any>(this.basePath + 'broadCastMessage&message=' + item.message + '&location=' + item.location + '&userId=' + item.userId, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

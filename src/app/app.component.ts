@@ -1,5 +1,4 @@
 import { Component, ViewChildren, NgZone } from '@angular/core';
-
 import { Platform, LoadingController, AlertController, NavController, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -9,6 +8,10 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { CodePush, SyncStatus } from '@ionic-native/code-push';
 import { Network } from '@ionic-native/network/ngx';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geomodel } from './model/geomodel';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +35,20 @@ export class AppComponent {
   private WatchDisconnect: Subscription;
   private networkFlag: boolean;
 
+  geoLatitude: number;
+  geoLongitude: number;
+  geoAltitude: number;
+  geoAccuracy: number;
+  geoAddress: string;
+
+  geoData: Geomodel;
+
+  // Geocoder configuration
+  geoencoderOptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 1
+  };
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -44,7 +61,10 @@ export class AppComponent {
     private navCtrl: NavController,
     private ngZone: NgZone,
     private toastCtrl: ToastController,
-    private network: Network
+    private network: Network,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder,
+    private apiService: ApiService
   ) {
     this.NetworkStatus = new BehaviorSubject(false);
     this.CheckNetworkStatus();
@@ -107,6 +127,7 @@ export class AppComponent {
     this.fcm.subscribeToTopic('desuung');
 
     this.fcm.getToken().then(token => {
+      console.log(token);
       this.authService.setItem('fcm_token', token);
     });
 
@@ -120,8 +141,10 @@ export class AppComponent {
         if (data.type === 'INCIDENT_ALERT') {
           this.navCtrl.navigateForward('/map');
           this.authService.setItem('latlng', data);
-        } else {
+        } else if (data.type === 'NEW_EVENT') {
           this.navCtrl.navigateForward('/upcomingevents');
+        } else if (data.type === 'BROADCAST_MESSAGE') {
+          this.presentAvailabilityConfirm();
         }
       } else {
         this.status = data.title;
@@ -129,11 +152,13 @@ export class AppComponent {
         if (data.type === 'INCIDENT_ALERT') {
           this.navigateUrl = '/map';
           this.authService.setItem('latlng', data);
-        } else {
+          this.presentConfirm();
+        } else if (data.type === 'NEW_EVENT') {
           this.navigateUrl = '/upcomingevents';
+          this.presentConfirm();
+        } else if (data.type === 'BROADCAST_MESSAGE') {
+          this.presentAvailabilityConfirm();
         }
-
-        this.presentConfirm();
       }
     });
 
@@ -179,6 +204,53 @@ export class AppComponent {
     this.NetworkStatus.next(IsOnline);
   }
 
+  updateStatus() {
+    this.getGeoLocation();
+  }
+
+  getGeoLocation() {
+    this.platform.ready().then(() => {
+      // if (this.platform.is('android')) {
+        this.geolocation.getCurrentPosition().then((position) => {
+          this.geoLatitude = position.coords.latitude;
+          this.geoLongitude = position.coords.longitude;
+          this.geoAltitude = position.coords.altitude;
+          this.getGeoencoder(position.coords.latitude, position.coords.longitude);
+        });
+      // }
+    });
+  }
+
+  // geocoder method to fetch address from coordinates passed as arguments
+  getGeoencoder(latitude, longitude) {
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+    .then((result) => {
+      const response = JSON.parse(JSON.stringify(result[0]));
+      this.geoData.userId = localStorage.getItem('userId');
+      this.geoData.latitude = response.latitude;
+      this.geoData.longitude = response.longitude;
+      this.geoData.altitude = this.geoAltitude;
+      this.geoData.dzongkhag = response.administrativeArea;
+      this.geoData.locality = response.locality;
+      this.geoData.exactLocation = response.thoroughfare;
+      this.geoData.availableStatus = 'AVAILABLE';
+
+      this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
+        if (res.RESULT === 'SUCCESS') {
+          this.status = 'Success';
+          this.message = 'Your status has been updated as AVAILABLE';
+        } else {
+          this.status = 'Failure';
+          this.message = 'Your status couldnot be updated, please try again';
+        }
+        this.presentAlert();
+      });
+    })
+    .catch((error: any) => {
+      alert('Error getting location' + JSON.stringify(error));
+    });
+  }
+
   showLoader() {
     this.loaderToShow = this.loadingCtrl.create({
       message: 'Please wait, checking for updates...'
@@ -213,6 +285,29 @@ export class AppComponent {
           text: 'Yes',
           handler: () => {
             this.navCtrl.navigateForward(this.navigateUrl);
+          }
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel Clicked');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async presentAvailabilityConfirm() {
+    const alert = await this.alertCtrl.create({
+      header: this.status.toUpperCase(),
+      message: this.message,
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.updateStatus();
           }
         },
         {

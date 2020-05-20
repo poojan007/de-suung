@@ -20,6 +20,7 @@ export class IncidentAlertPage implements OnInit {
   status: string;
   showBroadCastMsgDiv = false;
   locationList: any;
+  userId: string;
 
   message: string;
   location: any;
@@ -39,6 +40,7 @@ export class IncidentAlertPage implements OnInit {
   ngOnInit() {
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
     this.data.userId = userData.userId;
+    this.userId = userData.userId;
     this.data.roleId = userData.roleId;
 
     if (userData.roleId === '1') {
@@ -74,32 +76,37 @@ export class IncidentAlertPage implements OnInit {
             //   this.status = 'Failure';
             //   this.msg = 'Incident alert could not be broadcasted, please try again';
             // }
+            this.status = 'Success';
+            this.msg = 'Incident alert has been successfully broadcasted to all the nearby desuups';
+            this.presentAlert();
+            this.eventDetail = '';
           });
-          this.presentAlert();
-          this.eventDetail = '';
         });
     });
   }
 
   broadCastMessage() {
+    this.alertData.userId = this.userId;
     this.alertData.message = this.message;
     this.alertData.location = this.location.join(',');
     this.apiService.broadCastMessage(this.alertData).subscribe((res) => {
-      if (res.RESULT === 'SUCCESS') {
+      console.log(res);
+      // if (res.RESULT === 'SUCCESS') {
       this.status = 'Success';
       this.msg = 'Message has been successfully broadcasted to the selected desuups';
-      } else {
-        this.status = 'Failure';
-        this.msg = 'Message broadcast failed, please try again';
-      }
+      // } else {
+      //   this.status = 'Failure';
+      //   this.msg = 'Message broadcast failed, please try again';
+      // }
+
+      this.presentAlert();
     });
-    this.presentAlert();
   }
 
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       header: this.status,
-      message: this.message,
+      message: this.msg,
       buttons: ['OK']
     });
     await alert.present();
