@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { ActionSheetController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contactus',
@@ -11,7 +12,9 @@ export class ContactusPage implements OnInit {
 
   constructor(
     private callNumber: CallNumber,
-    private emailComposer: EmailComposer
+    private emailComposer: EmailComposer,
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -37,5 +40,32 @@ export class ContactusPage implements OnInit {
      };
      // Send a text message using default options
     this.emailComposer.open(email);
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

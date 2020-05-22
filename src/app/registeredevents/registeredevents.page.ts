@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiModel } from '../model/api-model';
 import { ApiService } from '../services/api.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, ActionSheetController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registeredevents',
@@ -21,7 +21,9 @@ export class RegisteredeventsPage implements OnInit {
     private apiService: ApiService,
     private authService: AuthenticationService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) {
     this.data = new ApiModel();
   }
@@ -79,5 +81,32 @@ export class RegisteredeventsPage implements OnInit {
       buttons: ['OK']
     });
       await alert.present();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

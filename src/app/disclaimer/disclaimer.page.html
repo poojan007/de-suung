@@ -7,27 +7,14 @@
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
+      <ion-button icon-only (click)="presentActionSheet()" color="primary">
+        <ion-icon name="apps"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-fab horizontal="end" vertical="top" slot="fixed" edge class="app-button-top">
-    <ion-fab-button class="app-button">
-      <ion-icon name="apps" class="app-button-icon"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list class="app-button-margin">
-      <ion-fab-button color="primary" [routerLink]="['/dashboard']">
-        <ion-icon name="home"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="primary" [routerLink]="['/settings']">
-        <ion-icon name="cog"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="primary" [routerLink]="['/logout']">
-        <ion-icon name="log-out"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
   <div class="form-header">Disclaimer</div>
   <ion-list>
     <ion-item lines="none">

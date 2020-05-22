@@ -3,6 +3,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
 import { ApiService } from '../services/api.service';
 import { LocationtrackerService } from '../services/locationtracker.service';
+import { ActionSheetController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +21,9 @@ export class SettingsPage implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private apiService: ApiService,
-    private locationService: LocationtrackerService
+    private locationService: LocationtrackerService,
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) {
     this.data = new ApiModel();
   }
@@ -45,5 +48,32 @@ export class SettingsPage implements OnInit {
     } else {
       this.locationService.startBackgroundGeolocation(this.data.userId);
     }
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

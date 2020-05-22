@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, ActionSheetController, NavController } from '@ionic/angular';
 import { EventDetailPage } from '../event-detail/event-detail.page';
 
 @Component({
@@ -20,7 +20,9 @@ export class UpcomingeventPage implements OnInit {
     private apiService: ApiService,
     private authService: AuthenticationService,
     private loadingCtrl: LoadingController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) {
     this.data = new ApiModel();
   }
@@ -79,5 +81,32 @@ export class UpcomingeventPage implements OnInit {
         });
       });
       return await modal.present();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

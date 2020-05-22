@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiModel } from '../model/api-model';
 import { ApiService } from '../services/api.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ActionSheetController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contributions',
@@ -18,7 +18,9 @@ export class ContributionsPage implements OnInit {
   constructor(
     private apiService: ApiService,
     private authService: AuthenticationService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) {
     this.data = new ApiModel();
   }
@@ -49,5 +51,32 @@ export class ContributionsPage implements OnInit {
     setTimeout(() => {
       this.loadingCtrl.dismiss();
     }, 1000);
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

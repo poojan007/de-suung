@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, Platform, AlertController } from '@ionic/angular';
+import { ModalController, Platform, AlertController, ActionSheetController, NavController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
 import { Geomodel } from '../model/geomodel';
@@ -31,7 +31,9 @@ export class IncidentAlertPage implements OnInit {
     private platform: Platform,
     private geolocation: Geolocation,
     private apiService: ApiService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) {
     this.data = new ApiModel();
     this.alertData = new Geomodel();
@@ -69,13 +71,6 @@ export class IncidentAlertPage implements OnInit {
           this.alertData.title = 'Incident Alert';
           console.log(JSON.stringify(this.alertData));
           this.apiService.postIncidentAlert(this.alertData).subscribe((res) => {
-            // if (res.RESULT === 'SUCCESS') {
-            // this.status = 'Success';
-            // this.msg = 'Incident alert has been successfully broadcasted to all the nearby desuups';
-            // } else {
-            //   this.status = 'Failure';
-            //   this.msg = 'Incident alert could not be broadcasted, please try again';
-            // }
             this.status = 'Success';
             this.msg = 'Incident alert has been successfully broadcasted to all the nearby desuups';
             this.presentAlert();
@@ -90,15 +85,8 @@ export class IncidentAlertPage implements OnInit {
     this.alertData.message = this.message;
     this.alertData.location = this.location.join(',');
     this.apiService.broadCastMessage(this.alertData).subscribe((res) => {
-      console.log(res);
-      // if (res.RESULT === 'SUCCESS') {
       this.status = 'Success';
       this.msg = 'Message has been successfully broadcasted to the selected desuups';
-      // } else {
-      //   this.status = 'Failure';
-      //   this.msg = 'Message broadcast failed, please try again';
-      // }
-
       this.presentAlert();
     });
   }
@@ -120,5 +108,32 @@ export class IncidentAlertPage implements OnInit {
 
   dismissModal() {
     this.dismiss();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

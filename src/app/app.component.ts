@@ -210,14 +210,12 @@ export class AppComponent {
 
   getGeoLocation() {
     this.platform.ready().then(() => {
-      // if (this.platform.is('android')) {
         this.geolocation.getCurrentPosition().then((position) => {
           this.geoLatitude = position.coords.latitude;
           this.geoLongitude = position.coords.longitude;
           this.geoAltitude = position.coords.altitude;
           this.getGeoencoder(position.coords.latitude, position.coords.longitude);
         });
-      // }
     });
   }
 
@@ -247,7 +245,7 @@ export class AppComponent {
       });
     })
     .catch((error: any) => {
-      alert('Error getting location' + JSON.stringify(error));
+      this.presentToast('Error getting location' + JSON.stringify(error));
     });
   }
 
@@ -301,7 +299,7 @@ export class AppComponent {
 
   async presentAvailabilityConfirm() {
     const alert = await this.alertCtrl.create({
-      header: this.status.toUpperCase(),
+      header: this.status,
       message: this.message,
       buttons: [
         {

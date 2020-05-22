@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, ActionSheetController, NavController } from '@ionic/angular';
 import { Qrmodel } from '../model/qrmodel';
 
 @Component({
@@ -21,7 +21,9 @@ export class GenerateQrPage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) {
     this.QRCode = new Qrmodel();
   }
@@ -48,5 +50,32 @@ export class GenerateQrPage implements OnInit {
 
   dismissModal() {
     this.dismiss();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

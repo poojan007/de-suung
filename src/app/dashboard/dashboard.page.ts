@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, NavController, Platform, AlertController, ModalController } from '@ionic/angular';
+import { LoadingController, NavController, Platform, AlertController, ModalController, ActionSheetController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -124,7 +124,8 @@ export class DashboardPage implements OnInit {
     private geolocation: Geolocation,
     private barcodeScanner: BarcodeScanner,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private actionSheetController: ActionSheetController
   ) {
     this.data = new ApiModel();
     this.geoData = new Geomodel();
@@ -332,5 +333,32 @@ export class DashboardPage implements OnInit {
     modal.onDidDismiss().then((dataReturned) => {
     });
     return await modal.present();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

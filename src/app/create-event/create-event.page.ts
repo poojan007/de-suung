@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiService } from '../services/api.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, AlertController, ModalController } from '@ionic/angular';
+import { LoadingController, AlertController, ModalController, ActionSheetController, NavController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { CreateEventModel } from '../model/create-event-model';
 import { DatePipe } from '@angular/common';
@@ -65,7 +65,9 @@ export class CreateEventPage implements OnInit {
     private loadingCtrl: LoadingController,
     private datePicker: DatePicker,
     private datePipe: DatePipe,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) {
     this.data = new ApiModel();
     this.createEventModel = new CreateEventModel();
@@ -203,5 +205,32 @@ export class CreateEventPage implements OnInit {
   confirmBatch() {
     this.inviteBatchComponent.confirm();
     this.inviteBatchComponent.close();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

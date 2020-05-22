@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-changepin',
@@ -18,7 +18,8 @@ export class ChangepinPage implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private navCtrl: NavController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private actionSheetController: ActionSheetController
   ) { }
 
   ngOnInit() {
@@ -49,6 +50,33 @@ export class ChangepinPage implements OnInit {
     this.authService.logout();
     this.navCtrl.navigateForward('');
     this.hideLoader();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
 }

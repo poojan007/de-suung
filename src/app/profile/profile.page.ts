@@ -127,6 +127,12 @@ export class ProfilePage implements OnInit {
           this.navCtrl.navigateForward('/updateprofile');
         }
       }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
         text: 'Close',
         icon: 'close',
         role: 'cancel',
