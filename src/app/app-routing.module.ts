@@ -125,6 +125,11 @@ const routes: Routes = [
     path: 'disclaimer',
     loadChildren: () => import('./disclaimer/disclaimer.module').then( m => m.DisclaimerPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'listen',
+    loadChildren: () => import('./listen/listen.module').then( m => m.ListenPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

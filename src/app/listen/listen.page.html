@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button icon-only (click)="presentActionSheet()" color="primary">
+        <ion-icon name="apps"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="form-header">Listen (Click on the item to play)</div>
+  <ion-list>
+    <ion-item button *ngFor="let track of playlist" (click)="start(track)">
+      <ion-label [color]="track === activeTrack ? 'primary':'dark'" class="ion-text-wrap">
+        {{ track.name }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer *ngIf="activeTrack">
+  <ion-toolbar color="dark">
+    <ion-row>
+      <ion-col size="12" class="ion-text-center ion-text-wrap">
+        <b>{{ activeTrack.name }}</b>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-range #range [(ngModel)]="progress" max="100" color="success" (touchend)="seek()" (mouseup)="seek()"></ion-range>
+      </ion-col>
+
+      <div class="ion-text-center">
+        <ion-col size="4" (click)='prev()'>
+          <img button src="../../assets/player-icons/skip-backward.png" style="width: 14%;">
+        </ion-col>
+        <ion-col size="4" *ngIf="!isPlaying" (click)='togglePlayer(false)'>
+          <img button src="../../assets/player-icons/play.png" style="width: 14%;">
+        </ion-col>
+        <ion-col size="4" *ngIf="isPlaying" (click)='togglePlayer(true)'>
+          <img button src="../../assets/player-icons/pause.png" style="width: 14%;">
+        </ion-col>
+        <ion-col size="4" (click)='next()'>
+          <img button src="../../assets/player-icons/skip-forward.png" style="width: 14%;">
+        </ion-col>
+      </div>
+
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
