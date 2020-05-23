@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Howl } from 'howler';
-import { IonRange } from '@ionic/angular';
+import { IonRange, ActionSheetController, NavController } from '@ionic/angular';
 
 export interface Track {
   name: string;
@@ -32,7 +32,10 @@ export class ListenPage implements OnInit {
 
   @ViewChild('range', { static: false }) range: IonRange;
 
-  constructor() { }
+  constructor(
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {
   }
@@ -97,4 +100,30 @@ export class ListenPage implements OnInit {
     }, 1000);
   }
 
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Settings',
+        icon: 'cog',
+        handler: () => {
+          this.navCtrl.navigateForward('settings');
+        }
+      }, {
+        text: 'Logout',
+        icon: 'log-out',
+        handler: () => {
+          this.navCtrl.navigateForward('/logout');
+        }
+      }, {
+        text: 'Close',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
 }

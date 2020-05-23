@@ -20,7 +20,7 @@ export class LocationtrackerService {
   lng: number;
   bearing: number;
   speed: number;
-  intervalTime = 180000;
+  intervalTime = 18000;
 
   config: BackgroundGeolocationConfig = {
     stationaryRadius: 5,
@@ -90,10 +90,8 @@ export class LocationtrackerService {
       this.geoData.exactLocation = response.thoroughfare;
       this.geoData.availableStatus = 'AVAILABLE';
 
-      // alert('Request Data: ' + JSON.stringify(this.geoData));
       this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
-        // alert('Response Data: ' + JSON.stringify(res));
-        this.presentToast();
+        // this.presentToast();
       });
     })
     .catch((error: any) => {
