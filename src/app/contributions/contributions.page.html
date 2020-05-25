@@ -18,7 +18,7 @@
   <div class="form-header">My Contributions</div>
   <div *ngIf="dataList?.length != 0">
     <ion-list *ngFor="let data of dataList">
-      <ion-card *ngIf="data.title !== null">
+      <ion-card>
         <ion-card-header style="--background: #ef5e5e;" text-wrap>
           <ion-card-subtitle style="--color: white;font-size: 20px;">{{data.title}}</ion-card-subtitle>
           <ion-card-title style="font-size: 12px; --color: white;">{{data.startDate}} - {{data.endDate}}</ion-card-title>

@@ -214,6 +214,7 @@ export class AppComponent {
           this.geoLatitude = position.coords.latitude;
           this.geoLongitude = position.coords.longitude;
           this.geoAltitude = position.coords.altitude;
+          alert(JSON.stringify(position));
           this.getGeoencoder(position.coords.latitude, position.coords.longitude);
         });
     });
