@@ -20,15 +20,25 @@ export class LocationtrackerService {
   lng: number;
   bearing: number;
   speed: number;
-  intervalTime = 18000;
+  intervalTime = 20000;
 
   config: BackgroundGeolocationConfig = {
-    stationaryRadius: 5,
-    distanceFilter: 5,
+    stationaryRadius: 20,
+    distanceFilter: 30,
     notificationTitle: 'De-Suung App Background Tracking',
     notificationText: 'ENABLED',
     debug: false,
-    // interval: 10000,
+    desiredAccuracy: 10,
+    stopOnTerminate: false,
+    interval: 300000,
+    fastestInterval: 300000,
+    activitiesInterval: 300000,
+    startForeground: true,
+    stopOnStillActivity: true,
+    activityType: 'AutomotiveNavigation',
+    saveBatteryOnBackground: true,
+    maxLocations: 10,
+    // interval: 2000,
     // fastestInterval: 5000,
     // activitiesInterval: 10000
   };
@@ -90,12 +100,14 @@ export class LocationtrackerService {
       this.geoData.exactLocation = response.thoroughfare;
       this.geoData.availableStatus = 'AVAILABLE';
 
+      console.log(JSON.stringify(this.geoData));
       this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
+        console.log(JSON.stringify(res));
         // this.presentToast();
       });
     })
     .catch((error: any) => {
-      alert('Error getting location' + JSON.stringify(error));
+      console.log('Error getting location' + JSON.stringify(error));
     });
   }
 
@@ -103,6 +115,7 @@ export class LocationtrackerService {
     // If you wish to turn OFF background-tracking, call the #stop method.
     this.backgroundGeolocation.stop();
     this.backgroundGeolocation.finish();
+    this.backgroundGeolocation.removeAllListeners();
     this.trackState.next(false);
   }
 

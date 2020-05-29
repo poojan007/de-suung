@@ -5,6 +5,8 @@ import { ApiModel } from '../model/api-model';
 import { Geomodel } from '../model/geomodel';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ApiService } from '../services/api.service';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-incident-alert',
@@ -25,6 +27,9 @@ export class IncidentAlertPage implements OnInit {
   message: string;
   location: any;
 
+  matches: string[];
+  isRecording = false;
+
   constructor(
     private modalCtrl: ModalController,
     private authService: AuthenticationService,
@@ -33,7 +38,9 @@ export class IncidentAlertPage implements OnInit {
     private apiService: ApiService,
     private alertCtrl: AlertController,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private speechRecognition: SpeechRecognition,
+    private cd: ChangeDetectorRef
   ) {
     this.data = new ApiModel();
     this.alertData = new Geomodel();
@@ -71,11 +78,11 @@ export class IncidentAlertPage implements OnInit {
           this.alertData.title = 'Incident Alert';
           console.log(JSON.stringify(this.alertData));
           this.apiService.postIncidentAlert(this.alertData).subscribe((res) => {
-            this.status = 'Success';
-            this.msg = 'Incident alert has been successfully broadcasted to all the nearby desuups';
-            this.presentAlert();
-            this.eventDetail = '';
           });
+          this.status = 'Success';
+          this.msg = 'Incident alert has been successfully broadcasted to all the nearby desuups';
+          this.presentAlert();
+          this.eventDetail = '';
         });
     });
   }
@@ -135,5 +142,46 @@ export class IncidentAlertPage implements OnInit {
       }]
     });
     await actionSheet.present();
+  }
+
+  isIOS() {
+    return this.platform.is('ios');
+  }
+
+  getPermission() {
+    this.speechRecognition.hasPermission()
+    .then((hasPermission: boolean) => {
+      if (!hasPermission) {
+        this.speechRecognition.requestPermission();
+      }
+    });
+  }
+
+  startListening(requestType) {
+    this.getPermission();
+
+    const options = {
+      language: 'en-US'
+    };
+
+    this.speechRecognition.startListening(options).subscribe(matches => {
+      this.matches = matches;
+
+      if (requestType === 'INCIDENT_ALERT') {
+        this.eventDetail = matches[0];
+      } else {
+        this.message = matches[0];
+      }
+      this.cd.detectChanges();
+    });
+    this.isRecording = true;
+  }
+
+  stopListening() {
+    if (this.platform.is('ios')) {
+      this.speechRecognition.stopListening().then(() => {
+        this.isRecording = false;
+      });
+    }
   }
 }

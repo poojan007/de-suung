@@ -18,6 +18,16 @@
 
 <ion-content>
   <div class="form-header">Report Incident</div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button color="primary" (click)="startListening('INCIDENT_ALERT')">Start Speaking</ion-button>
+      </ion-col>
+      <ion-col size="6" *ngIf="isIOS()">
+        <ion-button color="primary" (click)="stopListening()">Stop Recording</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <form #form="ngForm" (ngSubmit)="reportIncidentAlert();" class="form-margin">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
@@ -40,6 +50,16 @@
 
   <div *ngIf="showBroadCastMsgDiv">
     <div class="form-header">Broad Cast Message</div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button color="primary" (click)="startListening('BROADCAST_MESSAGE')">Start Speaking</ion-button>
+        </ion-col>
+        <ion-col size="6" *ngIf="isIOS()">
+          <ion-button color="primary" (click)="stopListening()">Stop Recording</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <form #form1="ngForm" (ngSubmit)="broadCastMessage();" class="form-margin">
       <ion-grid>
         <ion-row color="primary" justify-content-center>

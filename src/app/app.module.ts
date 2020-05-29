@@ -28,6 +28,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { IncidentAlertPageModule } from './incident-alert/incident-alert.module';
 import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -62,6 +63,7 @@ import { Network } from '@ionic-native/network/ngx';
     FCM,
     AppUpdate,
     Network,
+    SpeechRecognition,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

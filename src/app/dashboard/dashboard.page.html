@@ -55,7 +55,7 @@
           </a>
         </div>
       </ion-col>
-      <ion-col class="grid-layout">
+      <!-- <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/contributions']">
             <div>
@@ -64,9 +64,7 @@
             <ion-label class="text-14 ion-text-wrap ion-text-center"> My Service </ion-label>
           </a>
         </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
+      </ion-col> -->
       <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/profile']">
@@ -77,6 +75,8 @@
           </a>
         </div>
       </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a class="anchor-custom" (click)="broadCastMessage()">
@@ -100,7 +100,6 @@
       <ion-col class="grid-layout" *ngIf="showScanQR">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/scanqr']">
-          <!-- <a class="anchor-custom" (click)="scanQRCode()"> -->
             <div>
               <ion-icon name="barcode" class="icon-border"></ion-icon>
             </div>
@@ -108,8 +107,6 @@
           </a>
         </div>
       </ion-col>
-    </ion-row>
-    <ion-row>
       <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/shop']">
@@ -120,6 +117,8 @@
           </a>
         </div>
       </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/entertainment']">
@@ -140,9 +139,6 @@
           </a>
         </div>
       </ion-col>
-      <ion-col class="grid-layout" *ngIf="!showCreateEvent"></ion-col>
-    </ion-row>
-    <ion-row>
       <ion-col class="grid-layout" *ngIf="showAttendance">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/coordinatorevents']">
@@ -153,8 +149,6 @@
           </a>
         </div>
       </ion-col>
-      <ion-col class="grid-layout"></ion-col>
-      <ion-col class="grid-layout"></ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

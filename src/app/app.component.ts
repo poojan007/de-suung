@@ -8,7 +8,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { CodePush, SyncStatus } from '@ionic-native/code-push';
 import { Network } from '@ionic-native/network/ngx';
-import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Geomodel } from './model/geomodel';
 import { ApiService } from './services/api.service';
@@ -204,9 +204,9 @@ export class AppComponent {
     this.NetworkStatus.next(IsOnline);
   }
 
-  updateStatus() {
-    this.getGeoLocation();
-  }
+  // updateStatus() {
+  //   this.getGeoLocation();
+  // }
 
   getGeoLocation() {
     this.platform.ready().then(() => {
@@ -214,7 +214,6 @@ export class AppComponent {
           this.geoLatitude = position.coords.latitude;
           this.geoLongitude = position.coords.longitude;
           this.geoAltitude = position.coords.altitude;
-          alert(JSON.stringify(position));
           this.getGeoencoder(position.coords.latitude, position.coords.longitude);
         });
     });
@@ -233,6 +232,8 @@ export class AppComponent {
       this.geoData.locality = response.locality;
       this.geoData.exactLocation = response.thoroughfare;
       this.geoData.availableStatus = 'AVAILABLE';
+
+      alert(JSON.stringify(this.geoData));
 
       this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
         if (res.RESULT === 'SUCCESS') {
@@ -279,6 +280,7 @@ export class AppComponent {
     const alert = await this.alertCtrl.create({
       header: this.status.toUpperCase(),
       message: this.message,
+      backdropDismiss: false,
       buttons: [
         {
           text: 'Yes',
@@ -302,11 +304,12 @@ export class AppComponent {
     const alert = await this.alertCtrl.create({
       header: this.status,
       message: this.message,
+      backdropDismiss: false,
       buttons: [
         {
           text: 'Yes',
           handler: () => {
-            this.updateStatus();
+            this.getGeoLocation();
           }
         },
         {
