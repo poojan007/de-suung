@@ -126,4 +126,8 @@ export class ListenPage implements OnInit {
     });
     await actionSheet.present();
   }
+
+  ionViewWillLeave() {
+    this.togglePlayer(true);
+  }
 }

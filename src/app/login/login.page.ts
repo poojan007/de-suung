@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiModel } from '../model/api-model';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiService } from '../services/api.service';
-import { NavController, AlertController, ToastController } from '@ionic/angular';
+import { NavController, AlertController, ToastController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,8 @@ export class LoginPage implements OnInit {
     private apiService: ApiService,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private platform: Platform
   ) {
     this.data = new ApiModel();
     this.password = '';
@@ -76,6 +77,7 @@ export class LoginPage implements OnInit {
         if (twoFactorAuthentication === null) {
 
           const otp = Math.floor(Math.random() * 90000) + 10000;
+          console.log('otp: ' + otp);
           this.apiService.sendOTP(this.data.mobile, otp).subscribe((res) => {
             this.presentPrompt(otp);
           });
@@ -176,5 +178,25 @@ export class LoginPage implements OnInit {
     });
     toast.onDidDismiss();
     toast.present();
+  }
+
+  async presentExitConfirmation() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmation',
+      message: 'Do you want to exit the app?',
+      buttons: [
+        {
+          text: 'YES',
+          handler: () => {
+            this.navCtrl.navigateForward('/logout');
+          }
+        },
+        {
+          text: 'NO',
+          role: 'cancel'
+        }
+      ]
+    });
+    await alert.present();
   }
 }

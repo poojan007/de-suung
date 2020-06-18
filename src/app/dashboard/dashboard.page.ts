@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, NavController, Platform, AlertController, ModalController, ActionSheetController } from '@ionic/angular';
+// tslint:disable-next-line: max-line-length
+import { LoadingController, NavController, Platform, AlertController, ModalController, ActionSheetController, IonRouterOutlet } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Geomodel } from '../model/geomodel';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Qrmodel } from '../model/qrmodel';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { IncidentAlertPage } from '../incident-alert/incident-alert.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -113,6 +115,7 @@ export class DashboardPage implements OnInit {
   barcodeScannerOptions: BarcodeScannerOptions;
   scannerState = new BehaviorSubject(false);
   availableState = new BehaviorSubject(false);
+  backButtonSubscription: Subscription;
 
   constructor(
     private authService: AuthenticationService,
@@ -125,7 +128,8 @@ export class DashboardPage implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private router: Router
   ) {
     this.data = new ApiModel();
     this.geoData = new Geomodel();
@@ -134,6 +138,10 @@ export class DashboardPage implements OnInit {
       showTorchButton: true,
       showFlipCameraButton: true
     };
+
+    // this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(0, () => {
+    //     this.presentExitConfirmation();
+    // });
   }
 
   ngOnInit() {
@@ -360,5 +368,26 @@ export class DashboardPage implements OnInit {
       }]
     });
     await actionSheet.present();
+  }
+
+  async presentExitConfirmation() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmation',
+      message: 'Do you really want to exit the app?',
+      buttons: [
+        {
+          text: 'YES',
+          handler: () => {
+            this.backButtonSubscription.unsubscribe();
+            navigator['app'].exitApp();
+          }
+        },
+        {
+          text: 'NO',
+          role: 'cancel'
+        }
+      ]
+    });
+    await alert.present();
   }
 }

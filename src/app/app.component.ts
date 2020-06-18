@@ -6,7 +6,6 @@ import { AuthenticationService } from './services/authentication.service';
 import { LocationtrackerService } from './services/locationtracker.service';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { CodePush, SyncStatus } from '@ionic-native/code-push';
 import { Network } from '@ionic-native/network/ngx';
 import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -59,7 +58,6 @@ export class AppComponent {
     private locationService: LocationtrackerService,
     private fcm: FCM,
     private navCtrl: NavController,
-    private ngZone: NgZone,
     private toastCtrl: ToastController,
     private network: Network,
     private geolocation: Geolocation,
@@ -86,32 +84,32 @@ export class AppComponent {
   }
 
   setupApp() {
-    this.platform.ready().then(() => {
-      CodePush.sync({}, (progress) => {
-        this.ngZone.run(() => {
-          this.receivedBytes = progress.receivedBytes;
-          this.totalBytes = progress.totalBytes;
-        });
-      }).subscribe((status) => {
-        if (status === SyncStatus.CHECKING_FOR_UPDATE) {
-          this.progressStatus = 'Checking for update';
-        } else if (status === SyncStatus.DOWNLOADING_PACKAGE) {
-          this.progressStatus = 'Downloading package';
-        } else if (status === SyncStatus.IN_PROGRESS) {
-          this.progressStatus = 'In progress';
-        } else if (status === SyncStatus.INSTALLING_UPDATE) {
-          this.progressStatus = 'Installing updates';
-        } else if (status === SyncStatus.UP_TO_DATE) {
-          this.progressStatus = 'App is up to date';
-        } else if (status === SyncStatus.UPDATE_INSTALLED) {
-          this.progressStatus = 'Updates installed';
-        } else if (status === SyncStatus.ERROR) {
-          this.progressStatus = 'Error occurred, please try restarting your app';
-        }
+    // this.platform.ready().then(() => {
+    //   CodePush.sync({}, (progress) => {
+    //     this.ngZone.run(() => {
+    //       this.receivedBytes = progress.receivedBytes;
+    //       this.totalBytes = progress.totalBytes;
+    //     });
+    //   }).subscribe((status) => {
+    //     if (status === SyncStatus.CHECKING_FOR_UPDATE) {
+    //       this.progressStatus = 'Checking for update';
+    //     } else if (status === SyncStatus.DOWNLOADING_PACKAGE) {
+    //       this.progressStatus = 'Downloading package';
+    //     } else if (status === SyncStatus.IN_PROGRESS) {
+    //       this.progressStatus = 'In progress';
+    //     } else if (status === SyncStatus.INSTALLING_UPDATE) {
+    //       this.progressStatus = 'Installing updates';
+    //     } else if (status === SyncStatus.UP_TO_DATE) {
+    //       this.progressStatus = 'App is up to date';
+    //     } else if (status === SyncStatus.UPDATE_INSTALLED) {
+    //       this.progressStatus = 'Updates installed';
+    //     } else if (status === SyncStatus.ERROR) {
+    //       this.progressStatus = 'Error occurred, please try restarting your app';
+    //     }
 
-        this.presentToast(this.progressStatus);
-      });
-    });
+    //     this.presentToast(this.progressStatus);
+    //   });
+    // });
 
     // Code to enable background location tracking
     const trackMeFlag = this.locationService.getItem('track_me');
