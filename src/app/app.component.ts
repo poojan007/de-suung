@@ -11,6 +11,8 @@ import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geoc
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Geomodel } from './model/geomodel';
 import { ApiService } from './services/api.service';
+import { APP_BASE_HREF } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -166,7 +168,7 @@ export class AppComponent {
   CheckNetworkStatus() {
     if ( this.platform.is('cordova') ) {
         if ( this.network.type === undefined || this.network.type === null || this.network.type === 'unknown') {
-            this.UpdateNetworkStatus(false);
+            this.UpdateNetworkStatus(true);
         } else {
             this.UpdateNetworkStatus(true);
             this.networkFlag = true;

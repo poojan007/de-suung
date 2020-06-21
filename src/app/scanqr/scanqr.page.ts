@@ -56,7 +56,7 @@ export class ScanqrPage implements OnInit {
     this.preventBack = this.platform.backButton.subscribeWithPriority(9999, () => {});
     this.barcodeScanner.scan().then((barcodeData) => {
         if (barcodeData.cancelled) {
-            return;
+            this.navCtrl.navigateForward('/dashboard');
         }
         this.navCtrl.pop();
         this.scannedData = barcodeData;

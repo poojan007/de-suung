@@ -60,6 +60,7 @@ export class LocationtrackerService {
   }
 
   startBackgroundGeolocation(userId) {
+    this.checkIfEnabled();
     this.backgroundGeolocation.configure(this.config).then(() => {
       this.backgroundGeolocation
         .on(BackgroundGeolocationEvents.location)
@@ -70,6 +71,11 @@ export class LocationtrackerService {
     // start recording location
     this.backgroundGeolocation.start();
     this.trackState.next(true);
+  }
+
+  checkIfEnabled() {
+    const isLocationEnabled = this.backgroundGeolocation.checkStatus();
+    console.log('Location Status ===> ' + JSON.stringify(isLocationEnabled));
   }
 
   sendGPS(location, userId) {

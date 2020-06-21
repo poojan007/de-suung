@@ -51,7 +51,8 @@
         <engine name="android" spec="8.0.0" />
     </platform>
     <platform name="ios">
-        <preference name="CodePushDeploymentKey" value="OmNZ3gYl20RZlbQA2Tf0Kot2d6GnM3NFktwTZp" />
+        <preference name="WKSuspendInBackground" value="false" />
+        <preference name="ScrollEnabled" value="true" />
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
             <string>To Scan QR Code for attendance for certain events</string>
         </edit-config>
@@ -59,7 +60,7 @@
             <string>We use your location for getting the current location of the person for prompt deployment to certain assignment during times of disasters.</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationAlwaysUsageDescription">
-            <string>We track the users location, unless turned off explicitly. Tracking of the users location is basically to alert them if any disaster is report in their locality for prompt deployment. </string>
+            <string>We track the users location, unless turned off explicitly. Tracking of the users location is basically to alert them if any disaster is reported in their locality for prompt deployment. </string>
         </edit-config>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
@@ -118,7 +119,5 @@
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <engine name="ios" spec="latest" />
 </widget>
