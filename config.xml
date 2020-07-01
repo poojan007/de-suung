@@ -22,7 +22,6 @@
     <preference name="orientation" value="portrait" />
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyA2OR9NCts43D7CLtAxovY1zonifMtMVis" />
     <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyA2OR9NCts43D7CLtAxovY1zonifMtMVis" />
-    <!-- <preference name="UseLegacySwiftLanguageVersion" value="true" /> -->
     <preference name="WKWebViewOnly" value="true" />
     <platform name="android">
         <preference name="CodePushDeploymentKey" value="OmNZ3gYl20RZlbQA2Tf0Kot2d6GnM3NFktwTZp" />
