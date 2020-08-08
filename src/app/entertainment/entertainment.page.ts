@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, NavController, PopoverController } from '@ionic/angular';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-entertainment',
@@ -10,10 +11,21 @@ export class EntertainmentPage implements OnInit {
 
   constructor(
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

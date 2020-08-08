@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UpcomingeventPageRoutingModule } from './upcomingevent-routing.module';
 
 import { UpcomingeventPage } from './upcomingevent.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

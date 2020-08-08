@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="primary"></ion-back-button>
+      <ion-back-button color="primary" icon="arrow-back"></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center" style="font-weight: bold;">
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="presentActionSheet()" color="primary">
-        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      <ion-button (click)="presentPopover($event)" color="primary">
+        <ion-icon slot="icon-only" ios="ios-more" md="md-more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -113,44 +113,44 @@
   </div> -->
   <div class="col-12 div-container">
     <div class="margin-top-bottom text-header">
-      <ion-icon name="person-sharp"></ion-icon> Personal Information
+      <ion-icon ios="ios-person" md="md-person"></ion-icon> Personal Information
     </div>
     <div class="margin-top-bottom text-label">
-      <ion-icon name="card-sharp"></ion-icon><label class="margin-left-5">{{cidNo}}</label>
+      <ion-icon ios="ios-card" md="md-person"></ion-icon><label class="margin-left-5">{{cidNo}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <ion-icon name="mail-sharp"></ion-icon><label class="margin-left-5">{{email}}</label>
+      <ion-icon ios="ios-mail" md="md-mail"></ion-icon><label class="margin-left-5">{{email}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label><ion-icon name="call-sharp"></ion-icon></label><label class="margin-left-5">{{mobileNo}}</label>
+      <label><ion-icon ios="ios-call" md="md-call"></ion-icon></label><label class="margin-left-5">{{mobileNo}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label><ion-icon name="calendar-sharp"></ion-icon></label><label class="margin-left-5">{{dob}}</label>
+      <label><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon></label><label class="margin-left-5">{{dob}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label><ion-icon name="male-female-sharp"></ion-icon></label><label class="margin-left-5">{{gender}}</label>
+      <label><ion-icon ios="ios-female" md="md-female"></ion-icon></label><label class="margin-left-5">{{gender}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label><ion-icon name="water-sharp"></ion-icon></label><label class="margin-left-5">{{bloodGroup}}</label>
+      <label><ion-icon ios="ios-water" md="md-water"></ion-icon></label><label class="margin-left-5">{{bloodGroup}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label><ion-icon name="people-sharp"></ion-icon></label><label class="margin-left-5">{{empType}}</label>
+      <label><ion-icon ios="ios-people" md="md-people"></ion-icon></label><label class="margin-left-5">{{empType}}</label>
     </div>
     <div class="margin-top-bottom text-label">
-      <label><ion-icon name="location-sharp"></ion-icon></label><label class="margin-left-5 ion-text-wrap">{{dzongkhag}}, {{gewog}}, {{village}}</label>
+      <label><ion-icon ios="ios-compass" md="md-compass"></ion-icon></label><label class="margin-left-5 ion-text-wrap">{{dzongkhag}}, {{gewog}}, {{village}}</label>
     </div>
   </div> 
   <div class="col-12 div-container">
     <div class="margin-top-bottom text-header">
-      <ion-icon name="home-sharp"></ion-icon> Present Address Information
+      <ion-icon ios="ios-home" md="md-home"></ion-icon> Present Address Information
     </div>
     <div class="margin-top-bottom text-label">
-      <ion-icon name="location-sharp"></ion-icon><label>{{location}}</label>
+      <ion-icon ios="ios-location" md="md-location"></ion-icon><label>{{location}}</label>
     </div>
   </div>  
   <div class="col-12 div-container" *ngIf="empType === 'Employed'">
     <div class="margin-top-bottom text-header">
-      <ion-icon name="ribbon-sharp"></ion-icon> Job Details
+      <ion-icon ios="ios-ribbon" md="md-ribbon"></ion-icon> Job Details
     </div>
     <div class="margin-top-bottom text-label">
       <label>{{agencyType}}</label>
@@ -167,7 +167,7 @@
   </div>
   <div class="col-12 div-container" *ngIf="empType === 'Employed'">
     <div class="margin-top-bottom text-header">
-      <ion-icon name="ribbon-sharp"></ion-icon> Interests & Skills
+      <ion-icon ios="ios-ribbon" md="md-ribbon"></ion-icon> Interests & Skills
     </div>
     <div class="margin-top-bottom text-label">
       <label><b>Interests:</b></label>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RegisteredeventsPageRoutingModule } from './registeredevents-routing.module';
 
 import { RegisteredeventsPage } from './registeredevents.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

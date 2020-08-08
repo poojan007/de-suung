@@ -2,15 +2,15 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button icon-only color="primary" (click)="dismissModal()">
-        <ion-icon name="arrow-back"></ion-icon>
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title class="ion-text-center" style="font-weight: bold;">
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button icon-only (click)="presentActionSheet()" color="primary">
-        <ion-icon name="apps"></ion-icon>
+      <ion-button icon-only (click)="presentPopover($event)" color="primary">
+        <ion-icon ios="ios-more" md="md-more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -40,7 +40,7 @@
           </div>
           <div padding>
             <ion-button size="large" class="login-button" type="submit" [disabled]="form.invalid" expand="block">
-              <ion-icon name="alarm-sharp"></ion-icon>  Send
+              <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>  Send
             </ion-button>
           </div>
         </ion-col>
@@ -81,7 +81,7 @@
             </div>
             <div padding>
               <ion-button size="large" class="login-button" type="submit" [disabled]="form1.invalid" expand="block">
-                <ion-icon name="megaphone-sharp"></ion-icon>  Send
+                <ion-icon ios="ios-megaphone" md="md-megaphne"></ion-icon>  Send
               </ion-button>
             </div>
           </ion-col>

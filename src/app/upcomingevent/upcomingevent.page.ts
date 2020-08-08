@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, ModalController, ActionSheetController, NavController } from '@ionic/angular';
+import { LoadingController, ModalController, ActionSheetController, NavController, PopoverController } from '@ionic/angular';
 import { EventDetailPage } from '../event-detail/event-detail.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-upcomingevent',
@@ -22,7 +23,8 @@ export class UpcomingeventPage implements OnInit {
     private loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) {
     this.data = new ApiModel();
   }
@@ -81,6 +83,16 @@ export class UpcomingeventPage implements OnInit {
         });
       });
       return await modal.present();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

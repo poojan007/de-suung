@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button icon-only [routerLink]="['/upcomingevents']">
-        <ion-icon name="notifications" color="primary" style="font-size: 35px;"></ion-icon>
+        <ion-icon ios="ios-notifications" md="md-notifications" color="primary" style="font-size: 35px;"></ion-icon>
         <span class="badge badge-assertive alert-count">{{upcomingEventCount}}</span>
       </ion-button>
     </ion-buttons>
@@ -10,8 +10,8 @@
       <img src="assets/desuung-header-logo.png" class="custom-header-logo">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button icon-only (click)="presentActionSheet()" color="primary">
-        <ion-icon name="apps"></ion-icon>
+      <ion-button icon-only (click)="presentPopover($event)" color="primary">
+        <ion-icon ios="ios-more" md="md-more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -39,7 +39,7 @@
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/upcomingevents']">
             <div>
-              <ion-icon name="notifications" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-notifications" md="md-notifications" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> Upcoming Events </ion-label>
           </a>
@@ -49,39 +49,39 @@
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/registeredevents']">
             <div>
-              <ion-icon name="link" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-link" md="md-link" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> My Events </ion-label>
           </a>
         </div>
       </ion-col>
-      <!-- <ion-col class="grid-layout">
+      <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/contributions']">
             <div>
-              <ion-icon name="ribbon" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-ribbon" md="md-ribbon" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> My Service </ion-label>
           </a>
         </div>
-      </ion-col> -->
+      </ion-col>
+    </ion-row>
+    <ion-row> 
       <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/profile']">
             <div>
-              <ion-icon name="person" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-person" md="md-person" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> My Profile </ion-label>
           </a>
         </div>
       </ion-col>
-    </ion-row>
-    <ion-row>
       <ion-col class="grid-layout">
         <div class="ion-text-center">
           <a class="anchor-custom" (click)="broadCastMessage()">
             <div>
-              <ion-icon name="megaphone" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-megaphone" md="md-megaphone" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> Broad Cast Message </ion-label>
           </a>
@@ -101,19 +101,9 @@
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/scanqr']">
             <div>
-              <ion-icon name="barcode" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-qr-scanner" md="md-qr-scanner" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> Scan QR Code </ion-label>
-          </a>
-        </div>
-      </ion-col>
-      <ion-col class="grid-layout">
-        <div class="ion-text-center">
-          <a href="#" class="anchor-custom" [routerLink]="['/shop']">
-            <div>
-              <ion-icon name="cart" class="icon-border"></ion-icon>
-            </div>
-            <ion-label class="text-14 ion-text-wrap ion-text-center"> Store </ion-label>
           </a>
         </div>
       </ion-col>
@@ -121,9 +111,19 @@
     <ion-row>
       <ion-col class="grid-layout">
         <div class="ion-text-center">
+          <a href="#" class="anchor-custom" [routerLink]="['/shop']">
+            <div>
+              <ion-icon ios="ios-cart" md="md-cart" class="icon-border"></ion-icon>
+            </div>
+            <ion-label class="text-14 ion-text-wrap ion-text-center"> Store </ion-label>
+          </a>
+        </div>
+      </ion-col>
+      <ion-col class="grid-layout">
+        <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/entertainment']">
             <div>
-              <ion-icon name="film" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-film" md="md-film" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> Entertainment </ion-label>
           </a>
@@ -133,27 +133,31 @@
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/createevent']">
             <div>
-              <ion-icon name="add-circle" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-add-circle" md="md-add-circle" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> Create Event </ion-label>
           </a>
         </div>
       </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col class="grid-layout" *ngIf="showAttendance">
         <div class="ion-text-center">
           <a href="#" class="anchor-custom" [routerLink]="['/coordinatorevents']">
             <div>
-              <ion-icon name="person-add" class="icon-border"></ion-icon>
+              <ion-icon ios="ios-person-add" md="md-person-add" class="icon-border"></ion-icon>
             </div>
             <ion-label class="text-14 ion-text-wrap ion-text-center"> Attendance </ion-label>
           </a>
         </div>
       </ion-col>
+      <ion-col class="grid-layout"></ion-col>
+      <ion-col class="grid-layout"></ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 <ion-footer>
   <ion-button color="primary" expand="full" [routerLink]="['/contactus']">
-    <ion-icon name="call"></ion-icon>&nbsp;&nbsp;Contact Us
+    <ion-icon ios="ios-call" md="md-call"></ion-icon>&nbsp;&nbsp;Contact Us
   </ion-button>
 </ion-footer>

@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiService } from '../services/api.service';
 import { ApiModel } from '../model/api-model';
-import { LoadingController, AlertController, ModalController, ActionSheetController, NavController } from '@ionic/angular';
+import { LoadingController, AlertController, ModalController, ActionSheetController, NavController, PopoverController } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { CreateEventModel } from '../model/create-event-model';
 import { DatePipe } from '@angular/common';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { Subscription } from 'rxjs';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-create-event',
@@ -67,7 +68,8 @@ export class CreateEventPage implements OnInit {
     private datePipe: DatePipe,
     private alertCtrl: AlertController,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) {
     this.data = new ApiModel();
     this.createEventModel = new CreateEventModel();
@@ -205,6 +207,16 @@ export class CreateEventPage implements OnInit {
   confirmBatch() {
     this.inviteBatchComponent.confirm();
     this.inviteBatchComponent.close();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

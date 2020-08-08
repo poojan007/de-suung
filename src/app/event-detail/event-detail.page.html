@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button icon-only color="primary" (click)="dismissModal()">
-        <ion-icon name="arrow-back"></ion-icon>
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title class="ion-text-center" style="font-weight: bold;">
@@ -35,7 +35,7 @@
       </ion-card-content>
       <div align="right" *ngIf="data.total_desuup_required !== data.totalDesuupRegistered">
         <ion-button (click)="register()">
-          <ion-icon name="checkmark-circle"></ion-icon> Register
+          <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon> Register
         </ion-button>
       </div>
     </ion-card>

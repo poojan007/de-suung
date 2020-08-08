@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, NavController, PopoverController } from '@ionic/angular';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-contactus',
@@ -14,7 +15,8 @@ export class ContactusPage implements OnInit {
     private callNumber: CallNumber,
     private emailComposer: EmailComposer,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -40,6 +42,16 @@ export class ContactusPage implements OnInit {
      };
      // Send a text message using default options
     this.emailComposer.open(email);
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

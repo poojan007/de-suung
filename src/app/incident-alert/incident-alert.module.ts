@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { IncidentAlertPageRoutingModule } from './incident-alert-routing.module';
 
 import { IncidentAlertPage } from './incident-alert.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

@@ -26,13 +26,13 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { IncidentAlertPageModule } from './incident-alert/incident-alert.module';
-import { AppUpdate } from '@ionic-native/app-update/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
+import { CommonpopoverComponent } from './component/commonpopover/commonpopover.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, CommonpopoverComponent],
+  entryComponents: [CommonpopoverComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -61,7 +61,6 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
     AppVersion,
     BackgroundGeolocation,
     FCM,
-    AppUpdate,
     Network,
     SpeechRecognition,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

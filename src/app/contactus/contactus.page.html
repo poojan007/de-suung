@@ -7,8 +7,8 @@
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button icon-only (click)="presentActionSheet()" color="primary">
-        <ion-icon name="apps"></ion-icon>
+      <ion-button icon-only (click)="presentPopover($event)" color="primary">
+        <ion-icon ios="ios-more" md="md-more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -24,11 +24,11 @@
   
     <ion-card-content>
       <ion-item no-lines>
-        <ion-icon name="call" slot="end" style="color:#ff5507" (click)="call('+9752340353')"></ion-icon>
+        <ion-icon ios="ios-call" md="md-call" slot="end" style="color:#ff5507" (click)="call('+9752340353')"></ion-icon>
         <ion-label>+975-2-340353/341277</ion-label>
       </ion-item>
       <ion-item no-lines>
-        <ion-icon name="mail" slot="end" style="color:#ff5507" (click)="sendEmail()"></ion-icon>
+        <ion-icon ios="ios-mail" md="md-mail" slot="end" style="color:#ff5507" (click)="sendEmail()"></ion-icon>
         <ion-label>desuung11@gmail.com</ion-label>
       </ion-item>
     </ion-card-content>

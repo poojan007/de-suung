@@ -8,11 +8,11 @@
             <div padding>
               <ion-item>
                 <ion-input class="icon-size-13" name="username" type="Number" placeholder="CID Number" [(ngModel)]="cidNo" required></ion-input>
-                <ion-icon name="person" class="icon-size-15" item-left style="color: #ff5507;"></ion-icon>
+                <ion-icon ios="ios-person" md="md-person" class="icon-size-15" item-left style="color: #ff5507;"></ion-icon>
               </ion-item>
               <ion-item>
                 <ion-input class="icon-size-13" name="password" type="password" placeholder="Password" [(ngModel)]="password" required></ion-input>
-                <ion-icon name="key" class="icon-size-15" item-left style="color: #ff5507;"></ion-icon>
+                <ion-icon ios="ios-key" md="md-key" class="icon-size-15" item-left style="color: #ff5507;"></ion-icon>
               </ion-item>
             </div>
             <div padding>
@@ -20,7 +20,7 @@
                 <ion-row>
                   <ion-col class="padding-0">
                     <ion-button size="large" class="login-button" type="submit" [disabled]="form.invalid" expand="block">
-                      <ion-icon name="log-in" class="margin-right-3"></ion-icon>  Login
+                      <ion-icon ios="ios-log-in" md="md-log-in" class="margin-right-3"></ion-icon>  Login
                     </ion-button>
                   </ion-col>
                   <!-- <ion-col class="padding-0">

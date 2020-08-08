@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CoordinatorEventsPageRoutingModule } from './coordinator-events-routing.module';
 
 import { CoordinatorEventsPage } from './coordinator-events.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

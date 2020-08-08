@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="primary"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center" style="font-weight: bold;">
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button icon-only (click)="presentActionSheet()" color="primary">
-        <ion-icon name="apps"></ion-icon>
+      <ion-button icon-only (click)="presentPopover($event)" color="primary">
+        <ion-icon ios="ios-more" md="md-more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -27,14 +27,14 @@
   <div *ngIf="dataList?.length != 0">
     <ion-list *ngFor="let data of dataList">
       <ion-item>
-        <ion-icon name="notifications" style="color:#ff5507"></ion-icon>&nbsp;&nbsp;
+        <ion-icon ios="ios-notifications" md="md-notifications" style="color:#ff5507"></ion-icon>&nbsp;&nbsp;
         <ion-label>
           <h3 class="ion-text-wrap">{{data.title}}</h3>
           <h5 class="ion-text-wrap">{{data.event_type}}</h5>
           <!-- <p class="description ion-text-wrap">{{data.description}}</p> -->
         </ion-label>
         <ion-button slot="end" (click)="openModal(data.eventId)">
-          <ion-icon name="eye"></ion-icon>&nbsp;&nbsp;View
+          <ion-icon ios="ios-eye" md="md-eye"></ion-icon>&nbsp;&nbsp;View
         </ion-button>
       </ion-item>
     </ion-list>

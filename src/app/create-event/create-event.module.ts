@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { CreateEventPageRoutingModule } from './create-event-routing.module';
 import { CreateEventPage } from './create-event.page';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

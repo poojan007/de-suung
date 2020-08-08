@@ -75,9 +75,7 @@ export class LoginPage implements OnInit {
       if (response.validation === 'true') {
         const twoFactorAuthentication = this.authservice.getItem('two_factor_authentication');
         if (twoFactorAuthentication === null) {
-
           const otp = Math.floor(Math.random() * 90000) + 10000;
-          console.log('otp: ' + otp);
           this.apiService.sendOTP(this.data.mobile, otp).subscribe((res) => {
             this.presentPrompt(otp);
           });

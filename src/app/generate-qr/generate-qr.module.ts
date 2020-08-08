@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { GenerateQrPageRoutingModule } from './generate-qr-routing.module';
 import { GenerateQrPage } from './generate-qr.page';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, NavParams, ActionSheetController, NavController } from '@ionic/angular';
+import { ModalController, NavParams, ActionSheetController, NavController, PopoverController } from '@ionic/angular';
 import { Qrmodel } from '../model/qrmodel';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-generate-qr',
@@ -23,7 +24,8 @@ export class GenerateQrPage implements OnInit {
     private modalCtrl: ModalController,
     private navParams: NavParams,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) {
     this.QRCode = new Qrmodel();
   }
@@ -50,6 +52,16 @@ export class GenerateQrPage implements OnInit {
 
   dismissModal() {
     this.dismiss();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

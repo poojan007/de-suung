@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ContactusPageRoutingModule } from './contactus-routing.module';
 
 import { ContactusPage } from './contactus.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

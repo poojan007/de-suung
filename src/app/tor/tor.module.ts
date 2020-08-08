@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TorPageRoutingModule } from './tor-routing.module';
 
 import { TorPage } from './tor.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

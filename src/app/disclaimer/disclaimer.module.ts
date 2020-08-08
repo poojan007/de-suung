@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DisclaimerPageRoutingModule } from './disclaimer-routing.module';
 
 import { DisclaimerPage } from './disclaimer.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

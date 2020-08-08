@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ListenPageRoutingModule } from './listen-routing.module';
 
 import { ListenPage } from './listen.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
 // tslint:disable-next-line: max-line-length
-import { LoadingController, NavController, Platform, AlertController, ModalController, ActionSheetController, IonRouterOutlet } from '@ionic/angular';
+import { LoadingController, NavController, Platform, AlertController, ModalController, ActionSheetController, IonRouterOutlet, PopoverController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -12,6 +12,7 @@ import { Qrmodel } from '../model/qrmodel';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { IncidentAlertPage } from '../incident-alert/incident-alert.page';
 import { Router } from '@angular/router';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -129,7 +130,8 @@ export class DashboardPage implements OnInit {
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private actionSheetController: ActionSheetController,
-    private router: Router
+    private router: Router,
+    private popoverController: PopoverController
   ) {
     this.data = new ApiModel();
     this.geoData = new Geomodel();
@@ -138,20 +140,23 @@ export class DashboardPage implements OnInit {
       showTorchButton: true,
       showFlipCameraButton: true
     };
-
-    // this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(0, () => {
-    //     this.presentExitConfirmation();
-    // });
   }
 
   ngOnInit() {
-    // this.showLoader();
     const userData = JSON.parse(this.authService.getItem('USER_INFO'));
+
+    if (localStorage.getItem('initMessage') === null) {
+      localStorage.setItem('initMessage', 'TRUE');
+
+      this.status = 'Welcome';
+      // tslint:disable-next-line: max-line-length
+      this.message = 'Welcome Desuup ' + userData.name + '. Please change your password and ensure that your profile information is upto date and correct.';
+      this.presentAlert();
+    }
 
     this.data.userId = userData.userId;
     this.data.location = userData.location;
     this.data.batchNo = userData.batchNo;
-
     this.role = userData.roleName;
     this.priv = userData.privileges;
 
@@ -175,7 +180,6 @@ export class DashboardPage implements OnInit {
 
     this.showScanQR = true;
     this.getUpcomingEventCount();
-    // this.hideLoader();
   }
 
   ionViewWillEnter() {
@@ -218,14 +222,12 @@ export class DashboardPage implements OnInit {
 
   getGeoLocation() {
     this.platform.ready().then(() => {
-      // if (this.platform.is('android')) {
         this.geolocation.getCurrentPosition().then((position) => {
           this.geoLatitude = position.coords.latitude;
           this.geoLongitude = position.coords.longitude;
           this.geoAltitude = position.coords.altitude;
           this.getGeoencoder(position.coords.latitude, position.coords.longitude);
         });
-      // }
     });
   }
 
@@ -341,6 +343,16 @@ export class DashboardPage implements OnInit {
     modal.onDidDismiss().then((dataReturned) => {
     });
     return await modal.present();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

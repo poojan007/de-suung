@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DesuungShopPageRoutingModule } from './desuung-shop-routing.module';
 
 import { DesuungShopPage } from './desuung-shop.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

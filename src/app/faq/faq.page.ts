@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, NavController, PopoverController } from '@ionic/angular';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-faq',
@@ -14,7 +15,8 @@ export class FaqPage implements OnInit {
   constructor(
     private apiService: ApiService,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -25,6 +27,16 @@ export class FaqPage implements OnInit {
     this.apiService.getDropDownList(tableName, paramId, colName).subscribe((response) => {
       this.faqList = response;
     });
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

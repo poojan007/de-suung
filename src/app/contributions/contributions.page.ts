@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiModel } from '../model/api-model';
 import { ApiService } from '../services/api.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { LoadingController, ActionSheetController, NavController } from '@ionic/angular';
+import { LoadingController, ActionSheetController, NavController, PopoverController } from '@ionic/angular';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-contributions',
@@ -20,7 +21,8 @@ export class ContributionsPage implements OnInit {
     private authService: AuthenticationService,
     private loadingCtrl: LoadingController,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) {
     this.data = new ApiModel();
   }
@@ -51,6 +53,16 @@ export class ContributionsPage implements OnInit {
     setTimeout(() => {
       this.loadingCtrl.dismiss();
     }, 1000);
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

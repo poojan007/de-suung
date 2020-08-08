@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FaqPageRoutingModule } from './faq-routing.module';
 
 import { FaqPage } from './faq.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

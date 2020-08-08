@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ContributionsPageRoutingModule } from './contributions-routing.module';
 
 import { ContributionsPage } from './contributions.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

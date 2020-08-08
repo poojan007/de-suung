@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, Platform, AlertController, ActionSheetController, NavController } from '@ionic/angular';
+import { ModalController, Platform, AlertController, ActionSheetController, NavController, PopoverController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
 import { Geomodel } from '../model/geomodel';
@@ -7,6 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ApiService } from '../services/api.service';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { ChangeDetectorRef } from '@angular/core';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-incident-alert',
@@ -40,7 +41,8 @@ export class IncidentAlertPage implements OnInit {
     private actionSheetController: ActionSheetController,
     private navCtrl: NavController,
     private speechRecognition: SpeechRecognition,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private popoverController: PopoverController
   ) {
     this.data = new ApiModel();
     this.alertData = new Geomodel();
@@ -115,6 +117,16 @@ export class IncidentAlertPage implements OnInit {
 
   dismissModal() {
     this.dismiss();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

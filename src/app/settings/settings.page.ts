@@ -3,7 +3,8 @@ import { AuthenticationService } from '../services/authentication.service';
 import { ApiModel } from '../model/api-model';
 import { ApiService } from '../services/api.service';
 import { LocationtrackerService } from '../services/locationtracker.service';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, NavController, PopoverController } from '@ionic/angular';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +24,8 @@ export class SettingsPage implements OnInit {
     private apiService: ApiService,
     private locationService: LocationtrackerService,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) {
     this.data = new ApiModel();
   }
@@ -48,6 +50,16 @@ export class SettingsPage implements OnInit {
     } else {
       this.locationService.startBackgroundGeolocation(this.data.userId);
     }
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

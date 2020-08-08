@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Howl } from 'howler';
-import { IonRange, ActionSheetController, NavController } from '@ionic/angular';
+import { IonRange, ActionSheetController, NavController, PopoverController } from '@ionic/angular';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 export interface Track {
   name: string;
@@ -34,7 +35,8 @@ export class ListenPage implements OnInit {
 
   constructor(
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -98,6 +100,16 @@ export class ListenPage implements OnInit {
     setTimeout(() => {
       this.updateProgress()
     }, 1000);
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CommonpopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentActionSheet() {

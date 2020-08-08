@@ -7,8 +7,8 @@
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button icon-only (click)="presentActionSheet()" color="primary">
-        <ion-icon name="apps"></ion-icon>
+      <ion-button icon-only (click)="presentPopover($event)" color="primary">
+        <ion-icon ios="ios-more" md="md-more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -33,7 +33,7 @@
         </ion-card-content>
         <div align="right">
           <ion-button color="danger" (click)="cancelEvent(data.eventId)">
-            <ion-icon name="close-circle"></ion-icon> Cancel
+            <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon> Cancel
           </ion-button>
         </div>
       </ion-card>

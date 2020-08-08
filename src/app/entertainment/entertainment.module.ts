@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EntertainmentPageRoutingModule } from './entertainment-routing.module';
 
 import { EntertainmentPage } from './entertainment.page';
+import { CommonpopoverComponent } from '../component/commonpopover/commonpopover.component';
 
 @NgModule({
   imports: [

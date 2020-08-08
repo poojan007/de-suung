@@ -7,8 +7,8 @@
       <img src="../../assets/desuung-header-logo.png" class="logo">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button icon-only (click)="presentActionSheet()" color="primary">
-        <ion-icon name="apps"></ion-icon>
+      <ion-button icon-only (click)="presentPopover($event)" color="primary">
+        <ion-icon ios="ios-more" md="md-more"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -28,7 +28,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon name="location-sharp" style="color:#ff5507" slot="start"></ion-icon>
+      <ion-icon ios="ios-compass" md="md-compass" style="color:#ff5507" slot="start"></ion-icon>
       <ion-label>
         <h2>Track Me</h2>
       </ion-label>
@@ -36,35 +36,35 @@
     </ion-item>
 
     <ion-item [routerLink]="['/listen']">
-      <ion-icon name="musical-notes-sharp" style="color:#ff5507" slot="start"></ion-icon>
+      <ion-icon ios="ios-musical-notes" md="md-musical-notes" style="color:#ff5507" slot="start"></ion-icon>
       <ion-label class="ion-text-wrap">
         <h2>Listen to Zhabten & Code of Honor</h2>
       </ion-label>
     </ion-item>
 
     <ion-item [routerLink]="['/disclaimer']">
-      <ion-icon name="alert-sharp" style="color:#ff5507" slot="start"></ion-icon>
+      <ion-icon ios="ios-alert" md="md-alert" style="color:#ff5507" slot="start"></ion-icon>
       <ion-label>
         <h2>Disclaimer</h2>
       </ion-label>
     </ion-item>
 
     <ion-item [routerLink]="['/faq']">
-      <ion-icon name="help-circle-sharp" style="color:#ff5507" slot="start"></ion-icon>
+      <ion-icon ios="ios-help-circle" md="md-help-circle" style="color:#ff5507" slot="start"></ion-icon>
       <ion-label>
         <h2>FAQ</h2>
       </ion-label>
     </ion-item>
 
     <ion-item [routerLink]="['/tor']">
-      <ion-icon name="clipboard-sharp" style="color:#ff5507" slot="start"></ion-icon>
+      <ion-icon ios="ios-clipboard" md="md-clipboard" style="color:#ff5507" slot="start"></ion-icon>
       <ion-label>
         <h2>Terms and Privacy Policy</h2>
       </ion-label>
     </ion-item>
 
     <ion-item [routerLink]="['/appinfo']">
-      <ion-icon name="information-circle-sharp" style="color:#ff5507" slot="start"></ion-icon>
+      <ion-icon ios="ios-information-circle" md="md-information-circle" style="color:#ff5507" slot="start"></ion-icon>
       <ion-label>
         <h2>App Info</h2>
       </ion-label>
