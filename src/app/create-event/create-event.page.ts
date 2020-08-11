@@ -209,6 +209,10 @@ export class CreateEventPage implements OnInit {
     this.inviteBatchComponent.close();
   }
 
+  back() {
+    this.navCtrl.back();
+  }
+
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: CommonpopoverComponent,

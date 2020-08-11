@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="back()">
+        <ion-icon slot="start" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-weight: bold;">
+      <img src="../../assets/desuung-header-logo.png" class="logo">
+    </ion-title>
+    <ion-buttons slot="end"></ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment 
+    value="all" 
+    color="tertiary" 
+    scrollable="true"
+    mode="ios"
+    [(ngModel)]="segmentModel" 
+    (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="INCIDENT">
+        <ion-label>Incident Alerts</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="BROADCAST">
+        <ion-label>Broadcast Messages</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="orange-background">
+
+  <ion-card *ngIf="segmentModel === 'INCIDENT'" class="custom-card">
+    <div *ngIf="incidentDataList?.length != 0">
+      <ion-list *ngFor="let data of incidentDataList">
+        <ion-item>
+          <ion-icon ios="ios-alert" md="md-alert" style="color:#ff5507"></ion-icon>&nbsp;&nbsp;
+          <ion-label>
+            <h3 class="ion-text-wrap">{{data.desuupName}}</h3>
+            <h5 class="ion-text-wrap">{{data.desuupDid}}</h5>
+            <p class="ion-text-wrap" style="text-align: justify;letter-spacing: 1px;word-break: break-all; font-size: 10px;">{{data.body}}</p>
+          </ion-label>
+          <ion-button slot="end" (click)="openMap(data.latitude, data.longitude)">
+            <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div *ngIf="incidentDataList?.length == 0">
+      <div style="margin-top: 50%;
+      font-size: 20px;
+      text-align: center;
+      color: #ff5507;">
+        <img style="width: 100px;" src="../../assets/no-information.png">
+      </div>
+      <div style="font-size: 20px;
+      text-align: center;
+      color: #ff5507;">
+        No Incident Alerts Available
+      </div>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="segmentModel === 'BROADCAST'" class="custom-card">
+    <div *ngIf="broadCastDataList?.length != 0">
+      <ion-list *ngFor="let data of broadCastDataList">
+        <ion-item>
+          <ion-icon ios="ios-alert" md="md-alert" style="color:#ff5507"></ion-icon>&nbsp;&nbsp;
+          <ion-label>
+            <h3 class="ion-text-wrap">{{data.desuupName}}</h3>
+            <h5 class="ion-text-wrap">{{data.desuupDID}}</h5>
+            <p class="ion-text-wrap" style="text-align: justify; letter-spacing: 1px; word-break: break-all; font-size: 10px;">{{data.message}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div *ngIf="broadCastDataList?.length == 0">
+      <div style="margin-top: 50%;
+      font-size: 20px;
+      text-align: center;
+      color: #ff5507;">
+        <img style="width: 100px;" src="../../assets/no-information.png">
+      </div>
+      <div style="font-size: 20px;
+      text-align: center;
+      color: #ff5507;">
+        No Broadcast Messages Available
+      </div>
+    </div>
+  </ion-card>
+
+</ion-content>

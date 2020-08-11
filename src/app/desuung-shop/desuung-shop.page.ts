@@ -18,6 +18,10 @@ export class DesuungShopPage implements OnInit {
   ngOnInit() {
   }
 
+  back() {
+    this.navCtrl.back();
+  }
+
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: CommonpopoverComponent,

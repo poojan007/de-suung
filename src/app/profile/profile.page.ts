@@ -111,6 +111,10 @@ export class ProfilePage implements OnInit {
     return await popover.present();
   }
 
+  back() {
+    this.navCtrl.back();
+  }
+
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,

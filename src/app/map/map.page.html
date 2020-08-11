@@ -2,7 +2,9 @@
  
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button color="light" (click)="back()">
+        <ion-icon slot="start" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Incident Zone</ion-title>
   </ion-toolbar>

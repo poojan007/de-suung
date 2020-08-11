@@ -16,6 +16,7 @@ export class UpcomingeventPage implements OnInit {
   dataList = [];
   loaderToShow: any;
   data: ApiModel;
+  buttonIcon: string;
 
   constructor(
     private apiService: ApiService,
@@ -120,5 +121,9 @@ export class UpcomingeventPage implements OnInit {
       }]
     });
     await actionSheet.present();
+  }
+
+  back() {
+    this.navCtrl.back();
   }
 }

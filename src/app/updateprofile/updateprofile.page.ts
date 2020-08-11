@@ -206,4 +206,8 @@ export class UpdateprofilePage implements OnInit {
       this.show = false;
     }
   }
+
+  back() {
+    this.navCtrl.back();
+  }
 }

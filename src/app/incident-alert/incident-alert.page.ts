@@ -93,6 +93,7 @@ export class IncidentAlertPage implements OnInit {
     this.alertData.userId = this.userId;
     this.alertData.message = this.message;
     this.alertData.location = this.location.join(',');
+    console.log(JSON.stringify(this.alertData));
     this.apiService.broadCastMessage(this.alertData).subscribe((res) => {
       this.status = 'Success';
       this.msg = 'Message has been successfully broadcasted to the selected desuups';

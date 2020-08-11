@@ -130,6 +130,10 @@ const routes: Routes = [
     path: 'listen',
     loadChildren: () => import('./listen/listen.module').then( m => m.ListenPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'alerts',
+    loadChildren: () => import('./alerts/alerts.module').then( m => m.AlertsPageModule)
   }
 ];
 

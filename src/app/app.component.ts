@@ -110,28 +110,30 @@ export class AppComponent {
     this.fcm.onNotification().subscribe(data => {
       console.log(JSON.stringify(data));
       if (data.wasTapped) {
-        if (data.type === 'INCIDENT_ALERT') {
-          this.navCtrl.navigateForward('/map');
-          this.authService.setItem('latlng', data);
-        } else if (data.type === 'NEW_EVENT') {
-          this.navCtrl.navigateForward('/upcomingevents');
-        } else if (data.type === 'BROADCAST_MESSAGE') {
-          this.presentAvailabilityConfirm();
-        }
-      } else {
-        this.status = data.title;
-        this.message = data.body;
-        if (data.type === 'INCIDENT_ALERT') {
-          this.navigateUrl = '/map';
-          this.authService.setItem('latlng', data);
-          this.presentConfirm();
-        } else if (data.type === 'NEW_EVENT') {
-          this.navigateUrl = '/upcomingevents';
-          this.presentConfirm();
-        } else if (data.type === 'BROADCAST_MESSAGE') {
-          this.presentAvailabilityConfirm();
-        }
+        this.navCtrl.navigateForward('/alerts');
+        // if (data.type === 'INCIDENT_ALERT') {
+        //   this.navCtrl.navigateForward('/map');
+        //   this.authService.setItem('latlng', data);
+        // } else if (data.type === 'NEW_EVENT') {
+        //   this.navCtrl.navigateForward('/upcomingevents');
+        // } else if (data.type === 'BROADCAST_MESSAGE') {
+        //   this.presentAvailabilityConfirm();
+        // }
       }
+      // else {
+      //   this.status = data.title;
+      //   this.message = data.body;
+      //   if (data.type === 'INCIDENT_ALERT') {
+      //     this.navigateUrl = '/map';
+      //     this.authService.setItem('latlng', data);
+      //     this.presentConfirm();
+      //   } else if (data.type === 'NEW_EVENT') {
+      //     this.navigateUrl = '/upcomingevents';
+      //     this.presentConfirm();
+      //   } else if (data.type === 'BROADCAST_MESSAGE') {
+      //     this.presentAvailabilityConfirm();
+      //   }
+      // }
     });
 
     this.fcm.unsubscribeFromTopic('desuung');
@@ -204,8 +206,6 @@ export class AppComponent {
       this.geoData.locality = response.locality;
       this.geoData.exactLocation = response.thoroughfare;
       this.geoData.availableStatus = 'AVAILABLE';
-
-      alert(JSON.stringify(this.geoData));
 
       this.apiService.postAvailableStatus(this.geoData).subscribe((res) => {
         if (res.RESULT === 'SUCCESS') {

@@ -257,6 +257,22 @@ export class ApiService {
       );
   }
 
+  getIncidentAlerts(userId) {
+    return this.http
+      .get<any>(this.basePath + 'getIncidentAlertList&userId=' + userId, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getBroadCastMessages(location) {
+    return this.http
+      .get<any>(this.basePath + 'getBroadcastMessageList&location=' + location, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getDesuups(page?: number, size?: number): Desuup[] {
     let ports = [];
     console.log(this.desuups);

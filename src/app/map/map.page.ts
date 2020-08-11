@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChildren} from '@angular/core';
-import { Platform, ToastController } from '@ionic/angular';
+import { Platform, ToastController, NavController } from '@ionic/angular';
 import {
   GoogleMaps,
   GoogleMap,
@@ -42,15 +42,21 @@ export class MapPage implements OnInit {
     public platform: Platform,
     private nativeGeocoder: NativeGeocoder,
     private toastCtrl: ToastController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private navCtrl: NavController
   ) {
     this.items = JSON.parse(authService.getItem('latlng'));
+    console.log(JSON.stringify(this.items));
     this.incidentLatitude = this.items.latitude;
     this.incidentLongitude = this.items.longitude;
   }
 
   ngOnInit() {
     this.platform.ready().then(() => this.loadMap());
+  }
+
+  back() {
+    this.navCtrl.back();
   }
 
   loadMap() {

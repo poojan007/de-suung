@@ -44,6 +44,10 @@ export class ContactusPage implements OnInit {
     this.emailComposer.open(email);
   }
 
+  back() {
+    this.navCtrl.back();
+  }
+
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: CommonpopoverComponent,

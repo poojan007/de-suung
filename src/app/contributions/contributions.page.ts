@@ -55,6 +55,10 @@ export class ContributionsPage implements OnInit {
     }, 1000);
   }
 
+  back() {
+    this.navCtrl.back();
+  }
+
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: CommonpopoverComponent,

@@ -142,4 +142,9 @@ export class ListenPage implements OnInit {
   ionViewWillLeave() {
     this.togglePlayer(true);
   }
+
+  back() {
+    this.togglePlayer(true);
+    this.navCtrl.back();
+  }
 }

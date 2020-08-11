@@ -85,6 +85,10 @@ export class RegisteredeventsPage implements OnInit {
       await alert.present();
   }
 
+  back() {
+    this.navCtrl.back();
+  }
+
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: CommonpopoverComponent,

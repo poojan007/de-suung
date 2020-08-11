@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-appinfo',
@@ -11,7 +12,8 @@ export class AppinfoPage implements OnInit {
   versionNo: any;
 
   constructor(
-    private appVersion: AppVersion
+    private appVersion: AppVersion,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -20,4 +22,7 @@ export class AppinfoPage implements OnInit {
     });
   }
 
+  back() {
+    this.navCtrl.back();
+  }
 }
