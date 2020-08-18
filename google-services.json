@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "610684709968",
-    "firebase_url": "https://desuung-884bb.firebaseio.com",
-    "project_id": "desuung-884bb",
-    "storage_bucket": "desuung-884bb.appspot.com"
+    "project_number": "339002338398",
+    "firebase_url": "https://desuung-app.firebaseio.com",
+    "project_id": "desuung-app",
+    "storage_bucket": "desuung-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:610684709968:android:bcef1b9b163b084a373555",
+        "mobilesdk_app_id": "1:339002338398:android:e6376b5b9179ea7c7058cf",
         "android_client_info": {
-          "package_name": "bt.org.desuung"
+          "package_name": "bt.org.desuung.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "610684709968-vv0rn913gulpa5al6q0tld8toqg0reum.apps.googleusercontent.com",
+          "client_id": "339002338398-ng6il0n3s8li013geijrp82g2hnu0dbq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDXPORr2wdDocwZ54Tk1lXJLstkC4bYCIw"
+          "current_key": "AIzaSyCL1XnYS-G2Tv5ecJKyxQ_8QaWoPFsgw00"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "610684709968-vv0rn913gulpa5al6q0tld8toqg0reum.apps.googleusercontent.com",
+              "client_id": "339002338398-ng6il0n3s8li013geijrp82g2hnu0dbq.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "610684709968-s89ujkph6fqcgo264dk6i7gl6m65n2sm.apps.googleusercontent.com",
+              "client_id": "339002338398-bjnvt3ho7m03ttbnbo90sd3tsmvcs813.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "bt.org.desuung"
+                "bundle_id": "bt.org.desuung.app"
               }
             }
           ]

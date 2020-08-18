@@ -26,6 +26,13 @@
                 <ion-input class="icon-size-13" name="desuupName" type="text" [(ngModel)]="desuupName" [value]="desuupName" required></ion-input>
               </ion-item>
               <ion-item>
+                <ion-label position="floating">Gender</ion-label>
+                <ion-select class="icon-size-13 my_ion_select" name="gender" [(ngModel)]="gender" [value]="gender" required>
+                  <ion-select-option value="M">Male</ion-select-option>
+                  <ion-select-option value="F">Female</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
                 <ion-label position="floating">Email</ion-label>
                 <ion-input class="icon-size-13" name="email" type="email" [(ngModel)]="email" [value]="email" required></ion-input>
               </ion-item>

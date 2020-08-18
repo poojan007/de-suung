@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>610684709968-s89ujkph6fqcgo264dk6i7gl6m65n2sm.apps.googleusercontent.com</string>
+	<string>339002338398-bjnvt3ho7m03ttbnbo90sd3tsmvcs813.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.610684709968-s89ujkph6fqcgo264dk6i7gl6m65n2sm</string>
+	<string>com.googleusercontent.apps.339002338398-bjnvt3ho7m03ttbnbo90sd3tsmvcs813</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCe6RYjuk0aSPq7zlBT7cF3vUVsxXXsi0Y</string>
+	<string>AIzaSyBlEzh7Eb0ITNhj4F0eLVND7xpL8XvB1kY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>610684709968</string>
+	<string>339002338398</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>bt.org.desuung</string>
+	<string>bt.org.desuung.app</string>
 	<key>PROJECT_ID</key>
-	<string>desuung-884bb</string>
+	<string>desuung-app</string>
 	<key>STORAGE_BUCKET</key>
-	<string>desuung-884bb.appspot.com</string>
+	<string>desuung-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:610684709968:ios:3ea89a8d4e15139a373555</string>
+	<string>1:339002338398:ios:2a00246933841aa57058cf</string>
 	<key>DATABASE_URL</key>
-	<string>https://desuung-884bb.firebaseio.com</string>
+	<string>https://desuung-app.firebaseio.com</string>
 </dict>
 </plist>

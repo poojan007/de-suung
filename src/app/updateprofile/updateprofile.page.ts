@@ -144,6 +144,7 @@ export class UpdateprofilePage implements OnInit {
   updateProfile() {
     this.data.userId = this.userId;
     this.data.name = this.desuupName;
+    this.data.gender = this.gender;
     this.data.email = this.email;
     this.data.mobile = this.mobileNo;
     this.data.maritalStatus = this.maritalStatus;

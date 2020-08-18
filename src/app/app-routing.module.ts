@@ -133,7 +133,8 @@ const routes: Routes = [
   },
   {
     path: 'alerts',
-    loadChildren: () => import('./alerts/alerts.module').then( m => m.AlertsPageModule)
+    loadChildren: () => import('./alerts/alerts.module').then( m => m.AlertsPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

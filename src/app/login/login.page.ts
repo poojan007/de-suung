@@ -41,6 +41,9 @@ export class LoginPage implements OnInit {
     this.data.fcmToken = JSON.parse(this.authservice.getItem('fcm_token'));
 
     this.apiService.validateLogin(this.data).subscribe((response) => {
+
+      console.log('userid: ' + response.userId);
+
       this.data.validation = response.validation;
       this.data.name = response.name;
       this.data.did = response.did;
@@ -76,6 +79,7 @@ export class LoginPage implements OnInit {
         const twoFactorAuthentication = this.authservice.getItem('two_factor_authentication');
         if (twoFactorAuthentication === null) {
           const otp = Math.floor(Math.random() * 90000) + 10000;
+          console.log('OTP: ' + otp);
           this.apiService.sendOTP(this.data.mobile, otp).subscribe((res) => {
             this.presentPrompt(otp);
           });

@@ -34,13 +34,9 @@ export class AlertsPage implements OnInit {
 
   segmentChanged(event) {
     if (this.segmentModel === 'INCIDENT') {
-      this.showLoader();
       this.getIncidentAlerts();
-      this.hideLoader();
     } else if (this.segmentModel === 'BROADCAST') {
-      this.showLoader();
       this.getBroadCastMessages();
-      this.hideLoader();
     }
   }
 
