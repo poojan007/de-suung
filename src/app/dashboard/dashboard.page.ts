@@ -150,7 +150,7 @@ export class DashboardPage implements OnInit {
 
       this.status = 'Welcome';
       // tslint:disable-next-line: max-line-length
-      this.message = 'Welcome Desuup ' + userData.name + '. Please change your password and ensure that your profile information is upto date and correct.';
+      this.message = 'Welcome Desuup ' + userData.name + '. Please change your password and ensure that your profile information is upto date and correct. STAY SAFE.';
       this.presentAlert();
     }
 

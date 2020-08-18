@@ -37,10 +37,13 @@
         <ion-item>
           <ion-icon ios="ios-alert" md="md-alert" style="color:#ff5507"></ion-icon>&nbsp;&nbsp;
           <ion-label>
-            <h3 class="ion-text-wrap">{{data.desuupName}}</h3>
-            <h5 class="ion-text-wrap">{{data.desuupDid}}</h5>
+            <h3 class="ion-text-wrap">{{data.body}}</h3>
+            <span class="ion-text-wrap" style="font-size: 12px; color: #000000ab;letter-spacing: 0.3px;">Sender : {{data.desuupName}}({{data.desuupDID}})({{data.mobileNo}})</span>
+           <!--  <h5 class="ion-text-wrap">{{data.desuupDid}}</h5>
             <h5 class="ion-text-wrap">{{data.mobileNo}}</h5>
-            <p class="ion-text-wrap" style="text-align: justify;letter-spacing: 1px;word-break: break-all; font-size: 10px;">{{data.body}}</p>
+            <p class="ion-text-wrap"
+             style="text-align: justify;letter-spacing: 1px;
+             word-break: break-all; font-size: 10px;">{{data.body}}</p> -->
           </ion-label>
           <ion-button slot="end" (click)="openMap(data.latitude, data.longitude)">
             <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
