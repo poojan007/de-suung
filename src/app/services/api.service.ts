@@ -273,6 +273,14 @@ export class ApiService {
       );
   }
 
+  postMovementPassScan(item) {
+    return this.http
+      .post<any>('https://outpassdashboard.desuung.org.bt/api/scan-from-desuung-app', item, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getDesuups(page?: number, size?: number): Desuup[] {
     let ports = [];
     console.log(this.desuups);

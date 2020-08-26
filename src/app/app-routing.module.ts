@@ -135,6 +135,10 @@ const routes: Routes = [
     path: 'alerts',
     loadChildren: () => import('./alerts/alerts.module').then( m => m.AlertsPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'scan-movement-pass',
+    loadChildren: () => import('./scan-movement-pass/scan-movement-pass.module').then( m => m.ScanMovementPassPageModule)
   }
 ];
 
