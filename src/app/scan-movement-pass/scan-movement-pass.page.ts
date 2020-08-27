@@ -74,24 +74,36 @@ export class ScanMovementPassPage implements OnInit {
           this.qrData.cid = this.userCid;
 
           this.apiService.postMovementPassScan(this.qrData).subscribe(response => {
+            console.log(JSON.stringify(response));
             if (response.data !== null) {
               this.status = 'Success';
-              this.message = 'QR code successfully scanned with the current location';
+              this.message = `QR code successfully scanned with the current location. Scanned QR code belongs to zone:${response.sub_zone}`;
+              this.presentSuccessAlert();
             } else {
               this.status = 'Failure';
               this.message = 'QR Code scan failed, please try again with a valid QR code';
+              this.presentErrorAlert();
             }
-
-            this.presentAlert();
           });
         });
     });
   }
 
-  async presentAlert() {
+  async presentSuccessAlert() {
       const alert = await this.alertCtrl.create({
       header: this.status.toUpperCase(),
       message: this.message,
+      cssClass: 'alertsuccess',
+      buttons: ['OK']
+    });
+      await alert.present();
+  }
+
+  async presentErrorAlert() {
+      const alert = await this.alertCtrl.create({
+      header: this.status.toUpperCase(),
+      message: this.message,
+      cssClass: 'alerterror',
       buttons: ['OK']
     });
       await alert.present();
