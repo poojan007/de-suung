@@ -33,7 +33,7 @@
         <p><span class="title">Total Desuups Required:</span> <b>{{data.total_desuup_required}}</b></p>
         <p><span class="title">Total Desuups Registered:</span> <b>{{data.totalDesuupRegistered}}</b></p>
       </ion-card-content>
-      <div align="right" *ngIf="data.total_desuup_required !== data.totalDesuupRegistered">
+      <div align="right" *ngIf="data.total_desuup_required !== data.totalDesuupRegistered && data.status === 'AVAILABLE'">
         <ion-button (click)="register()">
           <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon> Register
         </ion-button>

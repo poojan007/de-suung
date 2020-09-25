@@ -42,12 +42,14 @@ export class AlertsPage implements OnInit {
 
   getIncidentAlerts() {
     this.apiService.getIncidentAlerts(this.userId).subscribe((response) => {
+      console.log(response);
       this.incidentDataList = response;
     });
   }
 
   getBroadCastMessages() {
     this.apiService.getBroadCastMessages(this.location).subscribe((response) => {
+      console.log(response);
       this.broadCastDataList = response;
     });
   }

@@ -36,6 +36,7 @@ export class RegisteredeventsPage implements OnInit {
     this.data.userId = userData.userId;
 
     this.apiService.getRegisteredEvents(this.data).subscribe((response) => {
+      console.log(response);
       this.dataList  = response;
     });
 

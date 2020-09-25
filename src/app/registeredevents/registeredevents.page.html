@@ -33,7 +33,7 @@
           <p><span class="title">Event Location:</span> <b>{{data.dzongkhag}}</b></p>
           <p><span class="title">Coordinator:</span> <b>{{data.userName}}</b></p>
         </ion-card-content>
-        <div align="right">
+        <div align="right" *ngIf="data.eventDueHours > 24">
           <ion-button color="danger" (click)="cancelEvent(data.eventId)">
             <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon> Cancel
           </ion-button>

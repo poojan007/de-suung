@@ -128,7 +128,6 @@ export class ScanqrPage implements OnInit {
     this.qrData.locality = this.locality;
     this.qrData.exactLocation = this.exactLocation;
     this.apiService.postQRCodeAttendance(this.qrData).subscribe((response) => {
-      alert(JSON.stringify(response));
       if (response.RESULT === 'SUCCESS') {
         this.status = 'Success';
         this.message = 'Your attendance has been successfully recorded.';
