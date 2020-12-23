@@ -75,7 +75,13 @@ export class ScanqrPage implements OnInit {
       // if (this.platform.is('android')) {
         this.geolocation.getCurrentPosition().then((position) => {
           this.altitude = position.coords.altitude;
-          this.getGeoencoder(position.coords.latitude, position.coords.longitude);
+          this.latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
+          this.dzongkhag = '';
+          this.locality = '';
+          this.exactLocation = '';
+          this.sendAttendance();
+          // this.getGeoencoder(position.coords.latitude, position.coords.longitude);
         });
       // }
     });
